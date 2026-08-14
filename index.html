@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesper Bookmarklets Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #100F0D; }
+  * { box-sizing: border-box; }
+  :focus-visible { outline: 2px solid #C6B2ED; outline-offset: 3px; border-radius: 3px; }
+  summary::-webkit-details-marker { display: none; }
+  .vl-drag:active { cursor: grabbing; }
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:#100F0D;color:#EDE7DA;font-family:'Noto Sans',Arial,Helvetica,sans-serif;line-height:1.55;padding-bottom:56px">
+
+  <a href="#tools" style="position:absolute;left:8px;top:-60px;z-index:300;background:#A6CA93;color:#100F0D;padding:10px 16px;border-radius:0 0 8px 8px;font-weight:700;text-decoration:none;transition:top .15s ease" onfocus="this.style.top='0'" onblur="this.style.top='-60px'">Skip to the bookmarklets</a>
+
+  <header style="max-width:1040px;margin:0 auto;padding:44px 20px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+    <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)" style="display:inline-flex;border-radius:10px">
+      <img src="assets/logo-cream.svg" alt="" width="104" style="width:104px;height:auto;display:block;filter:brightness(0) invert(1) sepia(0.18) saturate(1.4) hue-rotate(340deg)">
+    </a>
+    <h1 style="font-family:'Noto Serif',Georgia,serif;font-size:2.15rem;font-weight:600;letter-spacing:.01em;margin:0">Vesper Bookmarklets Directory</h1>
+    <p style="color:#A9A091;font-size:.98rem;max-width:700px;margin:0;text-wrap:pretty">Small scripts you keep in your bookmarks bar. One click runs them on the page you are checking : no extension, no account, no data leaving your browser.</p>
+  </header>
+
+  <main style="max-width:1040px;margin:26px auto 0;padding:0 20px">
+
+    <!-- Install instructions, open by default. Same copy as the design spec. -->
+    <details open style="border:1px solid rgba(237,231,218,0.16);border-radius:12px;background:#191714;margin-bottom:30px">
+      <summary style="cursor:pointer;padding:15px 18px;font-family:'Noto Serif',Georgia,serif;font-size:1rem;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px">How to install a bookmarklet</summary>
+      <div style="padding:14px 18px 20px;font-size:.89rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.14)">
+        <p style="margin:8px 0">A bookmarklet is a small script stored in a bookmark: it runs on the page you are currently on, and installs nothing in the browser.</p>
+        <p style="margin:14px 0 6px;color:#EDE7DA;font-weight:700">By dragging</p>
+        <ol style="padding-left:22px;margin:6px 0">
+          <li style="margin-bottom:7px">Show your bookmarks bar: <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">Cmd+Shift+B</code> (macOS) or <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">Ctrl+Shift+B</code></li>
+          <li style="margin-bottom:7px"><strong style="color:#EDE7DA">Drag the button</strong> you want straight onto that bar</li>
+          <li style="margin-bottom:7px">Go to the page you want to audit, then click the bookmark</li>
+        </ol>
+        <p style="margin:14px 0 6px;color:#EDE7DA;font-weight:700">Without dragging (keyboard, tremor, or simply preference)</p>
+        <ol style="padding-left:22px;margin:6px 0">
+          <li style="margin-bottom:7px">Press <strong style="color:#EDE7DA">Clipboard</strong> next to the tool you want</li>
+          <li style="margin-bottom:7px">In your browser's bookmark manager, create a new bookmark</li>
+          <li style="margin-bottom:7px">Give it a name, then paste the copied code into the <em>URL</em> field and save</li>
+        </ol>
+        <p style="margin:14px 0"><strong style="color:#EDE7DA">If nothing happens:</strong> open the console (<code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">Cmd+Option+I</code> on macOS, <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">Ctrl+Shift+I</code> on Windows, Console tab) before clicking. A <em>"Content Security Policy"</em> message means the site forbids running external scripts, and no bookmarklet can get around that. Reports open in a new tab: if your browser blocks pop-ups, allow them for the site you are checking.</p>
+        <p style="margin:14px 0"><strong style="color:#EDE7DA">Sonar is the exception.</strong> The other seven are pure JavaScript and run entirely inside the page. Sonar opens a panel in an iframe loaded over HTTPS, so it will not work on a page served from <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">file://</code> or plain HTTP: the browser blocks the mixed or local content.</p>
+        <p style="margin:14px 0">Every bookmarklet's full, unminified source is linked next to it. A bookmarklet runs arbitrary JavaScript on any page you click it on, so read it before you install it.</p>
+      </div>
+    </details>
+
+    <div id="tools">
+
+      <!-- Group: Automated scans -->
+      <section style="margin-bottom:36px">
+        <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#A6CA93;margin:0 0 4px">Automated scans</h2>
+        <p style="color:#A9A091;font-size:.88rem;margin:0 0 16px;max-width:720px">Run axe-core on the page and copy the raw JSON result, ready to paste into the Scan Viewer.</p>
+        <div style="display:grid;gap:14px">
+
+          <article style="border:1px solid rgba(237,231,218,0.14);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 AC Scan</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Scans the entire page with axe-core and copies the JSON result to your clipboard.</p>
+            </div>
+            <div class="vl-actions" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <a class="vl-drag" draggable="true" data-bookmarklet="full-scan" href="javascript:(function () { 'use strict'; try { function vlCopy(json, count) { var copied = false; try { var ta = document.createElement('textarea'); ta.value = json; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.focus(); ta.select(); copied = document.execCommand('copy'); document.body.removeChild(ta); } catch (e) { copied = false; } if (copied) { alert('JSON copied to clipboard. ' + count + ' violation(s) found.'); } else { alert('Automatic copy failed. Result is visible in the console. ' + count + ' violation(s) found.'); } } function scan() { axe.run(document, {}).then(function (r) { console.log(r); vlCopy(JSON.stringify(r), r.violations.length); }).catch(function (e) { alert('axe-core error: ' + e.message); }); } if (typeof axe === 'undefined') { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.0/axe.min.js'; s.onload = scan; document.head.appendChild(s); } else { scan(); } } catch (e) { alert('Error: ' + e.message); } })();" style="display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;text-decoration:none;cursor:grab">🦇 AC Scan</a>
+              <button type="button" class="vl-copy" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;display:inline-flex;align-items:center;gap:8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="display:block;flex:none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.553 1.10557C11.8346 0.964809 12.1659 0.964809 12.4475 1.10557L22.4475 6.10557C22.7862 6.27496 23.0002 6.62123 23.0002 7C23.0002 7.37877 22.7862 7.72504 22.4475 7.89443L12.4475 12.8944C12.1659 13.0352 11.8346 13.0352 11.553 12.8944L1.55303 7.89443C1.21425 7.72504 1.00024 7.37877 1.00024 7C1.00024 6.62123 1.21425 6.27496 1.55303 6.10557L11.553 1.10557ZM4.23631 7L12.0002 10.882L19.7642 7L12.0002 3.11803L4.23631 7Z" fill="currentColor"></path><path d="M1.10579 16.5528C1.35278 16.0588 1.95345 15.8586 2.44743 16.1055L12.0002 20.8819L21.553 16.1055C22.047 15.8586 22.6477 16.0588 22.8946 16.5528C23.1416 17.0467 22.9414 17.6474 22.4474 17.8944L12.4474 22.8944C12.1659 23.0352 11.8345 23.0352 11.553 22.8944L1.55301 17.8944C1.05903 17.6474 0.858803 17.0467 1.10579 16.5528Z" fill="currentColor"></path><path d="M2.44743 11.1055C1.95345 10.8586 1.35278 11.0588 1.10579 11.5528C0.858803 12.0467 1.05903 12.6474 1.55301 12.8944L11.553 17.8944C11.8345 18.0352 12.1659 18.0352 12.4474 17.8944L22.4474 12.8944C22.9414 12.6474 23.1416 12.0467 22.8946 11.5528C22.6477 11.0588 22.047 10.8586 21.553 11.1055L12.0002 15.8819L2.44743 11.1055Z" fill="currentColor"></path></svg>Clipboard</button>
+              <a href="scripts/full-scan.js" style="font-size:.85rem;color:#C6B2ED;text-decoration:underline;text-underline-offset:3px">Read the source</a>
+            </div>
+            <div class="vl-status" role="status" style="font-size:.82rem;color:#A6CA93;min-height:1.2em"></div>
+          </article>
+
+          <article style="border:1px solid rgba(237,231,218,0.14);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 AC Targeted Scan</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Same scan, restricted to one CSS selector, so you cut the noise coming from headers, footers and third party widgets.</p>
+            </div>
+            <div class="vl-actions" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <a class="vl-drag" draggable="true" data-bookmarklet="targeted-scan" href="javascript:(function () { 'use strict'; try { function vlCopy(json, count) { var copied = false; try { var ta = document.createElement('textarea'); ta.value = json; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.focus(); ta.select(); copied = document.execCommand('copy'); document.body.removeChild(ta); } catch (e) { copied = false; } if (copied) { alert('JSON copied to clipboard. ' + count + ' violation(s) found.'); } else { alert('Automatic copy failed. Result is visible in the console. ' + count + ' violation(s) found.'); } } function scan() { var sel = prompt('CSS selector for the area to scan (leave empty for the whole page):', ''); if (sel === null) { return; } var target = sel &amp;&amp; sel.trim() ? document.querySelector(sel.trim()) : document; if (sel &amp;&amp; sel.trim() &amp;&amp; !target) { alert('No element found for that selector.'); return; } axe.run(target, {}).then(function (r) { console.log(r); vlCopy(JSON.stringify(r), r.violations.length); }).catch(function (e) { alert('axe-core error: ' + e.message); }); } if (typeof axe === 'undefined') { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.0/axe.min.js'; s.onload = scan; document.head.appendChild(s); } else { scan(); } } catch (e) { alert('Error: ' + e.message); } })();" style="display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;text-decoration:none;cursor:grab">🦇 AC Targeted Scan</a>
+              <button type="button" class="vl-copy" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;display:inline-flex;align-items:center;gap:8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="display:block;flex:none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.553 1.10557C11.8346 0.964809 12.1659 0.964809 12.4475 1.10557L22.4475 6.10557C22.7862 6.27496 23.0002 6.62123 23.0002 7C23.0002 7.37877 22.7862 7.72504 22.4475 7.89443L12.4475 12.8944C12.1659 13.0352 11.8346 13.0352 11.553 12.8944L1.55303 7.89443C1.21425 7.72504 1.00024 7.37877 1.00024 7C1.00024 6.62123 1.21425 6.27496 1.55303 6.10557L11.553 1.10557ZM4.23631 7L12.0002 10.882L19.7642 7L12.0002 3.11803L4.23631 7Z" fill="currentColor"></path><path d="M1.10579 16.5528C1.35278 16.0588 1.95345 15.8586 2.44743 16.1055L12.0002 20.8819L21.553 16.1055C22.047 15.8586 22.6477 16.0588 22.8946 16.5528C23.1416 17.0467 22.9414 17.6474 22.4474 17.8944L12.4474 22.8944C12.1659 23.0352 11.8345 23.0352 11.553 22.8944L1.55301 17.8944C1.05903 17.6474 0.858803 17.0467 1.10579 16.5528Z" fill="currentColor"></path><path d="M2.44743 11.1055C1.95345 10.8586 1.35278 11.0588 1.10579 11.5528C0.858803 12.0467 1.05903 12.6474 1.55301 12.8944L11.553 17.8944C11.8345 18.0352 12.1659 18.0352 12.4474 17.8944L22.4474 12.8944C22.9414 12.6474 23.1416 12.0467 22.8946 11.5528C22.6477 11.0588 22.047 10.8586 21.553 11.1055L12.0002 15.8819L2.44743 11.1055Z" fill="currentColor"></path></svg>Clipboard</button>
+              <a href="scripts/targeted-scan.js" style="font-size:.85rem;color:#C6B2ED;text-decoration:underline;text-underline-offset:3px">Read the source</a>
+            </div>
+            <div class="vl-status" role="status" style="font-size:.82rem;color:#A6CA93;min-height:1.2em"></div>
+          </article>
+
+        </div>
+
+        <details style="border:1px solid rgba(237,231,218,0.14);border-radius:10px;margin-top:14px;background:#221F1A">
+          <summary style="cursor:pointer;padding:13px 16px;font-size:.86rem;font-weight:700;list-style:none">How do I run a targeted scan?</summary>
+          <div style="padding:12px 16px 18px;font-size:.87rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.14)">
+            <p style="margin:8px 0">By default, <strong style="color:#EDE7DA">🦇 AC Scan</strong> analyses the whole page. That is often too much: on a real site you get hundreds of violations, most of them from the header, the footer, or a third party widget you are not looking at. A targeted scan narrows the analysis to one area.</p>
+            <p style="margin:14px 0 6px;color:#EDE7DA;font-weight:700">Method 1: with the selector picker (recommended)</p>
+            <ol style="padding-left:22px;margin:6px 0">
+              <li style="margin-bottom:7px">Click the <strong style="color:#EDE7DA">🦇 CSS Selector</strong> bookmarklet</li>
+              <li style="margin-bottom:7px">Hover the page: the area under your cursor is highlighted and its selector shown live</li>
+              <li style="margin-bottom:7px">Click the area you want, and the selector is copied to your clipboard (Esc to cancel)</li>
+              <li style="margin-bottom:7px">Click <strong style="color:#EDE7DA">🦇 AC Targeted Scan</strong> and paste it into the prompt</li>
+            </ol>
+            <p style="margin:14px 0"><strong style="color:#EDE7DA">Method 2: via the inspector.</strong> <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">Cmd+Option+I</code> on macOS, <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">Ctrl+Shift+I</code> on Windows, Elements tab, right-click the element &rsaquo; <em>Copy</em> &rsaquo; <em>Copy selector</em>. Useful when the element is hard to hover (a menu that closes, an element under an overlay).</p>
+            <p style="margin:14px 0 6px;color:#EDE7DA;font-weight:700">Method 3: in the console, for full control</p>
+            <pre style="background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:6px;padding:10px;overflow-x:auto;font-family:'Courier New',monospace;font-size:.78rem;color:#E5BE7D;margin:6px 0">axe.run(document.querySelector('#content'))
+  .then(r =&gt; console.log(r.violations));</pre>
+            <p style="margin:8px 0">axe-core must already be loaded on the page, and clicking either scan bookmarklet first takes care of that.</p>
+            <p style="margin:14px 0"><strong style="color:#EDE7DA">The parent / child trap.</strong> axe-core analyses the targeted element <em>and all of its descendants</em>. Two consequences:</p>
+            <ul style="padding-left:22px;margin:8px 0">
+              <li style="margin-bottom:7px"><strong style="color:#EDE7DA">Too high = noise.</strong> Targeting <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">main</code> or <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">body</code> is practically a full scan. Go down to the component's real container.</li>
+              <li style="margin-bottom:7px"><strong style="color:#EDE7DA">Too low = false negatives.</strong> Some rules need the parent context. Targeting a lone <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;li&gt;</code> makes it impossible to check that it sits in a <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;ul&gt;</code>; targeting a <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;td&gt;</code> hides its table headers; targeting a single field hides the missing <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;fieldset&gt;</code>. Contrast depends on the inherited background, so out of context it can be computed wrong.</li>
+            </ul>
+            <p style="margin:8px 0">The right granularity is almost always the <strong style="color:#EDE7DA">component's standalone container</strong>: the whole <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;nav&gt;</code> rather than one link, the whole <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;form&gt;</code> rather than one field, the whole <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">&lt;table&gt;</code> rather than one cell.</p>
+            <p style="margin:14px 0"><strong style="color:#EDE7DA">Scanning every element of one kind.</strong> The targeted scan prompt only accepts one element (the first match). To cover every occurrence of a selector, use the console:</p>
+            <pre style="background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:6px;padding:10px;overflow-x:auto;font-family:'Courier New',monospace;font-size:.78rem;color:#E5BE7D;margin:6px 0">axe.run({ include: [['.card']] })
+  .then(r =&gt; console.log(r.violations));</pre>
+            <p style="margin:8px 0">That analyses <em>all</em> the cards on the page in one pass. Conversely, to scan the whole page <em>except</em> a noisy area (cookie banner, chat widget):</p>
+            <pre style="background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:6px;padding:10px;overflow-x:auto;font-family:'Courier New',monospace;font-size:.78rem;color:#E5BE7D;margin:6px 0">axe.run({ exclude: [['#cookie-banner'], ['#chat-widget']] })
+  .then(r =&gt; console.log(r.violations));</pre>
+            <p style="margin:8px 0">Either way, copy the object from the console (right-click the result &rsaquo; <em>Copy object</em>) and paste it into the <a href="scan-results.html" style="color:#F0A9A2">Scan Viewer</a>.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- Group: Targeting -->
+      <section style="margin-bottom:36px">
+        <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#A6CA93;margin:0 0 4px">Targeting</h2>
+        <p style="color:#A9A091;font-size:.88rem;margin:0 0 16px;max-width:720px">Getting from "that element over there" to a selector you can feed a scan, and back again.</p>
+        <div style="display:grid;gap:14px">
+
+          <article style="border:1px solid rgba(237,231,218,0.14);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 CSS Selector</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Click an element and copy its selector, then paste it into 🦇 AC Targeted Scan.</p>
+            </div>
+            <div class="vl-actions" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <a class="vl-drag" draggable="true" data-bookmarklet="css-selector" href="javascript:(function () { 'use strict'; if (window.__vlPicking) { return; } window.__vlPicking = true; var overlay = document.createElement('div'); overlay.style.cssText = 'position:fixed;pointer-events:none;z-index:2147483647;' + 'border:2px solid #A6CA93;background:rgba(166,202,147,0.18);display:none;'; document.body.appendChild(overlay); var badge = document.createElement('div'); badge.style.cssText = 'position:fixed;pointer-events:none;z-index:2147483647;' + 'background:#100F0D;color:#EDE7DA;font:12px monospace;padding:4px 8px;border-radius:4px;' + 'display:none;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'; document.body.appendChild(badge); var prevCursor = document.documentElement.style.cursor; document.documentElement.style.cursor = 'crosshair'; function esc(s) { try { return CSS.escape(s); } catch (e) { return s; } } function buildSelector(el) { if (!el || el.nodeType !== 1) return ''; if (el.id) { var s = '#' + esc(el.id); try { if (document.querySelectorAll(s).length === 1) return s; } catch (e) {} } var parts = []; var node = el; while (node &amp;&amp; node.nodeType === 1 &amp;&amp; node !== document.documentElement) { var part = node.tagName.toLowerCase(); if (node.id) { part = '#' + esc(node.id); parts.unshift(part); break; } var cls = (node.className &amp;&amp; typeof node.className === 'string') ? node.className.trim().split(/\s+/).filter(Boolean).slice(0, 2) : []; if (cls.length) { part += '.' + cls.map(esc).join('.'); } var parent = node.parentElement; if (parent) { var same = Array.prototype.filter.call(parent.children, function (c) { return c.tagName === node.tagName; }); if (same.length &gt; 1) { part += ':nth-of-type(' + (Array.prototype.indexOf.call(same, node) + 1) + ')'; } } parts.unshift(part); var candidate = parts.join(' &gt; '); try { if (document.querySelectorAll(candidate).length === 1) return candidate; } catch (e) {} node = parent; } return parts.join(' &gt; '); } function onMove(e) { var el = e.target; if (el === overlay || el === badge) return; var r = el.getBoundingClientRect(); overlay.style.display = 'block'; overlay.style.left = r.left + 'px'; overlay.style.top = r.top + 'px'; overlay.style.width = r.width + 'px'; overlay.style.height = r.height + 'px'; var sel = buildSelector(el); badge.textContent = sel; badge.style.display = 'block'; badge.style.left = Math.max(0, r.left) + 'px'; badge.style.top = Math.max(0, r.top - 24) + 'px'; } function cleanup() { document.removeEventListener('mousemove', onMove, true); document.removeEventListener('click', onClick, true); document.removeEventListener('keydown', onKey, true); overlay.remove(); badge.remove(); document.documentElement.style.cursor = prevCursor; window.__vlPicking = false; } function onClick(e) { e.preventDefault(); e.stopPropagation(); var sel = buildSelector(e.target); var copied = false; try { var ta = document.createElement('textarea'); ta.value = sel; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.focus(); ta.select(); copied = document.execCommand('copy'); document.body.removeChild(ta); } catch (err) { copied = false; } cleanup(); if (copied) { alert('Selector copied: ' + sel); } else { alert('Copy failed. Selector: ' + sel); } } function onKey(e) { if (e.key === 'Escape') { cleanup(); } } document.addEventListener('mousemove', onMove, true); document.addEventListener('click', onClick, true); document.addEventListener('keydown', onKey, true); })();" style="display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;text-decoration:none;cursor:grab">🦇 CSS Selector</a>
+              <button type="button" class="vl-copy" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;display:inline-flex;align-items:center;gap:8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="display:block;flex:none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.553 1.10557C11.8346 0.964809 12.1659 0.964809 12.4475 1.10557L22.4475 6.10557C22.7862 6.27496 23.0002 6.62123 23.0002 7C23.0002 7.37877 22.7862 7.72504 22.4475 7.89443L12.4475 12.8944C12.1659 13.0352 11.8346 13.0352 11.553 12.8944L1.55303 7.89443C1.21425 7.72504 1.00024 7.37877 1.00024 7C1.00024 6.62123 1.21425 6.27496 1.55303 6.10557L11.553 1.10557ZM4.23631 7L12.0002 10.882L19.7642 7L12.0002 3.11803L4.23631 7Z" fill="currentColor"></path><path d="M1.10579 16.5528C1.35278 16.0588 1.95345 15.8586 2.44743 16.1055L12.0002 20.8819L21.553 16.1055C22.047 15.8586 22.6477 16.0588 22.8946 16.5528C23.1416 17.0467 22.9414 17.6474 22.4474 17.8944L12.4474 22.8944C12.1659 23.0352 11.8345 23.0352 11.553 22.8944L1.55301 17.8944C1.05903 17.6474 0.858803 17.0467 1.10579 16.5528Z" fill="currentColor"></path><path d="M2.44743 11.1055C1.95345 10.8586 1.35278 11.0588 1.10579 11.5528C0.858803 12.0467 1.05903 12.6474 1.55301 12.8944L11.553 17.8944C11.8345 18.0352 12.1659 18.0352 12.4474 17.8944L22.4474 12.8944C22.9414 12.6474 23.1416 12.0467 22.8946 11.5528C22.6477 11.0588 22.047 10.8586 21.553 11.1055L12.0002 15.8819L2.44743 11.1055Z" fill="currentColor"></path></svg>Clipboard</button>
+              <a href="scripts/css-selector.js" style="font-size:.85rem;color:#C6B2ED;text-decoration:underline;text-underline-offset:3px">Read the source</a>
+            </div>
+            <div class="vl-status" role="status" style="font-size:.82rem;color:#A6CA93;min-height:1.2em"></div>
+          </article>
+
+          <article style="border:1px solid rgba(237,231,218,0.14);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 Finder</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Finds and highlights an element from a CSS selector or a code snippet, revealing it temporarily if it was hidden, collapsed or off-screen.</p>
+            </div>
+            <div class="vl-actions" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <a class="vl-drag" draggable="true" data-bookmarklet="element-finder" href="javascript:(function () { 'use strict'; try { if (document.getElementById('vl-finder-panel')) { document.getElementById('vl-finder-input').focus(); return; } var revealed = []; var marked = []; function esc(s) { if (s == null) return ''; return String(s).replace(/[&amp;&lt;&gt;&quot;']/g, function (c) { return { '&amp;': '&amp;amp;', '&lt;': '&amp;lt;', '&gt;': '&amp;gt;', '&quot;': '&amp;quot;', &quot;'&quot;: '&amp;#39;' }[c]; }); } function isHidden(el) { var st = getComputedStyle(el); return (st.display === 'none') || (st.visibility === 'hidden') || (parseFloat(st.opacity) === 0); } function reveal(el) { var chain = []; var node = el; while (node &amp;&amp; node.nodeType === 1) { chain.push(node); node = node.parentElement; } chain.forEach(function (n) { if (!isHidden(n) &amp;&amp; n.getAttribute('hidden') === null) return; revealed.push({ el: n, style: n.getAttribute('style'), hidden: n.getAttribute('hidden') }); if (n.getAttribute('hidden') !== null) { n.removeAttribute('hidden'); } n.style.display = 'block'; n.style.visibility = 'visible'; n.style.opacity = '1'; }); } function restore() { revealed.forEach(function (r) { if (r.style === null) { r.el.removeAttribute('style'); } else { r.el.setAttribute('style', r.style); } if (r.hidden !== null) { r.el.setAttribute('hidden', r.hidden); } }); revealed = []; marked.forEach(function (m) { m.el.style.outline = m.outline; }); marked = []; } function mark(el) { marked.push({ el: el, outline: el.style.outline }); el.style.outline = '4px solid #C6B2ED'; el.style.outlineOffset = '2px'; } function describe(el) { var d = el.tagName.toLowerCase(); if (el.id) { d += '#' + el.id; } if (el.className &amp;&amp; typeof el.className === 'string') { var cls = el.className.trim().split(/\s+/).filter(Boolean).slice(0, 3); if (cls.length) { d += '.' + cls.join('.'); } } return d; } function searchBySelector(q) { try { return Array.prototype.slice.call(document.querySelectorAll(q)); } catch (e) { return null; } } function searchBySnippet(q) { var host = document.createElement('div'); host.innerHTML = q; var probe = host.firstElementChild; if (!probe) { var text = q.trim(); if (!text) return []; var all = document.querySelectorAll('body *'); return Array.prototype.filter.call(all, function (el) { return el.children.length === 0 &amp;&amp; el.textContent.trim().indexOf(text) !== -1; }); } var tag = probe.tagName; var candidates = Array.prototype.slice.call(document.getElementsByTagName(tag)); var attrs = ['id', 'src', 'href', 'alt', 'aria-label', 'name', 'title', 'for', 'class']; var probeAttrs = {}; attrs.forEach(function (a) { var v = probe.getAttribute(a); if (v) { probeAttrs[a] = v; } }); var probeText = probe.textContent.replace(/\s+/g, ' ').trim(); var scored = candidates.map(function (el) { var score = 0; Object.keys(probeAttrs).forEach(function (a) { var v = el.getAttribute(a); if (v &amp;&amp; v === probeAttrs[a]) { score += (a === 'id' || a === 'src' || a === 'href') ? 4 : 2; } }); if (probeText &amp;&amp; el.textContent.replace(/\s+/g, ' ').trim() === probeText) { score += 3; } return { el: el, score: score }; }).filter(function (x) { return x.score &gt; 0; }); scored.sort(function (a, b) { return b.score - a.score; }); return scored.map(function (x) { return x.el; }); } var panel = document.createElement('div'); panel.id = 'vl-finder-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Vesper Lab, find an element'); panel.style.cssText = 'position:fixed;top:16px;right:16px;width:340px;max-height:80vh;overflow:auto;' + 'z-index:2147483647;background:#191714;color:#EDE7DA;border:1px solid rgba(237,231,218,0.16);' + 'border-radius:12px;padding:16px;font:14px/1.5 -apple-system,&quot;Segoe UI&quot;,Roboto,Helvetica,Arial,sans-serif;' + 'box-shadow:0 12px 40px rgba(0,0,0,.5);'; panel.innerHTML = '&lt;h2 style=&quot;font-family:Georgia,serif;font-size:16px;margin:0 0 4px;&quot;&gt;🦇 Finder&lt;/h2&gt;' + '&lt;p id=&quot;vl-finder-hint&quot; style=&quot;margin:0 0 10px;font-size:12px;color:#A9A091;&quot;&gt;Paste a CSS selector (&lt;code&gt;#menu .item&lt;/code&gt;) or an HTML snippet. Hidden elements are revealed temporarily.&lt;/p&gt;' + '&lt;label for=&quot;vl-finder-input&quot; style=&quot;display:block;font-size:12px;font-weight:700;margin-bottom:4px;&quot;&gt;Selector or snippet&lt;/label&gt;' + '&lt;textarea id=&quot;vl-finder-input&quot; rows=&quot;4&quot; aria-describedby=&quot;vl-finder-hint&quot; style=&quot;width:100%;font-family:Consolas,monospace;font-size:12px;padding:8px;border-radius:6px;border:1px solid rgba(237,231,218,0.18);background:#100F0D;color:#EDE7DA;&quot;&gt;&lt;/textarea&gt;' + '&lt;div style=&quot;display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;&quot;&gt;' + '&lt;button type=&quot;button&quot; id=&quot;vl-finder-go&quot; style=&quot;font-weight:700;font-size:13px;padding:8px 14px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;cursor:pointer;&quot;&gt;Search&lt;/button&gt;' + '&lt;button type=&quot;button&quot; id=&quot;vl-finder-reset&quot; style=&quot;font-weight:700;font-size:13px;padding:8px 14px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;&quot;&gt;Reset&lt;/button&gt;' + '&lt;button type=&quot;button&quot; id=&quot;vl-finder-close&quot; style=&quot;font-weight:700;font-size:13px;padding:8px 14px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#A9A091;cursor:pointer;&quot;&gt;Close&lt;/button&gt;' + '&lt;/div&gt;' + '&lt;div id=&quot;vl-finder-status&quot; role=&quot;status&quot; style=&quot;margin-top:10px;font-size:13px;color:#E5BE7D;font-weight:600;&quot;&gt;&lt;/div&gt;' + '&lt;ul id=&quot;vl-finder-results&quot; style=&quot;list-style:none;padding:0;margin:10px 0 0;font-size:12px;&quot;&gt;&lt;/ul&gt;'; document.body.appendChild(panel); var input = document.getElementById('vl-finder-input'); var statusEl = document.getElementById('vl-finder-status'); var resultsEl = document.getElementById('vl-finder-results'); function run() { restore(); resultsEl.innerHTML = ''; var q = input.value.trim(); if (!q) { statusEl.textContent = 'Enter a selector or a code snippet.'; input.focus(); return; } var found = null; var mode = ''; if (q.indexOf('&lt;') !== -1) { found = searchBySnippet(q); mode = 'code snippet'; } else { found = searchBySelector(q); mode = 'CSS selector'; if (found === null) { found = searchBySnippet(q); mode = 'text search (invalid selector)'; } else if (found.length === 0) { var alt = searchBySnippet(q); if (alt.length) { found = alt; mode = 'text search'; } } } found = (found || []).filter(function (el) { return el &amp;&amp; el !== panel &amp;&amp; !panel.contains(el); }).slice(0, 25); if (!found.length) { statusEl.textContent = 'No element found (' + mode + '). It may be inside an iframe, or loaded dynamically.'; return; } statusEl.textContent = found.length + ' element(s) found via ' + mode + '.'; found.forEach(function (el, i) { var wasHidden = isHidden(el); reveal(el); mark(el); var li = document.createElement('li'); li.style.cssText = 'padding:7px 0;border-bottom:1px solid rgba(237,231,218,0.12);'; li.innerHTML = '&lt;code style=&quot;font-size:11px;color:#C8C0B2;&quot;&gt;' + esc(describe(el)) + '&lt;/code&gt;' + (wasHidden ? '&lt;span style=&quot;color:#E5BE7D;font-size:11px;display:block;&quot;&gt;▲ was hidden, temporarily revealed&lt;/span&gt;' : ''); var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Go to element ' + (i + 1); btn.style.cssText = 'margin-top:5px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;'; btn.addEventListener('click', function () { try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { el.scrollIntoView(); } try { el.setAttribute('tabindex', '-1'); el.focus(); } catch (e) {} statusEl.textContent = 'Element ' + (i + 1) + ' targeted: ' + describe(el); }); li.appendChild(btn); resultsEl.appendChild(li); }); try { found[0].scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {} } document.getElementById('vl-finder-go').addEventListener('click', run); document.getElementById('vl-finder-reset').addEventListener('click', function () { restore(); resultsEl.innerHTML = ''; input.value = ''; statusEl.textContent = 'Reset: highlights and reveals undone.'; input.focus(); }); document.getElementById('vl-finder-close').addEventListener('click', function () { restore(); panel.remove(); }); input.addEventListener('keydown', function (e) { if (e.key === 'Enter' &amp;&amp; !e.shiftKey) { e.preventDefault(); run(); } if (e.key === 'Escape') { restore(); panel.remove(); } }); input.focus(); } catch (err) { alert('The bookmarklet ran into an error: ' + err.message + '. Open the console for details. If nothing appears at all, the site is probably blocking external scripts (CSP).'); if (window.console) { console.error('Vesper Lab, find an element:', err); } } })();" style="display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;text-decoration:none;cursor:grab">🦇 Finder</a>
+              <button type="button" class="vl-copy" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;display:inline-flex;align-items:center;gap:8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="display:block;flex:none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.553 1.10557C11.8346 0.964809 12.1659 0.964809 12.4475 1.10557L22.4475 6.10557C22.7862 6.27496 23.0002 6.62123 23.0002 7C23.0002 7.37877 22.7862 7.72504 22.4475 7.89443L12.4475 12.8944C12.1659 13.0352 11.8346 13.0352 11.553 12.8944L1.55303 7.89443C1.21425 7.72504 1.00024 7.37877 1.00024 7C1.00024 6.62123 1.21425 6.27496 1.55303 6.10557L11.553 1.10557ZM4.23631 7L12.0002 10.882L19.7642 7L12.0002 3.11803L4.23631 7Z" fill="currentColor"></path><path d="M1.10579 16.5528C1.35278 16.0588 1.95345 15.8586 2.44743 16.1055L12.0002 20.8819L21.553 16.1055C22.047 15.8586 22.6477 16.0588 22.8946 16.5528C23.1416 17.0467 22.9414 17.6474 22.4474 17.8944L12.4474 22.8944C12.1659 23.0352 11.8345 23.0352 11.553 22.8944L1.55301 17.8944C1.05903 17.6474 0.858803 17.0467 1.10579 16.5528Z" fill="currentColor"></path><path d="M2.44743 11.1055C1.95345 10.8586 1.35278 11.0588 1.10579 11.5528C0.858803 12.0467 1.05903 12.6474 1.55301 12.8944L11.553 17.8944C11.8345 18.0352 12.1659 18.0352 12.4474 17.8944L22.4474 12.8944C22.9414 12.6474 23.1416 12.0467 22.8946 11.5528C22.6477 11.0588 22.047 10.8586 21.553 11.1055L12.0002 15.8819L2.44743 11.1055Z" fill="currentColor"></path></svg>Clipboard</button>
+              <a href="scripts/element-finder.js" style="font-size:.85rem;color:#C6B2ED;text-decoration:underline;text-underline-offset:3px">Read the source</a>
+            </div>
+            <div class="vl-status" role="status" style="font-size:.82rem;color:#A6CA93;min-height:1.2em"></div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Group: Scan by element type -->
+      <section style="margin-bottom:36px">
+        <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#A6CA93;margin:0 0 4px">Scan by element type</h2>
+        <p style="color:#A9A091;font-size:.88rem;margin:0 0 16px;max-width:720px">Focused reports on the three element families that most often keep people from using a page. Each one opens its own report tab, printable and exportable. <strong style="color:#EDE7DA">English version in progress</strong> — the three tools below are still being translated and restyled, check back soon.</p>
+        <div style="display:grid;gap:14px">
+
+          <article style="border:1px dashed rgba(237,231,218,0.22);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px;opacity:.75">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 Link Scan</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Accessible name, destination, new window behaviour and whether the warning is perceivable, generic labels, and identical labels pointing to different destinations.</p>
+            </div>
+            <div role="status" style="font-size:.85rem;color:#A9A091">Not published yet — English translation in progress.</div>
+          </article>
+
+          <article style="border:1px dashed rgba(237,231,218,0.22);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px;opacity:.75">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 Image Scan</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Alternative text, decorative or hidden status, a captured thumbnail embedded in the exports, and a contrast heuristic flagging images to check by eye.</p>
+            </div>
+            <div role="status" style="font-size:.85rem;color:#A9A091">Not published yet — English translation in progress.</div>
+          </article>
+
+          <article style="border:1px dashed rgba(237,231,218,0.22);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px;opacity:.75">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 Label Scan</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Where each field gets its accessible name, required fields, radio and checkbox groups, linked error messages, missing autocomplete: a technical pass before the screen reader test.</p>
+            </div>
+            <div role="status" style="font-size:.85rem;color:#A9A091">Not published yet — English translation in progress.</div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Group: WCAG reference -->
+      <section style="margin-bottom:36px">
+        <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#A6CA93;margin:0 0 4px">WCAG reference</h2>
+        <p style="color:#A9A091;font-size:.88rem;margin:0 0 16px;max-width:720px">The success criteria at hand while you work, without leaving the page.</p>
+        <div style="display:grid;gap:14px">
+
+          <article style="border:1px solid rgba(237,231,218,0.14);border-radius:12px;background:#191714;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h3 style="font-family:'Noto Serif',Georgia,serif;font-size:1.12rem;font-weight:600;margin:0">🦇 Sonar</h3>
+              <p style="margin:0;color:#A9A091;font-size:.88rem;max-width:640px;text-wrap:pretty">Search the 87 WCAG 2.2 success criteria and read the description of any one of them in a movable panel over the page you are working on.</p>
+            </div>
+            <div class="vl-actions" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <a class="vl-drag" draggable="true" data-bookmarklet="sonar" href="javascript:(function () { 'use strict'; var URL_SONAR = 'https://VesperLab-A11Y.github.io/vesper-bookmarklets/sonar.html'; var existing = document.getElementById('vl-sonar-panel'); if (existing) { existing.remove(); return; } var panel = document.createElement('div'); panel.id = 'vl-sonar-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Sonar - WCAG 2.2 reference'); panel.style.cssText = 'position:fixed;top:24px;right:24px;width:min(460px,92vw);height:min(640px,86vh);' + 'z-index:2147483647;background:#100F0D;border:1px solid #A6CA93;border-radius:12px;' + 'box-shadow:0 18px 48px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;' + 'font:14px/1.5 system-ui,Arial,sans-serif'; var bar = document.createElement('div'); bar.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:12px;' + 'padding:8px 10px;background:#191714;color:#EDE7DA;cursor:move;border-bottom:1px solid rgba(237,231,218,.16)'; bar.innerHTML = '&lt;span style=&quot;font-weight:700;letter-spacing:.04em&quot;&gt;SONAR &amp;mdash; WCAG 2.2&lt;/span&gt;'; var closeBtn = document.createElement('button'); closeBtn.type = 'button'; closeBtn.textContent = '×'; closeBtn.setAttribute('aria-label', 'Close Sonar'); closeBtn.style.cssText = 'background:transparent;border:1px solid rgba(237,231,218,.3);color:#F0A9A2;' + 'border-radius:6px;width:28px;height:28px;font-size:16px;cursor:pointer'; closeBtn.onclick = function () { panel.remove(); document.removeEventListener('keydown', onKey); }; bar.appendChild(closeBtn); var frame = document.createElement('iframe'); frame.src = URL_SONAR; frame.title = 'Sonar - WCAG 2.2 criteria search'; frame.style.cssText = 'border:0;flex:1;width:100%;background:#100F0D'; panel.appendChild(bar); panel.appendChild(frame); document.body.appendChild(panel); closeBtn.focus(); var drag = null; bar.addEventListener('mousedown', function (e) { if (e.target === closeBtn) return; var r = panel.getBoundingClientRect(); drag = { x: e.clientX - r.left, y: e.clientY - r.top }; panel.style.right = 'auto'; panel.style.left = r.left + 'px'; panel.style.top = r.top + 'px'; e.preventDefault(); }); document.addEventListener('mousemove', function (e) { if (!drag) return; panel.style.left = Math.max(0, e.clientX - drag.x) + 'px'; panel.style.top = Math.max(0, e.clientY - drag.y) + 'px'; }); document.addEventListener('mouseup', function () { drag = null; }); function onKey(e) { if (e.key === 'Escape') { panel.remove(); document.removeEventListener('keydown', onKey); } } document.addEventListener('keydown', onKey); })();" style="display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;text-decoration:none;cursor:grab">🦇 Sonar</a>
+              <button type="button" class="vl-copy" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer;display:inline-flex;align-items:center;gap:8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="display:block;flex:none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.553 1.10557C11.8346 0.964809 12.1659 0.964809 12.4475 1.10557L22.4475 6.10557C22.7862 6.27496 23.0002 6.62123 23.0002 7C23.0002 7.37877 22.7862 7.72504 22.4475 7.89443L12.4475 12.8944C12.1659 13.0352 11.8346 13.0352 11.553 12.8944L1.55303 7.89443C1.21425 7.72504 1.00024 7.37877 1.00024 7C1.00024 6.62123 1.21425 6.27496 1.55303 6.10557L11.553 1.10557ZM4.23631 7L12.0002 10.882L19.7642 7L12.0002 3.11803L4.23631 7Z" fill="currentColor"></path><path d="M1.10579 16.5528C1.35278 16.0588 1.95345 15.8586 2.44743 16.1055L12.0002 20.8819L21.553 16.1055C22.047 15.8586 22.6477 16.0588 22.8946 16.5528C23.1416 17.0467 22.9414 17.6474 22.4474 17.8944L12.4474 22.8944C12.1659 23.0352 11.8345 23.0352 11.553 22.8944L1.55301 17.8944C1.05903 17.6474 0.858803 17.0467 1.10579 16.5528Z" fill="currentColor"></path><path d="M2.44743 11.1055C1.95345 10.8586 1.35278 11.0588 1.10579 11.5528C0.858803 12.0467 1.05903 12.6474 1.55301 12.8944L11.553 17.8944C11.8345 18.0352 12.1659 18.0352 12.4474 17.8944L22.4474 12.8944C22.9414 12.6474 23.1416 12.0467 22.8946 11.5528C22.6477 11.0588 22.047 10.8586 21.553 11.1055L12.0002 15.8819L2.44743 11.1055Z" fill="currentColor"></path></svg>Clipboard</button>
+              <a href="scripts/sonar.js" style="font-size:.85rem;color:#C6B2ED;text-decoration:underline;text-underline-offset:3px">Read the source</a>
+            </div>
+            <div class="vl-status" role="status" style="font-size:.82rem;color:#A6CA93;min-height:1.2em"></div>
+          </article>
+
+        </div>
+
+        <div style="border:1px solid rgba(237,231,218,0.14);border-left:4px solid #C6B2ED;border-radius:10px;padding:14px 16px;font-size:.86rem;color:#A9A091;margin-top:14px;background:#221F1A">
+          <strong style="color:#EDE7DA">Sonar needs HTTPS.</strong> Its panel loads this repository's <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">sonar.html</code> in an iframe, so the page you are working on must be served over HTTPS. On a local <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">file://</code> or plain HTTP page the browser will block it and the panel stays empty. <strong style="color:#EDE7DA">Sonar's own page (<code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">sonar.html</code>) is not published yet</strong> — the button above will install correctly but won't open a working panel until it ships.
+        </div>
+      </section>
+
+    </div>
+
+    <section style="border:1px solid rgba(237,231,218,0.14);border-radius:12px;background:#191714;padding:24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+      <div style="display:flex;flex-direction:column;gap:6px;max-width:560px">
+        <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:1.15rem;font-weight:600;margin:0">Axe-core Scan Viewer</h2>
+        <p style="margin:0;color:#A9A091;font-size:.88rem">Paste the JSON produced by 🦇 AC Scan or 🦇 AC Targeted Scan and get a report grouped by severity, with the failing selector and accessible Word, Excel and print exports.</p>
+      </div>
+      <a href="scan-results.html" style="flex-shrink:0;font-weight:700;font-size:.9rem;text-decoration:none;background:#A6CA93;color:#100F0D;padding:12px 22px;border-radius:10px;border:1px solid #A6CA93;white-space:nowrap;display:inline-flex;align-items:center;gap:8px">Open the viewer<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6"></path><path d="M20 4 11 13"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a>
+    </section>
+  </main>
+
+  <footer style="max-width:1040px;margin:44px auto 0;padding:20px 20px 0;text-align:center;font-size:.78rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.12);line-height:1.9">
+    <div>Vesper Bookmarklets Directory, built by <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:#F0A9A2">Vesper Lab</a></div>
+    <div>Scans powered by <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:#F0A9A2">axe-core</a> (Deque Systems), criteria based on <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:#F0A9A2">WCAG 2.2</a></div>
+    <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px">
+      <a href="https://github.com/VesperLab-A11Y/vesper-bookmarklets" target="_blank" rel="noopener" style="color:#F0A9A2">Source on GitHub</a>
+      <a href="scan-results.html" style="color:#F0A9A2">Scan Viewer</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// Boutons "Clipboard" : alternative au glisser-déposer pour installer un bookmarklet.
+// On lit le code directement dans le href de l'ancre voisine (source unique de vérité,
+// injectée par tools/build-bookmarklets.mjs) plutôt que de le recharger séparément.
+(function () {
+  'use strict';
+
+  function fallbackCopy(text) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  document.querySelectorAll('.vl-actions').forEach(function (row) {
+    var drag = row.querySelector('.vl-drag');
+    var copyBtn = row.querySelector('.vl-copy');
+    var status = row.parentElement.querySelector('.vl-status');
+
+    // Le lien à glisser ne doit rien faire au clic : il n'existe que pour être déposé
+    // dans la barre de favoris.
+    drag.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+
+    copyBtn.addEventListener('click', function () {
+      var code = drag.getAttribute('href');
+      if (!code || code === 'javascript:void 0') {
+        status.textContent = 'Bookmarklet code could not be loaded here. Use the source link.';
+        return;
+      }
+      var done = function () {
+        status.textContent = 'Code copied. Paste it into the URL field of a new bookmark.';
+      };
+      var fail = function () {
+        if (fallbackCopy(code)) { done(); }
+        else { status.textContent = 'Copy failed. Open the source file and copy the code from there.'; }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, fail);
+      } else {
+        fail();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

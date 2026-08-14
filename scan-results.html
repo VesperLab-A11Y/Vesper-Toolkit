@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Axe-core Scan Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #100F0D; }
+  * { box-sizing: border-box; }
+  :focus-visible { outline: 2px solid #C6B2ED; outline-offset: 3px; border-radius: 3px; }
+  summary::-webkit-details-marker { display: none; }
+  @media print {
+    body { background: #fff; }
+    .vl-screen-only { display: none !important; }
+    .vl-page { background: #fff !important; color: #000 !important; }
+    .vl-card, .vl-node { background: #fff !important; border-color: #999 !important; color: #000 !important; break-inside: avoid; }
+    .vl-card *, .vl-node * { color: #000 !important; }
+    a { color: #000 !important; text-decoration: underline; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  }
+</style>
+</head>
+<body>
+<div class="vl-page" style="min-height:100vh;background:#100F0D;color:#EDE7DA;font-family:'Noto Sans',Arial,Helvetica,sans-serif;line-height:1.55;padding-bottom:56px">
+  <a href="#json-input" class="vl-screen-only" style="position:absolute;left:8px;top:-60px;z-index:300;background:#A6CA93;color:#100F0D;padding:10px 16px;border-radius:0 0 8px 8px;font-weight:700;text-decoration:none;transition:top .15s ease" onfocus="this.style.top='0'" onblur="this.style.top='-60px'">Skip to the input field</a>
+
+  <header style="max-width:1000px;margin:0 auto;padding:40px 20px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+    <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)" style="display:inline-flex;border-radius:10px">
+      <img src="assets/logo-cream.svg" alt="" width="96" style="width:96px;height:auto;display:block;filter:brightness(0) invert(1) sepia(0.18) saturate(1.4) hue-rotate(340deg)">
+    </a>
+    <h1 style="font-family:'Noto Serif',Georgia,serif;font-size:2rem;font-weight:600;letter-spacing:.01em;margin:0">Axe-core Scan Viewer</h1>
+    <p style="color:#A9A091;font-size:.95rem;max-width:660px;margin:0;text-wrap:pretty">Turns a raw axe-core scan into a readable report. Criterias grouped by severity, with the failing selector, the rule documentation, and accessible Word, Excel and print exports. Built on axe-core, the open-source engine by Deque Systems.</p>
+  </header>
+
+  <main style="max-width:1000px;margin:26px auto 0;padding:0 20px">
+    <div class="vl-screen-only" style="background:#191714;border:1px solid rgba(237,231,218,0.14);border-left:4px solid #A6CA93;border-radius:10px;padding:14px 16px;font-size:.88rem;color:#A9A091;margin:0 0 26px">
+      <strong style="color:#EDE7DA">You need a scan first.</strong> The <em>🦇 AC Scan</em> and <em>🦇 AC Targeted Scan</em> bookmarklets produce a JSON in your terminal and copy it straight to your clipboard. Paste it in the field to see the results. You can install the bookmarklets from the <a href="index.html" style="color:#F0A9A2">Vesper Directory</a>, which also holds the install instructions and the targeted scan guide.
+    </div>
+
+    <section class="vl-screen-only" style="margin:0 0 8px">
+      <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#A6CA93;margin:0 0 6px">Usage</h2>
+      <p id="usageHint" style="font-size:.88rem;color:#A9A091;margin:0 0 16px;max-width:680px">Paste the output of <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">axe.run()</code> below. Press Enter to render the results, Shift+Enter for a line break inside the field.</p>
+      <label for="json-input" style="display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">axe-core JSON</label>
+      <textarea id="json-input" aria-describedby="usageHint" placeholder='{ "violations": [...], "passes": [...] }' style="width:100%;min-height:160px;font-family:'Courier New',monospace;font-size:.82rem;padding:12px;border:1px solid rgba(237,231,218,0.18);border-radius:10px;background:#191714;color:#EDE7DA;resize:vertical"></textarea>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px">
+        <button type="button" id="btnRender" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;cursor:pointer;display:inline-flex;align-items:center;gap:8px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4v7a4 4 0 0 1-4 4H4"></path><path d="M9 10 4 15l5 5"></path></svg>
+          Render results
+        </button>
+        <button type="button" id="btnClear" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer">Clear</button>
+        <button type="button" id="btnPrint" style="display:none;font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer">Print / PDF</button>
+        <button type="button" id="btnExcel" style="display:none;font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer">Export to Excel</button>
+        <button type="button" id="btnWord" style="display:none;font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer">Export to Word</button>
+      </div>
+
+      <div id="errorMsg" role="alert" style="color:#F0A9A2;font-size:.85rem;font-weight:600;margin-top:12px"></div>
+      <div id="statusMsg" role="status" style="color:#E5BE7D;font-size:.85rem;font-weight:600;margin-top:8px"></div>
+    </section>
+
+    <details id="exportHelp" class="vl-screen-only" style="display:none;border:1px solid rgba(237,231,218,0.14);border-radius:10px;margin-top:18px;background:#221F1A">
+      <summary style="cursor:pointer;padding:13px 16px;font-size:.86rem;font-weight:700;list-style:none;display:flex;align-items:center;gap:8px">How do I get these results into an accessible document?</summary>
+      <div style="padding:12px 16px 16px;font-size:.87rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.14)">
+        <p style="margin:8px 0"><strong style="color:#EDE7DA">PDF (via Print), a warning.</strong> Browser printing produces an <em>untagged</em> PDF: no heading structure, no table semantics, no reading order. A screen reader sees a flat text stream at best. Fine for a visual preview or an archive, not for a document that has to be accessible itself.</p>
+        <p style="margin:8px 0">Acrobat Pro can auto-tag (<em>Accessibility &rsaquo; Autotag Document</em>), but the result is approximate: reading order often wrong, tables badly reconstructed, headings not hierarchical. It always needs a full manual pass, so avoid it as a default.</p>
+        <p style="margin:8px 0"><strong style="color:#EDE7DA">Word (.docx), the accessible option.</strong> The export generates a genuinely structured document: native heading styles (Heading&nbsp;1, Heading&nbsp;2), a table with a marked, repeating header row, a declared document language, live links, alt text on images. To keep it accessible:</p>
+        <ul style="padding-left:22px;margin:8px 0">
+          <li style="margin-bottom:7px">Don't replace structure with formatting: never swap a heading style for enlarged bold text</li>
+          <li style="margin-bottom:7px">If you add rows, stay inside the existing table rather than starting a new one without a header</li>
+          <li style="margin-bottom:7px">Run the built-in <em>Accessibility Checker</em> (<em>Review &rsaquo; Check Accessibility</em>) before you share the file</li>
+          <li style="margin-bottom:7px">For an accessible PDF: export from Word via <em>File &rsaquo; Save As &rsaquo; PDF</em> with <strong style="color:#EDE7DA">&ldquo;Document structure tags for accessibility&rdquo;</strong> checked, never through browser printing</li>
+        </ul>
+        <p style="margin:8px 0"><strong style="color:#EDE7DA">Excel (.xlsx), for tracking and sorting.</strong> The export produces a clean data range: one row per issue, no merged cells, a frozen and filterable header row, an explicit sheet name. To keep it accessible:</p>
+        <ul style="padding-left:22px;margin:8px 0">
+          <li style="margin-bottom:7px">Don't add merged cells: they break screen reader navigation</li>
+          <li style="margin-bottom:7px">Don't rely on severity colour alone: the symbol (&#9670; &#9650; &#9679; &#9642;) is there for that, keep it</li>
+          <li style="margin-bottom:7px">If you add a tab, give it an explicit name rather than &ldquo;Sheet2&rdquo;</li>
+        </ul>
+      </div>
+    </details>
+
+    <div id="summaryPanel" role="status" tabindex="-1" style="display:none;margin-top:26px;padding:16px 18px;border:1px solid rgba(237,231,218,0.14);border-radius:10px;background:#191714;font-size:.92rem"></div>
+    <div id="scannedUrl" style="display:none;margin-top:10px;font-size:.82rem;color:#A9A091"></div>
+
+    <div id="resultsRoot" style="margin-top:26px"></div>
+
+    <div id="emptyState" style="display:none;margin-top:22px;padding:18px;border:1px dashed rgba(237,231,218,0.22);border-radius:10px;color:#A6CA93;font-size:.9rem;text-align:center">No barriers found in this result. Clean pass.</div>
+  </main>
+
+  <footer style="max-width:1000px;margin:44px auto 0;padding:20px 20px 0;text-align:center;font-size:.78rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.12);line-height:1.9">
+    <div>Axe-core Scan Viewer, built by <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:#F0A9A2">Vesper Lab</a></div>
+    <div>Powered by <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:#F0A9A2">axe-core</a> (Deque Systems), criteria based on <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:#F0A9A2">WCAG 2.2</a></div>
+    <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px">
+      <a href="index.html" style="color:#F0A9A2">All bookmarklets &amp; tools</a>
+      <a href="https://github.com/VesperLab-A11Y/vesper-bookmarklets" target="_blank" rel="noopener" style="color:#F0A9A2">Source on GitHub</a>
+    </div>
+  </footer>
+</div>
+
+<script src="assets/logo.b64.js"></script>
+<script>
+// Axe-core Scan Viewer — logique de l'application.
+// Transcrit du prototype de Design (Scan Results.dc.html), sans le framework de composants :
+// ici tout passe par du DOM/JS classique, pour que la page reste un simple fichier statique.
+(function () {
+  'use strict';
+
+  var ORDER = ['critical', 'serious', 'moderate', 'minor'];
+  var LABEL = { critical: 'Critical', serious: 'Serious', moderate: 'Moderate', minor: 'Minor' };
+  var SYMBOL = { critical: '◆', serious: '▲', moderate: '●', minor: '▪' };
+  var INK = { critical: '#F0A9A2', serious: '#E5BE7D', moderate: '#C6B2ED', minor: '#A6CA93' };
+  var TINT = { critical: '#2B1614', serious: '#2A2113', moderate: '#211C2E', minor: '#182317' };
+  var XL_FILL = { critical: 'FFF7E0DC', serious: 'FFF9EFD9', moderate: 'FFEDE6FA', minor: 'FFE6F0DE' };
+  var XL_INK = { critical: 'FF7A2E24', serious: 'FF6B4A12', moderate: 'FF453163', minor: 'FF33511F' };
+
+  var input = document.getElementById('json-input');
+  var btnRender = document.getElementById('btnRender');
+  var btnClear = document.getElementById('btnClear');
+  var btnPrint = document.getElementById('btnPrint');
+  var btnExcel = document.getElementById('btnExcel');
+  var btnWord = document.getElementById('btnWord');
+  var errorEl = document.getElementById('errorMsg');
+  var statusEl = document.getElementById('statusMsg');
+  var exportHelp = document.getElementById('exportHelp');
+  var summaryPanel = document.getElementById('summaryPanel');
+  var scannedUrlEl = document.getElementById('scannedUrl');
+  var resultsRoot = document.getElementById('resultsRoot');
+  var emptyState = document.getElementById('emptyState');
+
+  // state.data ressemble à { violations: [...], url: '...' } une fois qu'un scan a été rendu, sinon null.
+  var state = { data: null, busy: false };
+
+  // Échappe une valeur pour l'injecter sans risque dans du HTML — les violations viennent
+  // de la page auditée, donc leur contenu (attributs, extraits de code) n'est pas fiable.
+  function esc(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function cleanSummary(t) {
+    if (!t) return '';
+    return String(t)
+      .replace(/Fix any of the following:/gi, '')
+      .replace(/Fix all of the following:/gi, '')
+      .replace(/\s*\n\s*/g, ' ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
+
+  function stamp() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function badgeStyle(impact) {
+    return 'font-size:.76rem;font-weight:700;padding:4px 11px;border-radius:999px;letter-spacing:.03em;background:' +
+      TINT[impact] + ';color:' + INK[impact] + ';border:1px solid ' + INK[impact] + '55';
+  }
+
+  // --- Analyse du JSON collé ---
+  // Accepte soit un seul résultat axe-core ({violations:[...]}), soit un tableau de plusieurs
+  // scans fusionnés (utile pour comparer plusieurs pages) — chaque violation garde la trace
+  // de son url d'origine.
+  function parse() {
+    var raw = (input.value || '').trim();
+    errorEl.textContent = '';
+    statusEl.textContent = '';
+    if (!raw) {
+      errorEl.textContent = 'Paste some JSON in the field above first.';
+      state.data = null;
+      render();
+      return;
+    }
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      errorEl.textContent = 'Invalid JSON: ' + e.message + '. Check that you copied the whole object.';
+      state.data = null;
+      render();
+      return;
+    }
+    var scans;
+    if (Array.isArray(parsed)) {
+      scans = parsed;
+    } else if (parsed && parsed.violations) {
+      scans = [parsed];
+    } else {
+      errorEl.textContent = 'Unexpected structure: no "violations" key found.';
+      state.data = null;
+      render();
+      return;
+    }
+
+    var all = [];
+    scans.forEach(function (scan) {
+      (scan.violations || []).forEach(function (v) {
+        var copy = {};
+        Object.keys(v).forEach(function (k) { copy[k] = v[k]; });
+        copy._url = scan.url || '';
+        all.push(copy);
+      });
+    });
+    state.data = { violations: all, url: (scans[0] && scans[0].url) || '' };
+    render();
+  }
+
+  // --- Rendu ---
+  function render() {
+    var data = state.data;
+    var hasParsed = !!data;
+    var violations = (data && data.violations) || [];
+    var hasResults = hasParsed && violations.length > 0;
+    var isEmpty = hasParsed && violations.length === 0;
+
+    btnPrint.style.display = hasResults ? '' : 'none';
+    btnExcel.style.display = hasResults ? '' : 'none';
+    btnWord.style.display = hasResults ? '' : 'none';
+    exportHelp.style.display = hasResults ? '' : 'none';
+    emptyState.style.display = isEmpty ? '' : 'none';
+
+    if (!hasParsed) {
+      summaryPanel.style.display = 'none';
+      scannedUrlEl.style.display = 'none';
+      resultsRoot.innerHTML = '';
+      return;
+    }
+
+    var counts = { critical: 0, serious: 0, moderate: 0, minor: 0 };
+    violations.forEach(function (v) { if (counts[v.impact] !== undefined) counts[v.impact]++; });
+    var nodeCount = violations.reduce(function (s, v) { return s + (v.nodes ? v.nodes.length : 0); }, 0);
+
+    summaryPanel.style.display = '';
+    var tallyHtml = ORDER.map(function (i) {
+      return '<span style="' + badgeStyle(i) + '">' + SYMBOL[i] + ' ' + LABEL[i] + ': ' + counts[i] + '</span>';
+    }).join('');
+    summaryPanel.innerHTML =
+      '<div><strong>' + violations.length + '</strong> rule(s) in violation &middot; <strong>' + nodeCount + '</strong> affected element(s)</div>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">' + tallyHtml + '</div>';
+
+    if (data.url) {
+      scannedUrlEl.style.display = '';
+      scannedUrlEl.innerHTML = 'Page scanned: <code style="font-family:\'Courier New\',monospace;background:#191714;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px;word-break:break-all">' + esc(data.url) + '</code>';
+    } else {
+      scannedUrlEl.style.display = 'none';
+    }
+
+    var groupsHtml = '';
+    ORDER.forEach(function (impact) {
+      var rules = violations.filter(function (v) { return v.impact === impact; });
+      if (!rules.length) return;
+
+      var rulesHtml = rules.map(function (v) {
+        var wcag = (v.tags || []).filter(function (t) { return t.indexOf('wcag') === 0; }).join(', ');
+        var nodes = v.nodes || [];
+        var open = (impact === 'critical' || impact === 'serious') ? ' open' : '';
+        var cardStyle = 'border:1px solid rgba(237,231,218,0.14);border-left:4px solid ' + INK[impact] +
+          ';border-radius:8px;background:#191714;margin-bottom:10px';
+
+        var nodesHtml = nodes.map(function (n) {
+          var selector = (n.target || []).join(', ');
+          var htmlSnippet = n.html || '';
+          var summary = cleanSummary(n.failureSummary);
+          var snippetBlock = htmlSnippet
+            ? '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:10px 0 3px">Code snippet</div>' +
+              '<code style="font-family:\'Courier New\',monospace;font-size:.78rem;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:4px 6px;display:block;white-space:pre-wrap;word-break:break-word">' + esc(htmlSnippet) + '</code>'
+            : '';
+          var summaryBlock = summary
+            ? '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:10px 0 3px">Failure message</div>' +
+              '<p style="margin:3px 0;color:#C8C0B2">' + esc(summary) + '</p>'
+            : '';
+          return '<div class="vl-node" style="background:#221F1A;border:1px solid rgba(237,231,218,0.12);border-radius:8px;padding:10px 12px;margin-top:10px">' +
+            '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:4px 0 3px">CSS selector</div>' +
+            '<span style="font-family:\'Courier New\',monospace;font-size:.78rem;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px;word-break:break-all;display:inline-block">' + esc(selector) + '</span>' +
+            snippetBlock + summaryBlock +
+            '</div>';
+        }).join('');
+
+        var docLink = v.helpUrl
+          ? '<p style="margin:7px 0"><a href="' + esc(v.helpUrl) + '" target="_blank" rel="noopener" style="color:#F0A9A2">Rule documentation (new tab)</a></p>'
+          : '';
+
+        return '<details class="vl-card"' + open + ' style="' + cardStyle + '">' +
+          '<summary style="cursor:pointer;padding:13px 16px;font-size:.92rem;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:baseline;border-radius:8px">' +
+          '<span>' + esc(v.help || v.id) + '</span>' +
+          '<span style="font-weight:400;color:#A9A091;white-space:nowrap;font-size:.8rem">' + nodes.length + ' element(s)</span>' +
+          '</summary>' +
+          '<div style="padding:0 16px 16px;font-size:.87rem">' +
+          '<p style="margin:7px 0;color:#C8C0B2">' + esc(v.description || '') + '</p>' +
+          '<p style="margin:7px 0;font-size:.8rem;color:#A9A091">' +
+          '<code style="font-family:\'Courier New\',monospace;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">' + esc(v.id || '') + '</code> ' +
+          '<span>' + esc(wcag) + '</span></p>' +
+          docLink + nodesHtml +
+          '</div></details>';
+      }).join('');
+
+      groupsHtml += '<section style="margin-bottom:26px">' +
+        '<h2 style="font-family:\'Noto Serif\',Georgia,serif;font-size:1.05rem;font-weight:600;margin:0 0 10px;display:flex;align-items:center;gap:10px">' +
+        '<span style="' + badgeStyle(impact) + '">' + SYMBOL[impact] + ' ' + LABEL[impact] + '</span>' +
+        '<span style="font-size:.9rem;font-weight:400;color:#A9A091">' + rules.length + ' rule(s)</span>' +
+        '</h2>' + rulesHtml + '</section>';
+    });
+
+    resultsRoot.innerHTML = groupsHtml;
+  }
+
+  // --- Colonnes / lignes partagées par les deux exports ---
+  function columns() {
+    return [
+      { name: 'Severity', width: 13 },
+      { name: 'Rule (id)', width: 26, code: true },
+      { name: 'Title', width: 30, wrap: true },
+      { name: 'Description', width: 46, wrap: true },
+      { name: 'WCAG criteria', width: 16 },
+      { name: 'CSS selector', width: 30, wrap: true },
+      { name: 'Code snippet', width: 44, wrap: true, code: true },
+      { name: 'Failure message', width: 40, wrap: true },
+      { name: 'Documentation', width: 22, link: true }
+    ];
+  }
+
+  function buildRows() {
+    var rows = [];
+    ((state.data && state.data.violations) || []).forEach(function (v) {
+      var wcag = (v.tags || []).filter(function (t) { return t.indexOf('wcag') === 0; }).join(', ');
+      var nodes = (v.nodes && v.nodes.length) ? v.nodes : [{ target: [], html: '', failureSummary: '' }];
+      nodes.forEach(function (n) {
+        rows.push({
+          impact: v.impact || 'minor',
+          values: [
+            SYMBOL[v.impact] + ' ' + (LABEL[v.impact] || v.impact || ''),
+            v.id || '', v.help || '', v.description || '', wcag,
+            (n.target || []).join(', '), n.html || '',
+            cleanSummary(n.failureSummary), v.helpUrl || ''
+          ],
+          helpUrl: v.helpUrl || ''
+        });
+      });
+    });
+    return rows;
+  }
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var ex = document.querySelector('script[data-src="' + src + '"]');
+      if (ex) {
+        if (ex.dataset.loaded === '1') { resolve(); }
+        else {
+          ex.addEventListener('load', function () { resolve(); });
+          ex.addEventListener('error', function () { reject(new Error('could not load')); });
+        }
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = src;
+      s.setAttribute('data-src', src);
+      s.onload = function () { s.dataset.loaded = '1'; resolve(); };
+      s.onerror = function () { reject(new Error('Could not load the export library (an internet connection is required for this export).')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function download(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // --- Export Excel ---
+  function buildExcel() {
+    var COLUMNS = columns();
+    var rows = buildRows();
+    var wb = new window.ExcelJS.Workbook();
+    wb.creator = 'Vesper Lab';
+    wb.title = 'axe-core report';
+    var ws = wb.addWorksheet('axe-core violations', { views: [{ showGridLines: false, state: 'frozen', ySplit: 4 }] });
+    ws.columns = COLUMNS.map(function (c) { return { width: c.width }; });
+
+    ws.getCell('B1').value = { text: 'Vesper Lab, Axe-core Scan Viewer report', hyperlink: 'https://vesperlab.framer.website/' };
+    ws.getCell('B1').style = { font: { name: 'Noto Serif', size: 16, bold: true, color: { argb: 'FF3F5A32' } }, alignment: { vertical: 'middle' } };
+    ws.getRow(1).height = 30;
+    ws.getCell('B2').value = 'This report lists the accessibility barriers found by the axe-core engine (Deque Systems) on the scanned page.';
+    ws.getCell('B2').font = { name: 'Noto Serif', size: 10.5, italic: true, color: { argb: 'FF6B6459' } };
+    ws.getCell('B2').alignment = { wrapText: true, vertical: 'middle' };
+    ws.getRow(2).height = 34;
+
+    if (window.VL_LOGO_B64) {
+      try {
+        var img = wb.addImage({ base64: window.VL_LOGO_B64, extension: 'png' });
+        ws.addImage(img, { tl: { col: COLUMNS.length - 0.7, row: 0.05 }, ext: { width: 58, height: 56 } });
+      } catch (e) { /* report reste utilisable sans le logo */ }
+    }
+
+    var h = 4;
+    var hr = ws.getRow(h);
+    COLUMNS.forEach(function (c, i) { hr.getCell(i + 1).value = c.name; });
+    hr.height = 26;
+    hr.eachCell(function (cell) {
+      cell.font = { name: 'Noto Serif', size: 12, bold: true, color: { argb: 'FFF4EFE2' } };
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF5A7D46' } };
+      cell.alignment = { vertical: 'middle', wrapText: true };
+      cell.border = { top: { style: 'medium', color: { argb: 'FF3F5A32' } }, bottom: { style: 'medium', color: { argb: 'FF3F5A32' } }, left: { style: 'thin', color: { argb: 'FF3F5A32' } }, right: { style: 'thin', color: { argb: 'FF3F5A32' } } };
+    });
+
+    var thin = { style: 'thin', color: { argb: 'FFBFB9A8' } };
+    var r = h + 1;
+    rows.forEach(function (row) {
+      var xr = ws.getRow(r);
+      COLUMNS.forEach(function (c, i) {
+        if (c.link && row.helpUrl) { xr.getCell(i + 1).value = { text: 'Documentation', hyperlink: row.helpUrl }; }
+        else { xr.getCell(i + 1).value = row.values[i]; }
+      });
+      var stripe = ((r - h) % 2 === 0);
+      COLUMNS.forEach(function (c, i) {
+        var cell = xr.getCell(i + 1);
+        cell.border = { top: thin, bottom: thin, left: thin, right: thin };
+        cell.alignment = { vertical: 'top', wrapText: !!c.wrap, horizontal: 'left' };
+        if (i === 0) {
+          cell.font = { name: 'Calibri', size: 10.5, bold: true, color: { argb: XL_INK[row.impact] } };
+          cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL_FILL[row.impact] } };
+        } else if (c.link) {
+          cell.font = { name: 'Calibri', size: 10.5, color: { argb: 'FF8A4A45' }, underline: true };
+        } else {
+          cell.font = c.code
+            ? { name: 'Courier New', size: 10, color: { argb: 'FF1A1815' } }
+            : { name: 'Calibri', size: 10.5, color: { argb: 'FF1A1815' } };
+          if (stripe) { cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF6F3EA' } }; }
+        }
+      });
+      r++;
+    });
+
+    ws.autoFilter = { from: { row: h, column: 1 }, to: { row: h, column: COLUMNS.length } };
+
+    return wb.xlsx.writeBuffer().then(function (buf) {
+      download(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'vesperlab-ac-scan-' + stamp() + '.xlsx');
+    });
+  }
+
+  // --- Export Word ---
+  function buildWord() {
+    var d = window.docx;
+    var COLUMNS = columns();
+    var rows = buildRows();
+    var violations = (state.data && state.data.violations) || [];
+    var url = (state.data && state.data.url) || '';
+
+    function txt(t, o) {
+      o = o || {};
+      return new d.TextRun({ text: t == null ? '' : String(t), bold: !!o.bold, color: o.color, font: o.mono ? 'Courier New' : undefined });
+    }
+
+    var headerCells = COLUMNS.map(function (c) {
+      return new d.TableCell({
+        shading: { type: d.ShadingType.SOLID, color: '5A7D46', fill: '5A7D46' },
+        children: [new d.Paragraph({ children: [txt(c.name, { bold: true, color: 'FFFFFF' })] })]
+      });
+    });
+
+    var bodyRows = rows.map(function (row) {
+      var cells = COLUMNS.map(function (c, i) {
+        var children;
+        if (c.link && row.helpUrl) {
+          children = [new d.ExternalHyperlink({ children: [txt('Documentation', { color: 'A05C57' })], link: row.helpUrl })];
+        } else {
+          children = [txt(row.values[i], { mono: !!c.code, bold: i === 0, color: i === 0 ? XL_INK[row.impact].slice(2) : undefined })];
+        }
+        var opts = { children: [new d.Paragraph({ children: children })] };
+        if (i === 0) { opts.shading = { type: d.ShadingType.SOLID, color: XL_FILL[row.impact].slice(2), fill: XL_FILL[row.impact].slice(2) }; }
+        return new d.TableCell(opts);
+      });
+      return new d.TableRow({ children: cells });
+    });
+
+    var children = [];
+    if (window.VL_LOGO_B64) {
+      try {
+        children.push(new d.Paragraph({
+          children: [new d.ImageRun({
+            type: 'png', data: window.VL_LOGO_B64,
+            transformation: { width: 74, height: 72 },
+            altText: { title: 'Vesper Lab logo', description: 'Stylised bat, the Vesper Lab emblem', name: 'vesper-lab-logo' }
+          })]
+        }));
+      } catch (e) { /* document reste utilisable sans le logo */ }
+    }
+
+    children.push(new d.Paragraph({
+      heading: d.HeadingLevel.HEADING_1,
+      children: [new d.ExternalHyperlink({ children: [txt('Vesper Lab, Axe-core Scan Viewer report', { color: '3F5A32' })], link: 'https://vesperlab.framer.website/' })]
+    }));
+    children.push(new d.Paragraph({ children: [txt('This report lists the accessibility barriers found by the axe-core engine (Deque Systems) on the scanned page.')] }));
+    if (url) { children.push(new d.Paragraph({ children: [txt('Page scanned: ' + url)] })); }
+    children.push(new d.Paragraph({ children: [txt('Report date: ' + stamp())] }));
+
+    var counts = {};
+    violations.forEach(function (v) { counts[v.impact] = (counts[v.impact] || 0) + 1; });
+    children.push(new d.Paragraph({ text: 'Summary', heading: d.HeadingLevel.HEADING_2 }));
+    children.push(new d.Paragraph({ children: [txt(violations.length + ' rule(s) in violation, ' + rows.length + ' affected element(s).')] }));
+    ORDER.forEach(function (i) {
+      if (counts[i]) { children.push(new d.Paragraph({ text: SYMBOL[i] + ' ' + LABEL[i] + ': ' + counts[i] + ' rule(s)', bullet: { level: 0 } })); }
+    });
+
+    children.push(new d.Paragraph({ text: 'Violation detail', heading: d.HeadingLevel.HEADING_2 }));
+    children.push(new d.Table({
+      width: { size: 100, type: d.WidthType.PERCENTAGE },
+      rows: [new d.TableRow({ tableHeader: true, children: headerCells })].concat(bodyRows)
+    }));
+    children.push(new d.Paragraph({ text: '' }));
+    children.push(new d.Paragraph({ children: [txt('Report generated with the Vesper Lab bookmarklets.')] }));
+
+    var doc = new d.Document({
+      title: 'Vesper Lab, Axe-core Scan Viewer report',
+      creator: 'Vesper Lab',
+      description: 'Accessibility barriers found by axe-core',
+      styles: { default: { document: { run: { font: 'Calibri', size: 21, language: { value: 'en-CA' } } } } },
+      sections: [{ children: children }]
+    });
+
+    return d.Packer.toBlob(doc).then(function (blob) {
+      download(blob, 'vesperlab-ac-scan-' + stamp() + '.docx');
+    });
+  }
+
+  function runExport(kind) {
+    var src = kind === 'excel'
+      ? 'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js'
+      : 'https://cdn.jsdelivr.net/npm/docx@9.7.1/dist/index.iife.js';
+    state.busy = kind;
+    btnExcel.disabled = true;
+    btnWord.disabled = true;
+    var label = kind === 'excel' ? btnExcel : btnWord;
+    var originalLabel = label.textContent;
+    label.textContent = 'Generating…';
+    statusEl.textContent = kind === 'excel' ? 'Generating the Excel file…' : 'Generating the Word document…';
+
+    loadScript(src)
+      .then(function () { return kind === 'excel' ? buildExcel() : buildWord(); })
+      .then(function () { statusEl.textContent = kind === 'excel' ? 'Excel file downloaded.' : 'Word document downloaded.'; })
+      .catch(function (e) { statusEl.textContent = (kind === 'excel' ? 'Excel export failed: ' : 'Word export failed: ') + e.message; })
+      .then(function () {
+        state.busy = false;
+        btnExcel.disabled = false;
+        btnWord.disabled = false;
+        label.textContent = originalLabel;
+      });
+  }
+
+  // --- Câblage des événements ---
+  btnRender.addEventListener('click', parse);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      parse();
+    }
+  });
+  btnClear.addEventListener('click', function () {
+    input.value = '';
+    errorEl.textContent = '';
+    statusEl.textContent = '';
+    state.data = null;
+    render();
+  });
+  btnPrint.addEventListener('click', function () { window.print(); });
+  btnExcel.addEventListener('click', function () { runExport('excel'); });
+  btnWord.addEventListener('click', function () { runExport('word'); });
+})();
+</script>
+</body>
+</html>
