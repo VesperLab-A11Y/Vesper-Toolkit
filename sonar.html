@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sonar — WCAG 2.2 reference</title>
+<style>
+  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #100F0D; color: #EDE7DA; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  :focus-visible { outline: 2px solid #C6B2ED; outline-offset: 2px; }
+  body { display: flex; flex-direction: column; height: 100vh; }
+
+  #searchWrap { padding: 10px; border-bottom: 1px solid rgba(237,231,218,0.14); background: #191714; flex: none; }
+  #q { width: 100%; box-sizing: border-box; background: #100F0D; border: 1px solid rgba(237,231,218,0.18); border-radius: 8px; padding: 10px 11px; color: #EDE7DA; font-size: 13.5px; min-height: 40px; }
+  #pills { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+  .pill { appearance: none; cursor: pointer; border-radius: 999px; padding: 5px 11px; font-size: 11.5px; min-height: 30px; background: transparent; border: 1px solid rgba(237,231,218,0.18); color: #A9A091; }
+  .pill[aria-pressed="true"] { background-color: color-mix(in srgb, var(--pc) 18%, transparent); border-color: var(--pc); color: var(--pc); }
+  #hint { margin: 7px 0 0; font-size: 11px; color: #A9A091; }
+
+  #listWrap { flex: 1 1 auto; min-height: 0; overflow: auto; background: #100F0D; }
+  #list { list-style: none; margin: 0; padding: 5px; }
+  #list li { margin: 0; }
+  .row { appearance: none; cursor: pointer; width: 100%; text-align: left; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 7px; font-size: 13px; min-height: 42px; border: 1px solid transparent; background: transparent; color: #EDE7DA; }
+  .row.active { border-color: #7A659E; background: #221F1A; }
+  .row .id { font-variant-numeric: tabular-nums; color: #A9A091; min-width: 44px; flex: none; }
+  .row .name { flex: 1; }
+  .row .level { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; border: 1px solid; flex: none; }
+  .row .version { font-size: 11px; color: #A9A091; white-space: nowrap; flex: none; }
+  #noResults { margin: 0; padding: 18px 16px; font-size: 12.5px; color: #A9A091; }
+
+  #detail { display: none; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; overflow: auto; padding: 14px 16px; background: #191714; }
+  #back { appearance: none; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1px solid rgba(237,231,218,0.18); border-radius: 999px; padding: 6px 12px; font-size: 11.5px; color: #C6B2ED; min-height: 32px; }
+  #meta { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #A6CA93; }
+  #title { margin: 2px 0 0; font-size: 16px; font-weight: 600; color: #EDE7DA; }
+  #linkRow { display: flex; gap: 8px; flex-wrap: wrap; }
+  #linkRow a { display: inline-flex; align-items: center; padding: 7px 12px; border: 1px solid #5A7D46; border-radius: 999px; font-size: 11.5px; color: #A6CA93; text-decoration: none; min-height: 32px; }
+  #copyRow { display: flex; gap: 7px; flex-wrap: wrap; }
+  #copyRow button { appearance: none; cursor: pointer; background: #100F0D; border: 1px solid rgba(237,231,218,0.18); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; color: #C6B2ED; min-height: 32px; }
+  #toastWrap { min-height: 30px; padding: 6px 16px 10px; background: #191714; flex: none; }
+  #toast { margin: 0; padding: 6px 12px; display: inline-block; border: 1px solid #5A7D46; border-radius: 999px; background: #100F0D; font-size: 11.5px; color: #A6CA93; }
+</style>
+</head>
+<body>
+
+<div id="searchWrap">
+  <input type="search" id="q" aria-label="Search a criterion" aria-describedby="hint" placeholder="Search: name, id, guideline…">
+  <div id="pills"></div>
+  <p id="hint">↑ ↓ to browse · Enter to open · Esc to close · <span id="resultCount"></span></p>
+</div>
+
+<div id="listWrap">
+  <ul id="list"></ul>
+  <p id="noResults" hidden>No criterion matches.</p>
+</div>
+
+<div id="detail">
+  <button type="button" id="back">← Back to the list</button>
+  <div>
+    <div id="meta"></div>
+    <h2 id="title"></h2>
+  </div>
+  <div id="linkRow"></div>
+  <div id="copyRow"></div>
+</div>
+
+<div id="toastWrap"><span id="toast" hidden></span></div>
+
+<script src="assets/logo.b64.js"></script>
+<script>
+// Sonar (public) — Vesper Bookmarklets
+// Recherche dans les 87 critères WCAG 2.2. Contrairement à la version privée de Pauline,
+// cette version publique ne montre AUCUNE prose personnalisée (pas d'"erreur-type" ni
+// d'"impact client") : seules les métadonnées officielles du critère (nom, niveau, guideline)
+// et les liens vers les pages officielles W3C sont affichés. Le JSON chargé (assets/wcag22-public.json)
+// ne contient d'ailleurs même pas ces champs — ce n'est pas juste "caché", ils n'existent pas dans ce fichier.
+(function () {
+  'use strict';
+
+  var LEVEL_COLOR = { A: '#A6CA93', AA: '#C6B2ED', AAA: '#F0A9A2' };
+
+  var state = { data: [], q: '', levels: [], versions: [], active: 0, selectedId: null };
+
+  var qInput = document.getElementById('q');
+  var pillsEl = document.getElementById('pills');
+  var listEl = document.getElementById('list');
+  var listWrapEl = document.getElementById('listWrap');
+  var noResultsEl = document.getElementById('noResults');
+  var detailEl = document.getElementById('detail');
+  var backBtn = document.getElementById('back');
+  var metaEl = document.getElementById('meta');
+  var titleEl = document.getElementById('title');
+  var linkRowEl = document.getElementById('linkRow');
+  var copyRowEl = document.getElementById('copyRow');
+  var resultCountEl = document.getElementById('resultCount');
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+
+  function esc(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function notify(msg) {
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.hidden = true; }, 2200);
+  }
+
+  // Repli textarea+execCommand : l'API clipboard moderne peut être bloquée ici, Sonar tournant
+  // dans une iframe cross-origin (la permission clipboard-write n'est pas toujours déléguée par
+  // la page qui l'héberge, même quand scripts/sonar.js la demande sur la balise <iframe>).
+  function fallbackCopy(text) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function copy(text, msg) {
+    if (!text) return;
+    var done = function () { notify(msg); };
+    var fail = function () {
+      if (fallbackCopy(text)) { done(); }
+      else { notify('Copy failed.'); }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fail);
+    } else {
+      fail();
+    }
+  }
+
+  function filtered() {
+    var q = state.q.trim().toLowerCase();
+    return state.data.filter(function (c) {
+      if (q && (c.id + ' ' + c.name + ' ' + c.guidelineName).toLowerCase().indexOf(q) < 0) return false;
+      if (state.levels.length && state.levels.indexOf(c.level) < 0) return false;
+      if (state.versions.length && state.versions.indexOf(c.version) < 0) return false;
+      return true;
+    });
+  }
+
+  function renderPills() {
+    var versions = [];
+    state.data.forEach(function (c) { if (versions.indexOf(c.version) < 0) versions.push(c.version); });
+    versions.sort();
+
+    pillsEl.innerHTML = '';
+    ['A', 'AA', 'AAA'].forEach(function (lvl) {
+      pillsEl.appendChild(makePill('Level ' + lvl, state.levels.indexOf(lvl) > -1, LEVEL_COLOR[lvl], function () { toggleIn('levels', lvl); }));
+    });
+    versions.forEach(function (v) {
+      pillsEl.appendChild(makePill('WCAG ' + v, state.versions.indexOf(v) > -1, '#C6B2ED', function () { toggleIn('versions', v); }));
+    });
+  }
+
+  function makePill(label, on, color, onClick) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pill';
+    b.textContent = label;
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.style.setProperty('--pc', color);
+    b.addEventListener('click', onClick);
+    return b;
+  }
+
+  function toggleIn(key, val) {
+    var cur = state[key];
+    var i = cur.indexOf(val);
+    state[key] = i > -1 ? cur.filter(function (v) { return v !== val; }) : cur.concat([val]);
+    state.active = 0;
+    renderPills();
+    renderList();
+  }
+
+  function renderList() {
+    var list = filtered();
+    listEl.innerHTML = '';
+    list.forEach(function (c, i) {
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'row' + (i === state.active ? ' active' : '');
+      btn.innerHTML =
+        '<span class="id">' + esc(c.id) + '</span>' +
+        '<span class="name">' + esc(c.name) + '</span>' +
+        '<span class="level" style="color:' + LEVEL_COLOR[c.level] + ';border-color:' + LEVEL_COLOR[c.level] + '55;background:' + LEVEL_COLOR[c.level] + '1f">' + esc(c.level) + '</span>' +
+        '<span class="version">WCAG ' + esc(c.version) + '</span>';
+      btn.addEventListener('click', function () { openDetail(c.id); });
+      li.appendChild(btn);
+      listEl.appendChild(li);
+    });
+    noResultsEl.hidden = !(state.data.length > 0 && list.length === 0);
+    resultCountEl.textContent = list.length + ' result(s)';
+  }
+
+  // Fait défiler la liste pour garder la ligne active visible (navigation clavier).
+  function scrollActiveIntoView() {
+    var li = listEl.children[state.active];
+    if (!li) return;
+    var top = li.offsetTop, bottom = top + li.offsetHeight;
+    if (top < listWrapEl.scrollTop) listWrapEl.scrollTop = top - 4;
+    else if (bottom > listWrapEl.scrollTop + listWrapEl.clientHeight) listWrapEl.scrollTop = bottom - listWrapEl.clientHeight + 4;
+  }
+
+  function move(delta) {
+    var list = filtered();
+    if (!list.length) return;
+    var next = state.active + delta;
+    if (next < 0) next = list.length - 1;
+    if (next > list.length - 1) next = 0;
+    state.active = next;
+    renderList();
+    scrollActiveIntoView();
+  }
+
+  function openDetail(id) {
+    var c = state.data.filter(function (x) { return x.id === id; })[0];
+    if (!c) return;
+    state.selectedId = id;
+
+    listWrapEl.hidden = true;
+    document.getElementById('searchWrap').hidden = true;
+    detailEl.style.display = 'flex';
+
+    metaEl.textContent = 'Level ' + c.level + ' · WCAG ' + c.version + ' · ' + c.guidelineId + ' ' + c.guidelineName;
+    titleEl.textContent = c.id + ' ' + c.name;
+
+    var md = '[' + c.id + ' ' + c.name + '](' + c.url + ')';
+    var html = '<a href="' + c.url + '">' + c.id + ' ' + c.name + '</a>';
+
+    linkRowEl.innerHTML =
+      '<a href="' + esc(c.url) + '" target="_blank" rel="noreferrer">Go to the page ↗</a>' +
+      '<a href="' + esc(c.understandingUrl) + '" target="_blank" rel="noreferrer">Understanding doc ↗</a>';
+
+    copyRowEl.innerHTML = '';
+    [
+      ['Markdown link', md, 'Markdown link copied!'],
+      ['HTML link', html, 'HTML link copied!'],
+      ['Name only', c.id + ' ' + c.name, 'Name copied!'],
+      ['URL only', c.url, 'URL copied!']
+    ].forEach(function (a) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = a[0];
+      b.addEventListener('click', function () { copy(a[1], a[2]); });
+      copyRowEl.appendChild(b);
+    });
+
+    backBtn.focus();
+  }
+
+  function closeDetail() {
+    state.selectedId = null;
+    detailEl.style.display = 'none';
+    listWrapEl.hidden = false;
+    document.getElementById('searchWrap').hidden = false;
+    qInput.focus();
+  }
+
+  backBtn.addEventListener('click', closeDetail);
+
+  qInput.addEventListener('input', function (e) {
+    state.q = e.target.value;
+    state.active = 0;
+    renderList();
+  });
+
+  qInput.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      var c = filtered()[state.active];
+      if (c) openDetail(c.id);
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && state.selectedId) { closeDetail(); }
+  });
+
+  fetch('assets/wcag22-public.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      state.data = data;
+      renderPills();
+      renderList();
+    })
+    .catch(function () { notify('Could not load the WCAG criteria list.'); });
+
+  setTimeout(function () { qInput.focus(); }, 100);
+})();
+</script>
+</body>
+</html>

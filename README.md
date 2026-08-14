@@ -9,8 +9,8 @@ Small, free accessibility-testing tools that live in your bookmarks bar. No exte
 - **🦇 AC Scan / 🦇 AC Targeted Scan** — run [axe-core](https://github.com/dequelabs/axe-core) (Deque Systems) on a page or on one CSS selector, copy the JSON result.
 - **🦇 CSS Selector** — click an element, copy its selector.
 - **🦇 Finder** — find and highlight an element (even hidden or off-screen) from a selector or a code snippet.
-- **🦇 Link / Image / Label Scan** — focused reports on links, images and form labels. *English version in progress.*
-- **🦇 Sonar** — search the 87 WCAG 2.2 success criteria in a movable panel over the page you're working on.
+- **🦇 Link / Image / Label Scan** — focused reports on links, images and form labels, each opening its own printable/exportable report tab.
+- **🦇 Sonar** — search the 87 WCAG 2.2 success criteria in a movable panel over the page you're working on. Shows the official name, level, guideline and links to the W3C page — not Pauline's private audit notes, see *Status* below.
 - **Axe-core Scan Viewer** (`scan-results.html`) — turns the JSON from AC Scan into a readable report, exportable to Word, Excel and print.
 
 Full install instructions and a targeted-scan guide are on the directory page itself.
@@ -21,10 +21,11 @@ Full install instructions and a targeted-scan guide are on the directory page it
 vesper-bookmarklets/
 ├── index.html                  ← Bookmarklets Directory (install page)
 ├── scan-results.html           ← Axe-core Scan Viewer
-├── sonar.html                  ← Sonar's own page (not built yet)
+├── sonar.html                  ← Sonar's own page, loaded in an iframe by scripts/sonar.js
 ├── assets/
 │   ├── logo-cream.svg
-│   └── logo.b64.js             ← logo as base64, for the Word/Excel exports
+│   ├── logo.b64.js             ← logo as base64, for the Word/Excel exports
+│   └── wcag22-public.json      ← the 87 criteria, public fields only (see Status)
 ├── scripts/                    ← readable, unminified source of every bookmarklet
 ├── tools/build-bookmarklets.mjs ← publication script, see below
 └── README.md
@@ -44,9 +45,11 @@ One rule to respect in `scripts/*.js`: a comment must always be alone on its own
 
 ## Status
 
-Working and published: AC Scan, AC Targeted Scan, CSS Selector, Finder, the Directory page, the Scan Viewer.
+All 8 bookmarklets, the Directory, the Scan Viewer, and `sonar.html` are built and wired up.
 
-Still to do: translate and restyle Link/Image/Label Scan (currently French-only, old colour palette), build `sonar.html` as a standalone page (currently depends on an internal design-tool runtime that isn't published).
+**About Sonar and `wcag22-public.json`**: the full WCAG dataset Pauline uses for audits has three custom fields per criterion — `description`, `erreur_type`, `impact_client` — all written in French, the last two being her private audit notes. `assets/wcag22-public.json` is a filtered copy with only the official WCAG fields (name, level, guideline, the two W3C URLs…), which are already in English by nature. It does not contain `description`, `erreur_type` or `impact_client` at all — not hidden by CSS, genuinely absent from the file `sonar.html` fetches. Public Sonar therefore shows metadata + links to the official W3C pages instead of custom prose. If a translated `description` should be shown in the public tool too, that's a separate, bounded translation pass (87 short paragraphs) — flag it if wanted.
+
+**Not yet verified end-to-end**: this was built and checked with syntax validation, visual comparison against Design's screenshots, and in-browser testing of the Directory, the Viewer and Sonar's search/filter/detail view. The three big scan bookmarklets (Link/Image/Label Scan) were translated with care from the original, working French versions but have not yet been run against a real page — try each one on a real site before trusting the results.
 
 ## Credits
 

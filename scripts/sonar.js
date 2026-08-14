@@ -45,6 +45,9 @@
   var frame = document.createElement('iframe');
   frame.src = URL_SONAR;
   frame.title = 'Sonar - WCAG 2.2 criteria search';
+  // Délègue la permission clipboard-write à l'iframe : sans ça, les boutons "copier" de
+  // sonar.html retombent silencieusement sur leur repli execCommand dans la plupart des navigateurs.
+  frame.setAttribute('allow', 'clipboard-write');
   frame.style.cssText = 'border:0;flex:1;width:100%;background:#100F0D';
 
   panel.appendChild(bar);
