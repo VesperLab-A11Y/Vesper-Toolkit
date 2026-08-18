@@ -1,8 +1,8 @@
-# Vesper Bookmarklets
+# Vesper Toolkit
 
 Small, free accessibility-testing tools that live in your bookmarks bar. No extension, no account, no data leaving your browser. Built by [Vesper Lab](https://vesperlab.framer.website/).
 
-**[Get the bookmarklets →](https://VesperLab-A11Y.github.io/vesper-bookmarklets/)**
+**[Get the bookmarklets →](https://VesperLab-A11Y.github.io/Vesper-Toolkit/)**
 
 ## What's here
 
@@ -15,7 +15,7 @@ Small, free accessibility-testing tools that live in your bookmarks bar. No exte
 
 ## Installation
 
-Open the **[Bookmarklets Directory](https://VesperLab-A11Y.github.io/vesper-bookmarklets/)** : that page has a draggable button and a "Clipboard" fallback for each tool below, plus a source link so you can read the code before you install it.
+Open the **[Vesper Toolkit](https://VesperLab-A11Y.github.io/Vesper-Toolkit/)** : that page has a draggable button and a "Clipboard" fallback for each tool below, plus a source link so you can read the code before you install it.
 
 **By dragging**
 
@@ -36,8 +36,8 @@ Open the **[Bookmarklets Directory](https://VesperLab-A11Y.github.io/vesper-book
 ## Repo layout
 
 ```
-vesper-bookmarklets/
-├── index.html                  ← Bookmarklets Directory (install page)
+Vesper-Toolkit/
+├── index.html                  ← Vesper Toolkit (install page)
 ├── scan-results.html           ← Axe-core Scan Viewer
 ├── sonar.html                  ← Sonar's own page, loaded in an iframe by scripts/sonar.js
 ├── assets/
@@ -63,11 +63,11 @@ One rule to respect in `scripts/*.js`: a comment must always be alone on its own
 
 ## Status
 
-All 8 bookmarklets, the Directory, the Scan Viewer, and `sonar.html` are built and wired up.
+All 8 bookmarklets, Vesper Toolkit, the Scan Viewer, and `sonar.html` are built and wired up.
 
 **About Sonar and `wcag22-public.json`**: the full WCAG dataset Pauline uses for audits has three custom fields per criterion — `description`, `erreur_type`, `impact_client` — all written in French, the last two being her private audit notes. `assets/wcag22-public.json` is a filtered copy with only the official WCAG fields (name, level, guideline, the two W3C URLs…), which are already in English by nature. It does not contain `description`, `erreur_type` or `impact_client` at all — not hidden by CSS, genuinely absent from the file `sonar.html` fetches. Public Sonar therefore shows metadata + links to the official W3C pages instead of custom prose. If a translated `description` should be shown in the public tool too, that's a separate, bounded translation pass (87 short paragraphs) — flag it if wanted.
 
-**Not yet verified end-to-end**: this was built and checked with syntax validation, visual comparison against Design's screenshots, and in-browser testing of the Directory, the Viewer and Sonar's search/filter/detail view. The three big scan bookmarklets (Link/Image/Label Scan) were translated with care from the original, working French versions but have not yet been run against a real page — try each one on a real site before trusting the results.
+**Not yet verified end-to-end**: this was built and checked with syntax validation, visual comparison against Design's screenshots, and in-browser testing of Vesper Toolkit, the Viewer and Sonar's search/filter/detail view. The three big scan bookmarklets (Link/Image/Label Scan) were translated with care from the original, working French versions but have not yet been run against a real page — try each one on a real site before trusting the results.
 
 **About "Copy as JSON"**: Link/Image/Label Scan build a small internal rule table per scanner (`RULES` near the top of each `vlScan()`) so the JSON groups issues the way axe-core does — one entry per rule, with every affected element listed under it. Where a check has a real axe-core equivalent (`link-name`, `image-alt`, `label`, `button-name`, `autocomplete-valid`), the same id and impact level are reused; Vesper-only checks get a `vesper-*` id and a best-effort impact level. Verify the impact levels look right on a real report before relying on them for triage — some of these are judgment calls, not measured against axe-core's actual source.
 
@@ -75,10 +75,10 @@ All 8 bookmarklets, the Directory, the Scan Viewer, and `sonar.html` are built a
 
 This repo is fully static — GitHub Pages serves it as-is, no build step.
 
-1. Create an empty repo named `vesper-bookmarklets` under the `VesperLab-A11Y` account on GitHub (don't auto-generate a README/gitignore there).
-2. From this folder: `git remote add origin https://github.com/VesperLab-A11Y/vesper-bookmarklets.git`, then `git push -u origin main`.
+1. Create an empty repo named `Vesper-Toolkit` under the `VesperLab-A11Y` account on GitHub (don't auto-generate a README/gitignore there).
+2. From this folder: `git remote add origin https://github.com/VesperLab-A11Y/Vesper-Toolkit.git`, then `git push -u origin main`.
 3. On GitHub: **Settings › Pages**, source = branch `main`, folder `/ (root)`.
-4. The site goes live at `https://VesperLab-A11Y.github.io/vesper-bookmarklets/` — this is the exact URL already hardcoded in `scripts/sonar.js`, so Sonar works as soon as Pages is live.
+4. The site goes live at `https://VesperLab-A11Y.github.io/Vesper-Toolkit/` — this is the exact URL already hardcoded in `scripts/sonar.js`, so Sonar works as soon as Pages is live.
 
 ## Credits
 

@@ -1,4 +1,4 @@
-// Label Scan — Vesper Bookmarklets
+// Label Scan — Vesper Toolkit
 // Scans form fields, buttons, and radio/checkbox groups, opens a standalone report in a new tab:
 // where each field gets its accessible name, required fields, linked error messages, missing autocomplete.
 // The report is a fully self-contained HTML string (own CSS, own logo, own export logic) —
@@ -384,7 +384,7 @@
       "<p><strong>How to find it anyway:</strong></p>" +
       "<ol>" +
       "<li>Expand the row's code snippet (the <code>&lt;/&gt;</code> button) and copy it</li>" +
-      "<li>Use the <strong>&#x1F987; Finder</strong> bookmarklet from the Directory: paste the snippet or a selector, it finds the element, temporarily reveals it if it was hidden, and highlights it</li>" +
+      "<li>Use the <strong>&#x1F987; Finder</strong> bookmarklet from Vesper Toolkit: paste the snippet or a selector, it finds the element, temporarily reveals it if it was hidden, and highlights it</li>" +
       "<li>Otherwise, in the inspector: <code>Cmd+Option+I</code>, Elements tab, <code>Cmd+F</code>, paste a distinctive fragment of the snippet</li>" +
       "<li>In the console: <code>document.querySelector('YOUR_SELECTOR')</code> then right-click the result &rsaquo; <em>Reveal in Elements panel</em></li>" +
       "</ol>" +

@@ -1,4 +1,4 @@
-// Finder — Vesper Bookmarklets
+// Finder — Vesper Toolkit
 // Retrouve et met en évidence un ou plusieurs éléments à partir d'un sélecteur CSS ou d'un extrait de code HTML.
 // Utile quand le CSS Selector ne peut pas cibler un élément déjà disparu, masqué ou hors écran.
 (function () {

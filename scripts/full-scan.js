@@ -1,4 +1,4 @@
-// AC Scan — Vesper Bookmarklets
+// AC Scan — Vesper Toolkit
 // Lance axe-core sur toute la page et copie le résultat JSON dans le presse-papier.
 (function () {
   'use strict';

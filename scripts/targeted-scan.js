@@ -1,4 +1,4 @@
-// AC Targeted Scan — Vesper Bookmarklets
+// AC Targeted Scan — Vesper Toolkit
 // Comme AC Scan, mais restreint à un sélecteur CSS précis (voir 🦇 CSS Selector pour l'obtenir).
 (function () {
   'use strict';

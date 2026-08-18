@@ -1,4 +1,4 @@
-// Image Scan — Vesper Bookmarklets
+// Image Scan — Vesper Toolkit
 // Scans every image on the page and opens a standalone report in a new tab: alternative text,
 // decorative/hidden status, a captured thumbnail, and a contrast heuristic to check by eye.
 // The report is a fully self-contained HTML string (own CSS, own logo, own export logic) —
@@ -384,7 +384,7 @@
       "<p><strong>How to find it anyway:</strong></p>" +
       "<ol>" +
       "<li>Expand the row's code snippet (the <code>&lt;/&gt;</code> button) and copy it</li>" +
-      "<li>Use the <strong>&#x1F987; Finder</strong> bookmarklet from the Directory: paste the snippet or a selector, it finds the element, temporarily reveals it if it was hidden, and highlights it</li>" +
+      "<li>Use the <strong>&#x1F987; Finder</strong> bookmarklet from Vesper Toolkit: paste the snippet or a selector, it finds the element, temporarily reveals it if it was hidden, and highlights it</li>" +
       "<li>Otherwise, in the inspector: <code>Cmd+Option+I</code>, Elements tab, <code>Cmd+F</code>, paste a distinctive fragment of the snippet</li>" +
       "<li>In the console: <code>document.querySelector('YOUR_SELECTOR')</code> then right-click the result &rsaquo; <em>Reveal in Elements panel</em></li>" +
       "</ol>" +
