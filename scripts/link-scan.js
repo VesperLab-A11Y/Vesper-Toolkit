@@ -352,7 +352,7 @@
       "      CFG.rows.forEach(function (row) {\n" +
       "        (row.tags || []).forEach(function (t) {\n" +
       "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
-      "          byRule[t.id].nodes.push({ html: row.snippet || '', target: ['[data-vl-ref=\"' + row.ref + '\"]'], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
+      "          byRule[t.id].nodes.push({ html: row.snippet || '', target: row.target ? [row.target] : [], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
       "        });\n" +
       "      });\n" +
       "      var violations = Object.keys(byRule).map(function (k) { return byRule[k]; });\n" +
@@ -411,6 +411,43 @@
       return String(s).replace(/[&<>"']/g, function (c) {
         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
       });
+    }
+
+    function vlCssEsc(s) {
+      try { return CSS.escape(s); } catch (e) { return s; }
+    }
+
+    // Builds the shortest stable CSS selector for an element: id if unique, otherwise walks up
+    // the ancestors adding classes / :nth-of-type as needed, stopping as soon as the assembled
+    // selector matches exactly one element. Same logic as the CSS Selector bookmarklet, reused
+    // here so the "Copy as JSON" export's target field is a real selector, not the transient
+    // data-vl-ref attribute (which only exists during this scan, not in the page's own markup).
+    function vlBuildSelector(el) {
+      if (!el || el.nodeType !== 1) return '';
+      if (el.id) {
+        var s = '#' + vlCssEsc(el.id);
+        try { if (document.querySelectorAll(s).length === 1) return s; } catch (e) {}
+      }
+      var parts = [];
+      var node = el;
+      while (node && node.nodeType === 1 && node !== document.documentElement) {
+        var part = node.tagName.toLowerCase();
+        if (node.id) { part = '#' + vlCssEsc(node.id); parts.unshift(part); break; }
+        var cls = (node.className && typeof node.className === 'string')
+          ? node.className.trim().split(/\s+/).filter(Boolean).slice(0, 2)
+          : [];
+        if (cls.length) { part += '.' + cls.map(vlCssEsc).join('.'); }
+        var parent = node.parentElement;
+        if (parent) {
+          var same = Array.prototype.filter.call(parent.children, function (c) { return c.tagName === node.tagName; });
+          if (same.length > 1) { part += ':nth-of-type(' + (Array.prototype.indexOf.call(same, node) + 1) + ')'; }
+        }
+        parts.unshift(part);
+        var candidate = parts.join(' > ');
+        try { if (document.querySelectorAll(candidate).length === 1) return candidate; } catch (e) {}
+        node = parent;
+      }
+      return parts.join(' > ');
     }
 
     // Assembles CFG (title, columns, rows, extra disclosures...) into the full report HTML
@@ -590,6 +627,7 @@
       Array.prototype.forEach.call(links, function (link) {
         ref++;
         link.setAttribute('data-vl-ref', ref);
+        var target = vlBuildSelector(link);
         var hrefRaw = link.getAttribute('href') || '';
         var resolved = link.href || hrefRaw;
         var name = accName(link);
@@ -623,7 +661,7 @@
           note(notes, tags, 'hidden', 'Link hidden visually (display, opacity, or clip).');
         }
 
-        data.push({ ref: ref, sev: sev, _name: name, _resolved: resolved, _notes: notes, _tags: tags, hrefRaw: hrefRaw, blank: blank, isWarned: isWarned, snippet: wrap.innerHTML });
+        data.push({ ref: ref, sev: sev, _name: name, _resolved: resolved, _notes: notes, _tags: tags, target: target, hrefRaw: hrefRaw, blank: blank, isWarned: isWarned, snippet: wrap.innerHTML });
       });
 
       // Second pass: flag the same label pointing at different destinations.
@@ -647,7 +685,7 @@
       var rows = data.map(function (d) {
         var notesTxt = d._notes.join(' ');
         return {
-          ref: d.ref, sev: d.sev, snippet: d.snippet, tags: d._tags,
+          ref: d.ref, sev: d.sev, snippet: d.snippet, tags: d._tags, target: d.target,
           cells: [
             { h: '<code>' + vlEsc(d.hrefRaw || '(empty)') + '</code>', t: d.hrefRaw || '(empty)', url: d._resolved },
             { h: d._name ? vlEsc(d._name) : '<span class="noname">(no accessible name)</span>', t: d._name || '(no accessible name)' },
