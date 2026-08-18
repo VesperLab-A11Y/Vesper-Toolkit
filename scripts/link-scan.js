@@ -333,6 +333,36 @@
       "    return d.Packer.toBlob(doc).then(function (blob) {\n" +
       "      download(blob, 'vesperlab-' + CFG.slug + '-' + stamp() + '.docx');\n" +
       "    });\n" +
+      "  }\n\n" +
+      "  /* ---------------- copy as axe-core-shaped JSON, for Vesper Auditor ---------------- */\n" +
+      "  function fallbackCopy(text, done, fail) {\n" +
+      "    try {\n" +
+      "      var ta = document.createElement('textarea');\n" +
+      "      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';\n" +
+      "      document.body.appendChild(ta); ta.focus(); ta.select();\n" +
+      "      var ok = document.execCommand('copy');\n" +
+      "      document.body.removeChild(ta);\n" +
+      "      if (ok) { done(); } else { fail(); }\n" +
+      "    } catch (e) { fail(); }\n" +
+      "  }\n\n" +
+      "  var jsonBtn = document.getElementById('jsonBtn');\n" +
+      "  if (jsonBtn) {\n" +
+      "    jsonBtn.addEventListener('click', function () {\n" +
+      "      var byRule = {};\n" +
+      "      CFG.rows.forEach(function (row) {\n" +
+      "        (row.tags || []).forEach(function (t) {\n" +
+      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
+      "          byRule[t.id].nodes.push({ html: row.snippet || '', target: ['[data-vl-ref=\"' + row.ref + '\"]'], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
+      "        });\n" +
+      "      });\n" +
+      "      var violations = Object.keys(byRule).map(function (k) { return byRule[k]; });\n" +
+      "      var payload = { violations: violations, passes: [], url: CFG.pageUrl, timestamp: new Date().toISOString() };\n" +
+      "      var text = JSON.stringify(payload);\n" +
+      "      var done = function () { say('JSON copied. Paste it into Auditor the same way as an AC Scan result.'); };\n" +
+      "      var fail = function () { say('Copy failed. Open the browser console and copy the result of copy(text) manually.'); };\n" +
+      "      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done, fail); }); }\n" +
+      "      else { fallbackCopy(text, done, fail); }\n" +
+      "    });\n" +
       "  }\n" +
       "})();\n";
 
@@ -447,6 +477,7 @@
       s += '<button type="button" class="vl-btn secondary" id="printBtn">Print / PDF</button>';
       s += '<button type="button" class="vl-btn secondary" id="excelBtn">Export to Excel</button>';
       s += '<button type="button" class="vl-btn secondary" id="wordBtn">Export to Word</button>';
+      s += '<button type="button" class="vl-btn secondary" id="jsonBtn">Copy as JSON</button>';
       s += '</div>';
       s += '<div id="exportStatus" role="status"></div>';
 
@@ -532,6 +563,26 @@
         return false;
       }
 
+      // Rule metadata for the "Copy as JSON" export (axe-core-shaped, for Vesper Auditor).
+      // Where a real axe-core rule covers the same check, we reuse its id/impact so the JSON
+      // is not just axe-shaped but actually matches what AC Scan would report. Vesper-only
+      // checks (no axe-core equivalent) get a "vesper-" id and a best-effort impact level \u2014
+      // tell me if a level looks wrong once you see this on a real audit.
+      var RULES = {
+        noName: { id: 'link-name', impact: 'serious', description: 'Links must have discernible text', help: 'Ensure links have discernible text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/link-name' },
+        generic: { id: 'vesper-link-generic-text', impact: 'moderate', description: 'Link text is generic or ambiguous out of context', help: 'Give links a name that makes sense read out of context (avoid "click here", "read more")', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html' },
+        newWinNoWarn: { id: 'vesper-link-new-window-unannounced', impact: 'moderate', description: 'Link opens a new window with no perceivable warning', help: 'Warn users, visually and to assistive technology, before opening a new window', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html' },
+        fakeButton: { id: 'vesper-link-fake-button', impact: 'moderate', description: 'A link is used as a fake button', help: 'Use a real <button> for actions that do not navigate', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html' },
+        hidden: { id: 'vesper-link-hidden', impact: 'minor', description: 'Link is visually hidden', help: 'Confirm the link is intentionally and consistently hidden from everyone, not just sighted users', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html' },
+        dupName: { id: 'vesper-link-ambiguous-duplicate', impact: 'moderate', description: 'Same link text used for different destinations', help: 'Give links pointing to different destinations distinct accessible names', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html' }
+      };
+      // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
+      // tag for the JSON export \u2014 single source of truth for the message text.
+      function note(notes, tags, key, msg) {
+        notes.push(msg);
+        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, msg: msg }); }
+      }
+
       var links = document.querySelectorAll('a[href], [role="link"]');
       var data = [];
       var ref = 0;
@@ -549,29 +600,30 @@
         wrap.appendChild(link.cloneNode(true));
 
         var notes = [];
+        var tags = [];
         var sev = 'ok';
         if (!name) {
-          notes.push('Link with no accessible name (no text, aria-label, or image alt).');
+          note(notes, tags, 'noName', 'Link with no accessible name (no text, aria-label, or image alt).');
           sev = 'err';
         } else if (GENERIC.test(norm(name))) {
-          notes.push('Generic or ambiguous label out of context: \u201c' + name + '\u201d.');
+          note(notes, tags, 'generic', 'Generic or ambiguous label out of context: \u201c' + name + '\u201d.');
           sev = 'warn';
         }
         if (blank && isWarned === false) {
-          notes.push('Opens in a new window with no perceivable warning detected.');
+          note(notes, tags, 'newWinNoWarn', 'Opens in a new window with no perceivable warning detected.');
           if (sev !== 'err') sev = 'warn';
         } else if (blank && isWarned === true) {
           notes.push('Opens in a new window, a warning was detected. Check that it\u2019s perceivable both visually and to a screen reader.');
         }
         if (/^(#|javascript:void\(0\)|javascript:;?)$/i.test(hrefRaw.trim())) {
-          notes.push('href="' + hrefRaw + '" used as a fake button: a real button would be more appropriate.');
+          note(notes, tags, 'fakeButton', 'href="' + hrefRaw + '" used as a fake button: a real button would be more appropriate.');
           if (sev !== 'err') sev = 'warn';
         }
         if (hidden) {
-          notes.push('Link hidden visually (display, opacity, or clip).');
+          note(notes, tags, 'hidden', 'Link hidden visually (display, opacity, or clip).');
         }
 
-        data.push({ ref: ref, sev: sev, _name: name, _resolved: resolved, _notes: notes, hrefRaw: hrefRaw, blank: blank, isWarned: isWarned, snippet: wrap.innerHTML });
+        data.push({ ref: ref, sev: sev, _name: name, _resolved: resolved, _notes: notes, _tags: tags, hrefRaw: hrefRaw, blank: blank, isWarned: isWarned, snippet: wrap.innerHTML });
       });
 
       // Second pass: flag the same label pointing at different destinations.
@@ -587,7 +639,7 @@
         if (!k || !byName[k]) return;
         var n = Object.keys(byName[k]).length;
         if (n > 1 && d.sev !== 'err') {
-          d._notes.push('Label \u201c' + d._name + '\u201d used for ' + n + ' different destinations: ambiguous out of context.');
+          note(d._notes, d._tags, 'dupName', 'Label \u201c' + d._name + '\u201d used for ' + n + ' different destinations: ambiguous out of context.');
           d.sev = 'warn';
         }
       });
@@ -595,7 +647,7 @@
       var rows = data.map(function (d) {
         var notesTxt = d._notes.join(' ');
         return {
-          ref: d.ref, sev: d.sev, snippet: d.snippet,
+          ref: d.ref, sev: d.sev, snippet: d.snippet, tags: d._tags,
           cells: [
             { h: '<code>' + vlEsc(d.hrefRaw || '(empty)') + '</code>', t: d.hrefRaw || '(empty)', url: d._resolved },
             { h: d._name ? vlEsc(d._name) : '<span class="noname">(no accessible name)</span>', t: d._name || '(no accessible name)' },

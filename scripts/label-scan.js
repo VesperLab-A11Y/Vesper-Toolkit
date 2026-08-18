@@ -333,6 +333,36 @@
       "    return d.Packer.toBlob(doc).then(function (blob) {\n" +
       "      download(blob, 'vesperlab-' + CFG.slug + '-' + stamp() + '.docx');\n" +
       "    });\n" +
+      "  }\n\n" +
+      "  /* ---------------- copy as axe-core-shaped JSON, for Vesper Auditor ---------------- */\n" +
+      "  function fallbackCopy(text, done, fail) {\n" +
+      "    try {\n" +
+      "      var ta = document.createElement('textarea');\n" +
+      "      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';\n" +
+      "      document.body.appendChild(ta); ta.focus(); ta.select();\n" +
+      "      var ok = document.execCommand('copy');\n" +
+      "      document.body.removeChild(ta);\n" +
+      "      if (ok) { done(); } else { fail(); }\n" +
+      "    } catch (e) { fail(); }\n" +
+      "  }\n\n" +
+      "  var jsonBtn = document.getElementById('jsonBtn');\n" +
+      "  if (jsonBtn) {\n" +
+      "    jsonBtn.addEventListener('click', function () {\n" +
+      "      var byRule = {};\n" +
+      "      CFG.rows.forEach(function (row) {\n" +
+      "        (row.tags || []).forEach(function (t) {\n" +
+      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
+      "          byRule[t.id].nodes.push({ html: row.snippet || '', target: ['[data-vl-ref=\"' + row.ref + '\"]'], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
+      "        });\n" +
+      "      });\n" +
+      "      var violations = Object.keys(byRule).map(function (k) { return byRule[k]; });\n" +
+      "      var payload = { violations: violations, passes: [], url: CFG.pageUrl, timestamp: new Date().toISOString() };\n" +
+      "      var text = JSON.stringify(payload);\n" +
+      "      var done = function () { say('JSON copied. Paste it into Auditor the same way as an AC Scan result.'); };\n" +
+      "      var fail = function () { say('Copy failed. Open the browser console and copy the result of copy(text) manually.'); };\n" +
+      "      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done, fail); }); }\n" +
+      "      else { fallbackCopy(text, done, fail); }\n" +
+      "    });\n" +
       "  }\n" +
       "})();\n";
 
@@ -447,6 +477,7 @@
       s += '<button type="button" class="vl-btn secondary" id="printBtn">Print / PDF</button>';
       s += '<button type="button" class="vl-btn secondary" id="excelBtn">Export to Excel</button>';
       s += '<button type="button" class="vl-btn secondary" id="wordBtn">Export to Word</button>';
+      s += '<button type="button" class="vl-btn secondary" id="jsonBtn">Copy as JSON</button>';
       s += '</div>';
       s += '<div id="exportStatus" role="status"></div>';
 
@@ -527,10 +558,36 @@
         return null;
       }
 
+      // Rule metadata for the "Copy as JSON" export (axe-core-shaped, for Vesper Auditor).
+      // Where a real axe-core rule covers the same check, we reuse its id/impact so the JSON
+      // is not just axe-shaped but actually matches what AC Scan would report. Vesper-only
+      // checks (no axe-core equivalent) get a "vesper-" id and a best-effort impact level —
+      // tell me if a level looks wrong once you see this on a real audit.
+      var RULES = {
+        buttonNoName: { id: 'button-name', impact: 'critical', description: 'Buttons must have discernible text', help: 'Ensure buttons have discernible text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/button-name' },
+        labelledbyBroken: { id: 'vesper-aria-labelledby-broken', impact: 'serious', description: 'aria-labelledby references an id that does not exist', help: 'Fix or remove the broken aria-labelledby reference', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html' },
+        placeholderOnly: { id: 'label', impact: 'critical', description: 'Form elements must have labels', help: 'Ensure every form element has a label', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label' },
+        noName: { id: 'label', impact: 'critical', description: 'Form elements must have labels', help: 'Ensure every form element has a label', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label' },
+        weakTitle: { id: 'vesper-label-weak-title-fallback', impact: 'moderate', description: 'Accessible name relies only on the title attribute', help: 'Provide a real, visible label rather than relying on title alone', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label' },
+        requiredNoHint: { id: 'vesper-label-required-no-hint', impact: 'moderate', description: 'Field is required but has no textual hint of that', help: 'Give a visible textual cue ("*", "required") in addition to the required attribute', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html' },
+        hintNotRequired: { id: 'vesper-label-hint-not-required', impact: 'moderate', description: 'A visible "required" hint is present but the field is not marked required', help: 'Set required or aria-required="true" to match the visible hint', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html' },
+        invalidNoDescribedby: { id: 'vesper-aria-invalid-no-message', impact: 'moderate', description: 'aria-invalid="true" with no linked error message', help: 'Link the error message with aria-describedby', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html' },
+        describedbyBroken: { id: 'vesper-aria-describedby-broken', impact: 'moderate', description: 'aria-describedby references a missing or empty message', help: 'Ensure the referenced description element exists and has text', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html' },
+        missingAutocomplete: { id: 'autocomplete-valid', impact: 'serious', description: 'autocomplete attribute must be used correctly', help: 'Use a recognisable autocomplete value on fields that ask for known personal data', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/autocomplete-valid' },
+        groupNoFieldset: { id: 'vesper-form-group-no-fieldset', impact: 'critical', description: 'Radio/checkbox group has no shared fieldset', help: 'Wrap the group in a fieldset so its context survives field-by-field navigation', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html' },
+        groupNoLegend: { id: 'vesper-form-group-no-legend', impact: 'serious', description: 'Radio/checkbox group has a fieldset but no legend', help: 'Add a legend describing the group', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html' }
+      };
+      // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
+      // tag for the JSON export — single source of truth for the message text.
+      function note(notes, tags, key, msg) {
+        notes.push(msg);
+        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, msg: msg }); }
+      }
+
       var rows = [];
       var ref = 0;
 
-      function push(el, type, name, source, notes, sev, required) {
+      function push(el, type, name, source, notes, tags, sev, required) {
         ref++;
         if (el && el.setAttribute) { el.setAttribute('data-vl-ref', ref); }
         var snippet = '';
@@ -541,7 +598,7 @@
         }
         var notesTxt = notes.join(' ');
         rows.push({
-          ref: ref, sev: sev, snippet: snippet,
+          ref: ref, sev: sev, snippet: snippet, tags: tags,
           cells: [
             { h: '<code>' + vlEsc(type) + '</code>', t: type },
             { h: name ? vlEsc(name) : '<span class="noname">(none)</span>', t: name || '(none)' },
@@ -558,6 +615,7 @@
         var tag = el.tagName;
         var type = (tag === 'INPUT') ? (el.getAttribute('type') || 'text') : tag.toLowerCase();
         var notes = [];
+        var tags = [];
         var sev = 'ok';
 
         if (tag === 'BUTTON' || (tag === 'INPUT' && ['submit', 'button', 'reset', 'image'].indexOf(type) !== -1)) {
@@ -565,9 +623,9 @@
           var bAl = el.getAttribute('aria-label');
           var bLb = idsText(el.getAttribute('aria-labelledby'));
           var bName = bAl || bLb.text || btnText;
-          if (!bName) { notes.push('Button with no text or accessible name (probably an icon-only button).'); sev = 'err'; }
-          if (el.getAttribute('aria-labelledby') && bLb.broken) { notes.push("aria-labelledby references an id that doesn't exist."); if (sev !== 'err') sev = 'warn'; }
-          push(el, 'button', bName, bAl ? 'aria-label' : (bLb.text ? 'aria-labelledby' : 'text'), notes, sev, false);
+          if (!bName) { note(notes, tags, 'buttonNoName', 'Button with no text or accessible name (probably an icon-only button).'); sev = 'err'; }
+          if (el.getAttribute('aria-labelledby') && bLb.broken) { note(notes, tags, 'labelledbyBroken', "aria-labelledby references an id that doesn't exist."); if (sev !== 'err') sev = 'warn'; }
+          push(el, 'button', bName, bAl ? 'aria-label' : (bLb.text ? 'aria-labelledby' : 'text'), notes, tags, sev, false);
           return;
         }
 
@@ -588,41 +646,41 @@
         else if (byWrap) { name = byWrap; source = 'wrapping label'; }
         else if (ti) { name = ti; source = 'title (weak)'; }
 
-        if (lbRaw && lb.broken) { notes.push("aria-labelledby references one or more ids that don't exist."); sev = 'warn'; }
+        if (lbRaw && lb.broken) { note(notes, tags, 'labelledbyBroken', "aria-labelledby references one or more ids that don't exist."); sev = 'warn'; }
 
         if (!name) {
           if (ph) {
-            notes.push('No real label, only a placeholder (“' + ph + '”): disappears once typing starts, not reliable.');
+            note(notes, tags, 'placeholderOnly', 'No real label, only a placeholder (“' + ph + '”): disappears once typing starts, not reliable.');
             sev = 'err';
             name = '(placeholder only)';
             source = 'placeholder';
           } else {
-            notes.push('No accessible name detected (no label, aria-label, aria-labelledby, or title).');
+            note(notes, tags, 'noName', 'No accessible name detected (no label, aria-label, aria-labelledby, or title).');
             sev = 'err';
           }
         } else if (source === 'title (weak)') {
-          notes.push('Accessible name provided only by title: a weak fallback, prefer a real label.');
+          note(notes, tags, 'weakTitle', 'Accessible name provided only by title: a weak fallback, prefer a real label.');
           if (sev !== 'err') sev = 'warn';
         }
 
         var required = !!(el.required || el.getAttribute('aria-required') === 'true');
         var hint = REQ_HINT.test(name) || REQ_HINT.test(ph);
-        if (required && !hint) { notes.push('Marked required but no textual hint detected (“*”, “required”): check visually.'); if (sev !== 'err') sev = 'warn'; }
-        if (!required && hint) { notes.push('A visual "required" hint is present, but neither required nor aria-required="true" is set.'); if (sev !== 'err') sev = 'warn'; }
+        if (required && !hint) { note(notes, tags, 'requiredNoHint', 'Marked required but no textual hint detected (“*”, “required”): check visually.'); if (sev !== 'err') sev = 'warn'; }
+        if (!required && hint) { note(notes, tags, 'hintNotRequired', 'A visual "required" hint is present, but neither required nor aria-required="true" is set.'); if (sev !== 'err') sev = 'warn'; }
 
         if (el.getAttribute('aria-invalid') === 'true') {
           var db = el.getAttribute('aria-describedby');
           var desc = idsText(db);
-          if (!db) { notes.push("aria-invalid=\"true\" with no aria-describedby: the error message isn't linked to the field."); if (sev !== 'err') sev = 'warn'; }
-          else if (desc.broken || !desc.text) { notes.push('aria-describedby is present but the referenced message is missing or empty.'); if (sev !== 'err') sev = 'warn'; }
+          if (!db) { note(notes, tags, 'invalidNoDescribedby', "aria-invalid=\"true\" with no aria-describedby: the error message isn't linked to the field."); if (sev !== 'err') sev = 'warn'; }
+          else if (desc.broken || !desc.text) { note(notes, tags, 'describedbyBroken', 'aria-describedby is present but the referenced message is missing or empty.'); if (sev !== 'err') sev = 'warn'; }
         }
 
         if (tag === 'INPUT' && !el.getAttribute('autocomplete')) {
           var g = guessAC(el);
-          if (g) { notes.push('Recognizable field (“' + g + '”) with no autocomplete attribute (WCAG 1.3.5).'); if (sev !== 'err') sev = 'warn'; }
+          if (g) { note(notes, tags, 'missingAutocomplete', 'Recognizable field (“' + g + '”) with no autocomplete attribute (WCAG 1.3.5).'); if (sev !== 'err') sev = 'warn'; }
         }
 
-        push(el, type, name, source, notes, sev, required);
+        push(el, type, name, source, notes, tags, sev, required);
       });
 
       // Radio/checkbox groups: flag missing fieldset/legend, which is what announces the
@@ -638,20 +696,21 @@
         var fs = g[0].closest('fieldset');
         var same = g.every(function (el) { return el.closest('fieldset') === fs; });
         var notes = [];
+        var tags = [];
         var sev = 'ok';
         if (!fs || !same) {
-          notes.push('Group of ' + g.length + ' options (name="' + nm + '") with no shared fieldset: loses context when navigating field by field.');
+          note(notes, tags, 'groupNoFieldset', 'Group of ' + g.length + ' options (name="' + nm + '") with no shared fieldset: loses context when navigating field by field.');
           sev = 'err';
         } else {
           var lg = fs.querySelector('legend');
           if (!lg || !lg.textContent.trim()) {
-            notes.push('fieldset present for the “' + nm + '” group but with no legend (or an empty one): the grouping isn’t announced.');
+            note(notes, tags, 'groupNoLegend', 'fieldset present for the “' + nm + '” group but with no legend (or an empty one): the grouping isn’t announced.');
             sev = 'err';
           } else {
             notes.push('Group correctly structured: fieldset + legend “' + lg.textContent.trim() + '”.');
           }
         }
-        push(g[0], 'group (' + g[0].type + ')', 'name="' + nm + '" – ' + g.length + ' options', 'fieldset/legend', notes, sev, false);
+        push(g[0], 'group (' + g[0].type + ')', 'name="' + nm + '" – ' + g.length + ' options', 'fieldset/legend', notes, tags, sev, false);
       });
 
       vlBuildReport({

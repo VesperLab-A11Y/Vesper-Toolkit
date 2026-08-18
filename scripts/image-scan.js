@@ -333,6 +333,36 @@
       "    return d.Packer.toBlob(doc).then(function (blob) {\n" +
       "      download(blob, 'vesperlab-' + CFG.slug + '-' + stamp() + '.docx');\n" +
       "    });\n" +
+      "  }\n\n" +
+      "  /* ---------------- copy as axe-core-shaped JSON, for Vesper Auditor ---------------- */\n" +
+      "  function fallbackCopy(text, done, fail) {\n" +
+      "    try {\n" +
+      "      var ta = document.createElement('textarea');\n" +
+      "      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';\n" +
+      "      document.body.appendChild(ta); ta.focus(); ta.select();\n" +
+      "      var ok = document.execCommand('copy');\n" +
+      "      document.body.removeChild(ta);\n" +
+      "      if (ok) { done(); } else { fail(); }\n" +
+      "    } catch (e) { fail(); }\n" +
+      "  }\n\n" +
+      "  var jsonBtn = document.getElementById('jsonBtn');\n" +
+      "  if (jsonBtn) {\n" +
+      "    jsonBtn.addEventListener('click', function () {\n" +
+      "      var byRule = {};\n" +
+      "      CFG.rows.forEach(function (row) {\n" +
+      "        (row.tags || []).forEach(function (t) {\n" +
+      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
+      "          byRule[t.id].nodes.push({ html: row.snippet || '', target: ['[data-vl-ref=\"' + row.ref + '\"]'], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
+      "        });\n" +
+      "      });\n" +
+      "      var violations = Object.keys(byRule).map(function (k) { return byRule[k]; });\n" +
+      "      var payload = { violations: violations, passes: [], url: CFG.pageUrl, timestamp: new Date().toISOString() };\n" +
+      "      var text = JSON.stringify(payload);\n" +
+      "      var done = function () { say('JSON copied. Paste it into Auditor the same way as an AC Scan result.'); };\n" +
+      "      var fail = function () { say('Copy failed. Open the browser console and copy the result of copy(text) manually.'); };\n" +
+      "      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done, fail); }); }\n" +
+      "      else { fallbackCopy(text, done, fail); }\n" +
+      "    });\n" +
       "  }\n" +
       "})();\n";
 
@@ -447,6 +477,7 @@
       s += '<button type="button" class="vl-btn secondary" id="printBtn">Print / PDF</button>';
       s += '<button type="button" class="vl-btn secondary" id="excelBtn">Export to Excel</button>';
       s += '<button type="button" class="vl-btn secondary" id="wordBtn">Export to Word</button>';
+      s += '<button type="button" class="vl-btn secondary" id="jsonBtn">Copy as JSON</button>';
       s += '</div>';
       s += '<div id="exportStatus" role="status"></div>';
 
@@ -571,6 +602,25 @@
         });
       }
 
+      // Rule metadata for the "Copy as JSON" export (axe-core-shaped, for Vesper Auditor).
+      // Where a real axe-core rule covers the same check, we reuse its id/impact so the JSON
+      // is not just axe-shaped but actually matches what AC Scan would report. Vesper-only
+      // checks (no axe-core equivalent) get a "vesper-" id and a best-effort impact level —
+      // tell me if a level looks wrong once you see this on a real audit.
+      var RULES = {
+        noAlt: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
+        roleImgNoName: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
+        noNameNotDecorative: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
+        redundantTitle: { id: 'vesper-image-redundant-title', impact: 'minor', description: 'title attribute duplicates or conflicts with alt text', help: 'Avoid a title that repeats or contradicts the alt text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
+        lowContrast: { id: 'vesper-image-low-contrast', impact: 'minor', description: 'Image has low internal contrast (heuristic, verify by eye if it carries text)', help: 'Check manually whether embedded text in the image meets contrast requirements', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html' }
+      };
+      // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
+      // tag for the JSON export — single source of truth for the message text.
+      function note(notes, tags, key, msg) {
+        notes.push(msg);
+        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, msg: msg }); }
+      }
+
       var imgs = document.querySelectorAll('img, [role="img"]');
       var jobs = [];
       var ref = 0;
@@ -594,6 +644,7 @@
         }
 
         var notes = [];
+        var tags = [];
         var sev = 'ok';
         var decorative = false;
 
@@ -603,14 +654,14 @@
           if (isHidden(img)) { notes.push('Image hidden (could not be revealed automatically).'); }
           else { notes.push('Image hidden, temporarily revealed for this report.'); }
         }
-        if (noAlt && !isRoleImg) { notes.push('No alt attribute.'); sev = 'err'; }
+        if (noAlt && !isRoleImg) { note(notes, tags, 'noAlt', 'No alt attribute.'); sev = 'err'; }
         if (emptyAlt) { notes.push('Empty alt attribute: treated as decorative by assistive technology.'); decorative = true; }
         var role = img.getAttribute('role');
         if (role === 'presentation' || role === 'none') { notes.push('role="' + role + '": hidden from assistive technology.'); decorative = true; }
         if (img.getAttribute('aria-hidden') === 'true') { notes.push('aria-hidden="true": hidden from assistive technology.'); decorative = true; }
         var title = img.getAttribute('title');
         if (title && emptyAlt) { notes.push("title present with an empty alt: the title won't be exposed."); }
-        else if (title && !noAlt) { notes.push('title in addition to alt (“' + title + '”): redundant or potentially confusing.'); if (sev !== 'err') sev = 'warn'; }
+        else if (title && !noAlt) { note(notes, tags, 'redundantTitle', 'title in addition to alt (“' + title + '”): redundant or potentially confusing.'); if (sev !== 'err') sev = 'warn'; }
 
         if (isRoleImg) {
           var hasLabel = false;
@@ -618,21 +669,21 @@
           var lb = idsText(img.getAttribute('aria-labelledby'));
           if (al) { hasLabel = true; name = al; notes.push('Accessible name provided by aria-label.'); }
           else if (lb) { hasLabel = true; name = lb; notes.push('Accessible name provided by aria-labelledby.'); }
-          if (!hasLabel) { notes.push('role="img" with no accessible name: use aria-label or aria-labelledby (not alt).'); sev = 'err'; }
+          if (!hasLabel) { note(notes, tags, 'roleImgNoName', 'role="img" with no accessible name: use aria-label or aria-labelledby (not alt).'); sev = 'err'; }
         }
-        if (!name && !decorative && !isRoleImg) { notes.push('No accessible name, and not identified as decorative.'); sev = 'err'; }
+        if (!name && !decorative && !isRoleImg) { note(notes, tags, 'noNameNotDecorative', 'No accessible name, and not identified as decorative.'); sev = 'err'; }
 
         jobs.push(capture(src).then(function (cap) {
           var cLabel = 'N/A';
           if (cap.error === 'cors') { cLabel = 'N/A (CORS)'; }
           else if (cap.error) { cLabel = 'N/A'; }
           else if (cap.contrast) { cLabel = cap.contrast.ok ? 'OK' : '!'; }
-          if (cLabel === '!' && sev === 'ok') { sev = 'warn'; notes.push('Low internal contrast: check manually if the image carries text.'); }
+          if (cLabel === '!' && sev === 'ok') { sev = 'warn'; note(notes, tags, 'lowContrast', 'Low internal contrast: check manually if the image carries text.'); }
           var ratio = cap.contrast ? Math.round(cap.contrast.ratio * 100) / 100 : null;
           var cTxt = cLabel + (ratio ? ' (' + ratio + ':1)' : '');
           var notesTxt = notes.join(' ');
           return {
-            ref: ref, sev: sev, snippet: snippet, thumb: cap.dataUrl, thumbAlt: name || 'Image with no alternative text',
+            ref: ref, sev: sev, snippet: snippet, tags: tags, thumb: cap.dataUrl, thumbAlt: name || 'Image with no alternative text',
             cells: [
               { h: isRoleImg ? '<code>role="img"</code>' : '<code>&lt;img&gt;</code>', t: isRoleImg ? 'role=img' : 'img' },
               { h: cap.dataUrl ? '<img src="' + cap.dataUrl + '" alt="">' : '<span class="noname">(capture unavailable' + (cap.error === 'cors' ? ' – CORS' : '') + ')</span>', t: cap.dataUrl ? '' : '(capture unavailable)' },

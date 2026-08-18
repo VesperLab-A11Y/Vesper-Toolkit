@@ -6,16 +6,16 @@ Small, free accessibility-testing tools that live in your bookmarks bar. No exte
 
 ## What's here
 
-- **🦇 AC Scan / 🦇 AC Targeted Scan** — run [axe-core](https://github.com/dequelabs/axe-core) (Deque Systems) on a page or on one CSS selector, copy the JSON result.
-- **🦇 CSS Selector** — click an element, copy its selector.
-- **🦇 Finder** — find and highlight an element (even hidden or off-screen) from a selector or a code snippet.
-- **🦇 Link / Image / Label Scan** — focused reports on links, images and form labels, each opening its own printable/exportable report tab.
-- **🦇 Sonar** — search the 87 WCAG 2.2 success criteria in a movable panel over the page you're working on. Shows the official name, level, guideline and links to the W3C page — not Pauline's private audit notes, see *Status* below.
+- **🦇 AC Scan / 🦇 AC Targeted Scan** : run [axe-core](https://github.com/dequelabs/axe-core) (Deque Systems) on a page or on one CSS selector, copy the JSON result.
+- **🦇 CSS Selector** : click an element, copy its selector.
+- **🦇 Finder** : find and highlight an element (even hidden or off-screen) from a selector or a code snippet.
+- **🦇 Link / Image / Label Scan** : focused reports on links, images and form labels, each opening its own printable/exportable report tab. Each report also has a **Copy as JSON** button, in the same axe-core-shaped format AC Scan produces — paste it into Vesper Auditor the same way.
+- **🦇 Sonar** : search the 87 WCAG 2.2 success criteria in a movable panel over the page you're working on. Shows the official name, level, guideline and links to the W3C page.
 - **Axe-core Scan Viewer** (`scan-results.html`) — turns the JSON from AC Scan into a readable report, exportable to Word, Excel and print.
 
 ## Installation
 
-Open the **[Bookmarklets Directory](https://VesperLab-A11Y.github.io/vesper-bookmarklets/)** — that page has a draggable button and a "Clipboard" fallback for each tool below, plus a source link so you can read the code before you install it.
+Open the **[Bookmarklets Directory](https://VesperLab-A11Y.github.io/vesper-bookmarklets/)** : that page has a draggable button and a "Clipboard" fallback for each tool below, plus a source link so you can read the code before you install it.
 
 **By dragging**
 
@@ -68,6 +68,8 @@ All 8 bookmarklets, the Directory, the Scan Viewer, and `sonar.html` are built a
 **About Sonar and `wcag22-public.json`**: the full WCAG dataset Pauline uses for audits has three custom fields per criterion — `description`, `erreur_type`, `impact_client` — all written in French, the last two being her private audit notes. `assets/wcag22-public.json` is a filtered copy with only the official WCAG fields (name, level, guideline, the two W3C URLs…), which are already in English by nature. It does not contain `description`, `erreur_type` or `impact_client` at all — not hidden by CSS, genuinely absent from the file `sonar.html` fetches. Public Sonar therefore shows metadata + links to the official W3C pages instead of custom prose. If a translated `description` should be shown in the public tool too, that's a separate, bounded translation pass (87 short paragraphs) — flag it if wanted.
 
 **Not yet verified end-to-end**: this was built and checked with syntax validation, visual comparison against Design's screenshots, and in-browser testing of the Directory, the Viewer and Sonar's search/filter/detail view. The three big scan bookmarklets (Link/Image/Label Scan) were translated with care from the original, working French versions but have not yet been run against a real page — try each one on a real site before trusting the results.
+
+**About "Copy as JSON"**: Link/Image/Label Scan build a small internal rule table per scanner (`RULES` near the top of each `vlScan()`) so the JSON groups issues the way axe-core does — one entry per rule, with every affected element listed under it. Where a check has a real axe-core equivalent (`link-name`, `image-alt`, `label`, `button-name`, `autocomplete-valid`), the same id and impact level are reused; Vesper-only checks get a `vesper-*` id and a best-effort impact level. Verify the impact levels look right on a real report before relying on them for triage — some of these are judgment calls, not measured against axe-core's actual source.
 
 ## Deploying
 
