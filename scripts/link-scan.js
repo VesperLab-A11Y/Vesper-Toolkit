@@ -336,7 +336,7 @@
       "      var byRule = {};\n" +
       "      CFG.rows.forEach(function (row) {\n" +
       "        (row.tags || []).forEach(function (t) {\n" +
-      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
+      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: t.wcag ? ['wcag' + t.wcag.replace(/\./g, '')] : [], nodes: [] }; }\n" +
       "          byRule[t.id].nodes.push({ html: row.snippet || '', target: row.target ? [row.target] : [], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
       "        });\n" +
       "      });\n" +
@@ -590,18 +590,18 @@
       // checks (no axe-core equivalent) get a "vesper-" id and a best-effort impact level \u2014
       // tell me if a level looks wrong once you see this on a real audit.
       var RULES = {
-        noName: { id: 'link-name', impact: 'serious', description: 'Links must have discernible text', help: 'Ensure links have discernible text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/link-name' },
-        generic: { id: 'vesper-link-generic-text', impact: 'moderate', description: 'Link text is generic or ambiguous out of context', help: 'Give links a name that makes sense read out of context (avoid "click here", "read more")', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html' },
-        newWinNoWarn: { id: 'vesper-link-new-window-unannounced', impact: 'moderate', description: 'Link opens a new window with no perceivable warning', help: 'Warn users, visually and to assistive technology, before opening a new window', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html' },
-        fakeButton: { id: 'vesper-link-fake-button', impact: 'moderate', description: 'A link is used as a fake button', help: 'Use a real <button> for actions that do not navigate', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html' },
-        hidden: { id: 'vesper-link-hidden', impact: 'minor', description: 'Link is visually hidden', help: 'Confirm the link is intentionally and consistently hidden from everyone, not just sighted users', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html' },
-        dupName: { id: 'vesper-link-ambiguous-duplicate', impact: 'moderate', description: 'Same link text used for different destinations', help: 'Give links pointing to different destinations distinct accessible names', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html' }
+        noName: { id: 'link-name', impact: 'serious', description: 'Links must have discernible text', help: 'Ensure links have discernible text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/link-name', wcag: '2.4.4' },
+        generic: { id: 'vesper-link-generic-text', impact: 'moderate', description: 'Link text is generic or ambiguous out of context', help: 'Give links a name that makes sense read out of context (avoid "click here", "read more")', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html', wcag: '2.4.4' },
+        newWinNoWarn: { id: 'vesper-link-new-window-unannounced', impact: 'moderate', description: 'Link opens a new window with no perceivable warning', help: 'Warn users, visually and to assistive technology, before opening a new window', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html', wcag: '3.2.5' },
+        fakeButton: { id: 'vesper-link-fake-button', impact: 'moderate', description: 'A link is used as a fake button', help: 'Use a real <button> for actions that do not navigate', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html', wcag: '4.1.2' },
+        hidden: { id: 'vesper-link-hidden', impact: 'minor', description: 'Link is visually hidden', help: 'Confirm the link is intentionally and consistently hidden from everyone, not just sighted users', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html', wcag: '4.1.2' },
+        dupName: { id: 'vesper-link-ambiguous-duplicate', impact: 'moderate', description: 'Same link text used for different destinations', help: 'Give links pointing to different destinations distinct accessible names', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html', wcag: '2.4.4' }
       };
       // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
       // tag for the JSON export \u2014 single source of truth for the message text.
       function note(notes, tags, key, msg) {
         notes.push(msg);
-        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, msg: msg }); }
+        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, wcag: RULES[key].wcag, msg: msg }); }
       }
 
       var links = document.querySelectorAll('a[href], [role="link"]');

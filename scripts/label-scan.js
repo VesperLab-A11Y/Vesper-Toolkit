@@ -336,7 +336,7 @@
       "      var byRule = {};\n" +
       "      CFG.rows.forEach(function (row) {\n" +
       "        (row.tags || []).forEach(function (t) {\n" +
-      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
+      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: t.wcag ? ['wcag' + t.wcag.replace(/\./g, '')] : [], nodes: [] }; }\n" +
       "          byRule[t.id].nodes.push({ html: row.snippet || '', target: row.target ? [row.target] : [], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
       "        });\n" +
       "      });\n" +
@@ -585,24 +585,24 @@
       // checks (no axe-core equivalent) get a "vesper-" id and a best-effort impact level —
       // tell me if a level looks wrong once you see this on a real audit.
       var RULES = {
-        buttonNoName: { id: 'button-name', impact: 'critical', description: 'Buttons must have discernible text', help: 'Ensure buttons have discernible text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/button-name' },
-        labelledbyBroken: { id: 'vesper-aria-labelledby-broken', impact: 'serious', description: 'aria-labelledby references an id that does not exist', help: 'Fix or remove the broken aria-labelledby reference', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html' },
-        placeholderOnly: { id: 'label', impact: 'critical', description: 'Form elements must have labels', help: 'Ensure every form element has a label', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label' },
-        noName: { id: 'label', impact: 'critical', description: 'Form elements must have labels', help: 'Ensure every form element has a label', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label' },
-        weakTitle: { id: 'vesper-label-weak-title-fallback', impact: 'moderate', description: 'Accessible name relies only on the title attribute', help: 'Provide a real, visible label rather than relying on title alone', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label' },
-        requiredNoHint: { id: 'vesper-label-required-no-hint', impact: 'moderate', description: 'Field is required but has no textual hint of that', help: 'Give a visible textual cue ("*", "required") in addition to the required attribute', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html' },
-        hintNotRequired: { id: 'vesper-label-hint-not-required', impact: 'moderate', description: 'A visible "required" hint is present but the field is not marked required', help: 'Set required or aria-required="true" to match the visible hint', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html' },
-        invalidNoDescribedby: { id: 'vesper-aria-invalid-no-message', impact: 'moderate', description: 'aria-invalid="true" with no linked error message', help: 'Link the error message with aria-describedby', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html' },
-        describedbyBroken: { id: 'vesper-aria-describedby-broken', impact: 'moderate', description: 'aria-describedby references a missing or empty message', help: 'Ensure the referenced description element exists and has text', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html' },
-        missingAutocomplete: { id: 'autocomplete-valid', impact: 'serious', description: 'autocomplete attribute must be used correctly', help: 'Use a recognisable autocomplete value on fields that ask for known personal data', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/autocomplete-valid' },
-        groupNoFieldset: { id: 'vesper-form-group-no-fieldset', impact: 'critical', description: 'Radio/checkbox group has no shared fieldset', help: 'Wrap the group in a fieldset so its context survives field-by-field navigation', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html' },
-        groupNoLegend: { id: 'vesper-form-group-no-legend', impact: 'serious', description: 'Radio/checkbox group has a fieldset but no legend', help: 'Add a legend describing the group', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html' }
+        buttonNoName: { id: 'button-name', impact: 'critical', description: 'Buttons must have discernible text', help: 'Ensure buttons have discernible text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/button-name', wcag: '4.1.2' },
+        labelledbyBroken: { id: 'vesper-aria-labelledby-broken', impact: 'serious', description: 'aria-labelledby references an id that does not exist', help: 'Fix or remove the broken aria-labelledby reference', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html', wcag: '4.1.2' },
+        placeholderOnly: { id: 'label', impact: 'critical', description: 'Form elements must have labels', help: 'Ensure every form element has a label', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label', wcag: '3.3.2' },
+        noName: { id: 'label', impact: 'critical', description: 'Form elements must have labels', help: 'Ensure every form element has a label', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label', wcag: '3.3.2' },
+        weakTitle: { id: 'vesper-label-weak-title-fallback', impact: 'moderate', description: 'Accessible name relies only on the title attribute', help: 'Provide a real, visible label rather than relying on title alone', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/label', wcag: '3.3.2' },
+        requiredNoHint: { id: 'vesper-label-required-no-hint', impact: 'moderate', description: 'Field is required but has no textual hint of that', help: 'Give a visible textual cue ("*", "required") in addition to the required attribute', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html', wcag: '3.3.2' },
+        hintNotRequired: { id: 'vesper-label-hint-not-required', impact: 'moderate', description: 'A visible "required" hint is present but the field is not marked required', help: 'Set required or aria-required="true" to match the visible hint', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html', wcag: '3.3.2' },
+        invalidNoDescribedby: { id: 'vesper-aria-invalid-no-message', impact: 'moderate', description: 'aria-invalid="true" with no linked error message', help: 'Link the error message with aria-describedby', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html', wcag: '3.3.1' },
+        describedbyBroken: { id: 'vesper-aria-describedby-broken', impact: 'moderate', description: 'aria-describedby references a missing or empty message', help: 'Ensure the referenced description element exists and has text', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html', wcag: '3.3.1' },
+        missingAutocomplete: { id: 'autocomplete-valid', impact: 'serious', description: 'autocomplete attribute must be used correctly', help: 'Use a recognisable autocomplete value on fields that ask for known personal data', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/autocomplete-valid', wcag: '1.3.5' },
+        groupNoFieldset: { id: 'vesper-form-group-no-fieldset', impact: 'critical', description: 'Radio/checkbox group has no shared fieldset', help: 'Wrap the group in a fieldset so its context survives field-by-field navigation', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html', wcag: '1.3.1' },
+        groupNoLegend: { id: 'vesper-form-group-no-legend', impact: 'serious', description: 'Radio/checkbox group has a fieldset but no legend', help: 'Add a legend describing the group', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html', wcag: '1.3.1' }
       };
       // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
       // tag for the JSON export — single source of truth for the message text.
       function note(notes, tags, key, msg) {
         notes.push(msg);
-        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, msg: msg }); }
+        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, wcag: RULES[key].wcag, msg: msg }); }
       }
 
       var rows = [];

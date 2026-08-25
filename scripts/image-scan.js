@@ -336,7 +336,7 @@
       "      var byRule = {};\n" +
       "      CFG.rows.forEach(function (row) {\n" +
       "        (row.tags || []).forEach(function (t) {\n" +
-      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: [], nodes: [] }; }\n" +
+      "          if (!byRule[t.id]) { byRule[t.id] = { id: t.id, impact: t.impact, description: t.description, help: t.help, helpUrl: t.helpUrl, tags: t.wcag ? ['wcag' + t.wcag.replace(/\./g, '')] : [], nodes: [] }; }\n" +
       "          byRule[t.id].nodes.push({ html: row.snippet || '', target: row.target ? [row.target] : [], failureSummary: 'Fix the following:\\n  ' + t.msg });\n" +
       "        });\n" +
       "      });\n" +
@@ -629,17 +629,17 @@
       // checks (no axe-core equivalent) get a "vesper-" id and a best-effort impact level —
       // tell me if a level looks wrong once you see this on a real audit.
       var RULES = {
-        noAlt: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
-        roleImgNoName: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
-        noNameNotDecorative: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
-        redundantTitle: { id: 'vesper-image-redundant-title', impact: 'minor', description: 'title attribute duplicates or conflicts with alt text', help: 'Avoid a title that repeats or contradicts the alt text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt' },
-        lowContrast: { id: 'vesper-image-low-contrast', impact: 'minor', description: 'Image has low internal contrast (heuristic, verify by eye if it carries text)', help: 'Check manually whether embedded text in the image meets contrast requirements', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html' }
+        noAlt: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt', wcag: '1.1.1' },
+        roleImgNoName: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt', wcag: '1.1.1' },
+        noNameNotDecorative: { id: 'image-alt', impact: 'critical', description: 'Images must have alternate text', help: 'Ensure <img> elements have alternate text or a role of none/presentation', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt', wcag: '1.1.1' },
+        redundantTitle: { id: 'vesper-image-redundant-title', impact: 'minor', description: 'title attribute duplicates or conflicts with alt text', help: 'Avoid a title that repeats or contradicts the alt text', helpUrl: 'https://dequeuniversity.com/rules/axe/4.10/image-alt', wcag: '1.1.1' },
+        lowContrast: { id: 'vesper-image-low-contrast', impact: 'minor', description: 'Image has low internal contrast (heuristic, verify by eye if it carries text)', help: 'Check manually whether embedded text in the image meets contrast requirements', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html', wcag: '1.4.3' }
       };
       // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
       // tag for the JSON export — single source of truth for the message text.
       function note(notes, tags, key, msg) {
         notes.push(msg);
-        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, msg: msg }); }
+        if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, wcag: RULES[key].wcag, msg: msg }); }
       }
 
       var imgs = document.querySelectorAll('img, [role="img"]');
