@@ -29,28 +29,32 @@
   <a href="#json-input" class="vl-screen-only" style="position:absolute;left:8px;top:-60px;z-index:300;background:#A6CA93;color:#100F0D;padding:10px 16px;border-radius:0 0 8px 8px;font-weight:700;text-decoration:none;transition:top .15s ease" onfocus="this.style.top='0'" onblur="this.style.top='-60px'">Skip to the input field</a>
 
   <header style="max-width:1000px;margin:0 auto;padding:40px 20px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div id="langSwitch" role="group" aria-label="Interface language / Langue de l'interface" style="display:flex;gap:4px;align-self:flex-end">
+      <button type="button" id="langEn" aria-pressed="true" style="appearance:none;cursor:pointer;background:color-mix(in srgb, #C6B2ED 18%, transparent);border:1px solid #C6B2ED;color:#C6B2ED;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.04em;min-height:26px">EN</button>
+      <button type="button" id="langFr" aria-pressed="false" style="appearance:none;cursor:pointer;background:transparent;border:1px solid rgba(237,231,218,0.22);color:#A9A091;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.04em;min-height:26px">FR</button>
+    </div>
     <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)" style="display:inline-flex;border-radius:10px">
       <img src="assets/logo-cream.svg" alt="" width="96" style="width:96px;height:auto;display:block;filter:brightness(0) invert(1) sepia(0.18) saturate(1.4) hue-rotate(340deg)">
     </a>
-    <h1 style="font-family:'Noto Serif',Georgia,serif;font-size:2rem;font-weight:600;letter-spacing:.01em;margin:0">Axe-core Scan Viewer</h1>
-    <p style="color:#A9A091;font-size:.95rem;max-width:660px;margin:0;text-wrap:pretty">Turns a raw axe-core scan into a readable report. Criterias grouped by severity, with the failing selector, the rule documentation, and accessible Word, Excel and print exports. Built on axe-core, the open-source engine by Deque Systems.</p>
+    <h1 id="pageTitle" style="font-family:'Noto Serif',Georgia,serif;font-size:2rem;font-weight:600;letter-spacing:.01em;margin:0">Axe-core Scan Viewer</h1>
+    <p id="pageSubtitle" style="color:#A9A091;font-size:.95rem;max-width:660px;margin:0;text-wrap:pretty">Turns a raw axe-core scan into a readable report. Criterias grouped by severity, with the failing selector, the rule documentation, and accessible Word, Excel and print exports. Built on axe-core, the open-source engine by Deque Systems.</p>
   </header>
 
   <main style="max-width:1000px;margin:26px auto 0;padding:0 20px">
-    <div class="vl-screen-only" style="background:#191714;border:1px solid rgba(237,231,218,0.14);border-left:4px solid #A6CA93;border-radius:10px;padding:14px 16px;font-size:.88rem;color:#A9A091;margin:0 0 26px">
+    <div id="calloutBox" class="vl-screen-only" style="background:#191714;border:1px solid rgba(237,231,218,0.14);border-left:4px solid #A6CA93;border-radius:10px;padding:14px 16px;font-size:.88rem;color:#A9A091;margin:0 0 26px">
       <strong style="color:#EDE7DA">You need a scan first.</strong> The <em>🦇 AC Scan</em> and <em>🦇 AC Targeted Scan</em> bookmarklets produce a JSON in your terminal and copy it straight to your clipboard. Paste it in the field to see the results. You can install the bookmarklets from the <a href="index.html" style="color:#F0A9A2">Vesper Toolkit</a>, which also holds the install instructions and the targeted scan guide.
     </div>
 
     <section class="vl-screen-only" style="margin:0 0 8px">
-      <h2 style="font-family:'Noto Serif',Georgia,serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#A6CA93;margin:0 0 6px">Usage</h2>
+      <h2 id="usageH2" style="font-family:'Noto Serif',Georgia,serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#A6CA93;margin:0 0 6px">Usage</h2>
       <p id="usageHint" style="font-size:.88rem;color:#A9A091;margin:0 0 16px;max-width:680px">Paste the output of <code style="font-family:'Courier New',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">axe.run()</code> below. Press Enter to render the results, Shift+Enter for a line break inside the field.</p>
-      <label for="json-input" style="display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">axe-core JSON</label>
+      <label id="jsonLabel" for="json-input" style="display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">axe-core JSON</label>
       <textarea id="json-input" aria-describedby="usageHint" placeholder='{ "violations": [...], "passes": [...] }' style="width:100%;min-height:160px;font-family:'Courier New',monospace;font-size:.82rem;padding:12px;border:1px solid rgba(237,231,218,0.18);border-radius:10px;background:#191714;color:#EDE7DA;resize:vertical"></textarea>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px">
         <button type="button" id="btnRender" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid #A6CA93;background:#A6CA93;color:#100F0D;cursor:pointer;display:inline-flex;align-items:center;gap:8px">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4v7a4 4 0 0 1-4 4H4"></path><path d="M9 10 4 15l5 5"></path></svg>
-          Render results
+          <span id="btnRenderLabel">Render results</span>
         </button>
         <button type="button" id="btnClear" style="font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer">Clear</button>
         <button type="button" id="btnPrint" style="display:none;font:700 .85rem/1 'Noto Sans',Arial,sans-serif;padding:11px 18px;border-radius:8px;border:1px solid rgba(237,231,218,0.22);background:transparent;color:#F0A9A2;cursor:pointer">Print / PDF</button>
@@ -63,8 +67,8 @@
     </section>
 
     <details id="exportHelp" class="vl-screen-only" style="display:none;border:1px solid rgba(237,231,218,0.14);border-radius:10px;margin-top:18px;background:#221F1A">
-      <summary style="cursor:pointer;padding:13px 16px;font-size:.86rem;font-weight:700;list-style:none;display:flex;align-items:center;gap:8px">How do I get these results into an accessible document?</summary>
-      <div style="padding:12px 16px 16px;font-size:.87rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.14)">
+      <summary id="exportHelpSummary" style="cursor:pointer;padding:13px 16px;font-size:.86rem;font-weight:700;list-style:none;display:flex;align-items:center;gap:8px">How do I get these results into an accessible document?</summary>
+      <div id="exportHelpBody" style="padding:12px 16px 16px;font-size:.87rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.14)">
         <p style="margin:8px 0"><strong style="color:#EDE7DA">PDF (via Print), a warning.</strong> Browser printing produces an <em>untagged</em> PDF: no heading structure, no table semantics, no reading order. A screen reader sees a flat text stream at best. Fine for a visual preview or an archive, not for a document that has to be accessible itself.</p>
         <p style="margin:8px 0">Acrobat Pro can auto-tag (<em>Accessibility &rsaquo; Autotag Document</em>), but the result is approximate: reading order often wrong, tables badly reconstructed, headings not hierarchical. It always needs a full manual pass, so avoid it as a default.</p>
         <p style="margin:8px 0"><strong style="color:#EDE7DA">Word (.docx), the accessible option.</strong> The export generates a genuinely structured document: native heading styles (Heading&nbsp;1, Heading&nbsp;2), a table with a marked, repeating header row, a declared document language, live links, alt text on images. To keep it accessible:</p>
@@ -77,7 +81,7 @@
         <p style="margin:8px 0"><strong style="color:#EDE7DA">Excel (.xlsx), for tracking and sorting.</strong> The export produces a clean data range: one row per issue, no merged cells, a frozen and filterable header row, an explicit sheet name. To keep it accessible:</p>
         <ul style="padding-left:22px;margin:8px 0">
           <li style="margin-bottom:7px">Don't add merged cells: they break screen reader navigation</li>
-          <li style="margin-bottom:7px">Don't rely on severity colour alone: the symbol (&#9670; &#9650; &#9679; &#9642;) is there for that, keep it</li>
+          <li style="margin-bottom:7px">Don't rely on severity colour alone: the symbol (&#9670; &#9650; &#9679; &#9642; &#9675;) is there for that, keep it</li>
           <li style="margin-bottom:7px">If you add a tab, give it an explicit name rather than &ldquo;Sheet2&rdquo;</li>
         </ul>
       </div>
@@ -92,11 +96,11 @@
   </main>
 
   <footer style="max-width:1000px;margin:44px auto 0;padding:20px 20px 0;text-align:center;font-size:.78rem;color:#A9A091;border-top:1px solid rgba(237,231,218,0.12);line-height:1.9">
-    <div>Axe-core Scan Viewer, built by <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:#F0A9A2">Vesper Lab</a></div>
-    <div>Powered by <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:#F0A9A2">axe-core</a> (Deque Systems), criteria based on <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:#F0A9A2">WCAG 2.2</a></div>
+    <div id="footerBuilt">Axe-core Scan Viewer, built by <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:#F0A9A2">Vesper Lab</a></div>
+    <div id="footerPowered">Powered by <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:#F0A9A2">axe-core</a> (Deque Systems), criteria based on <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:#F0A9A2">WCAG 2.2</a></div>
     <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px">
-      <a href="index.html" style="color:#F0A9A2">All bookmarklets &amp; tools</a>
-      <a href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" target="_blank" rel="noopener" style="color:#F0A9A2">Source on GitHub</a>
+      <a href="index.html" id="footerAllTools" style="color:#F0A9A2">All bookmarklets &amp; tools</a>
+      <a href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" target="_blank" rel="noopener" id="footerSource" style="color:#F0A9A2">Source on GitHub</a>
     </div>
   </footer>
 </div>
@@ -109,13 +113,75 @@
 (function () {
   'use strict';
 
-  var ORDER = ['critical', 'serious', 'moderate', 'minor'];
-  var LABEL = { critical: 'Critical', serious: 'Serious', moderate: 'Moderate', minor: 'Minor' };
-  var SYMBOL = { critical: '◆', serious: '▲', moderate: '●', minor: '▪' };
-  var INK = { critical: '#F0A9A2', serious: '#E5BE7D', moderate: '#C6B2ED', minor: '#A6CA93' };
-  var TINT = { critical: '#2B1614', serious: '#2A2113', moderate: '#211C2E', minor: '#182317' };
-  var XL_FILL = { critical: 'FFF7E0DC', serious: 'FFF9EFD9', moderate: 'FFEDE6FA', minor: 'FFE6F0DE' };
-  var XL_INK = { critical: 'FF7A2E24', serious: 'FF6B4A12', moderate: 'FF453163', minor: 'FF33511F' };
+  // "unrated" covers violations with no impact level at all (impact: null) — Sonar and the
+  // Link/Image/Label Scan bookmarklets export this shape too (see TECHNICAL-BRIEF.md), and
+  // none of them can reliably guess a severity. Earlier this bucket didn't exist, so any
+  // null-impact violation matched no group in the loop below and silently vanished from the
+  // page (buildRows() already had a — misleading — 'minor' fallback for the exports; this
+  // makes both paths honest and consistent instead).
+  var ORDER = ['critical', 'serious', 'moderate', 'minor', 'unrated'];
+  var LABEL = { critical: 'Critical', serious: 'Serious', moderate: 'Moderate', minor: 'Minor', unrated: 'Not rated' };
+  var SYMBOL = { critical: '◆', serious: '▲', moderate: '●', minor: '▪', unrated: '○' };
+  var INK = { critical: '#F0A9A2', serious: '#E5BE7D', moderate: '#C6B2ED', minor: '#A6CA93', unrated: '#A9A091' };
+  var TINT = { critical: '#2B1614', serious: '#2A2113', moderate: '#211C2E', minor: '#182317', unrated: '#221F1A' };
+  var XL_FILL = { critical: 'FFF7E0DC', serious: 'FFF9EFD9', moderate: 'FFEDE6FA', minor: 'FFE6F0DE', unrated: 'FFEDE9E2' };
+  var XL_INK = { critical: 'FF7A2E24', serious: 'FF6B4A12', moderate: 'FF453163', minor: 'FF33511F', unrated: 'FF56514A' };
+  var LABEL_EN = { critical: 'Critical', serious: 'Serious', moderate: 'Moderate', minor: 'Minor', unrated: 'Not rated' };
+  var LABEL_FR = { critical: 'Critique', serious: 'Sérieux', moderate: 'Modéré', minor: 'Mineur', unrated: 'Non noté' };
+
+  // Interface chrome only — the violation content itself (v.description/v.help/v.id) stays in
+  // whatever language it was authored in (English, from axe-core or from the scan bookmarklets'
+  // rule tables) and is never translated here.
+  var lang = 'en';
+  var T = {
+    en: {
+      title: 'Axe-core Scan Viewer',
+      subtitle: 'Turns a raw axe-core scan into a readable report. Criterias grouped by severity, with the failing selector, the rule documentation, and accessible Word, Excel and print exports. Built on axe-core, the open-source engine by Deque Systems.',
+      usage: 'Usage', jsonLabel: 'axe-core JSON', renderBtn: 'Render results', clearBtn: 'Clear',
+      usageHint: 'Paste the output of <code style="font-family:\'Courier New\',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">axe.run()</code> below. Press Enter to render the results, Shift+Enter for a line break inside the field.',
+      printBtn: 'Print / PDF', excelBtn: 'Export to Excel', wordBtn: 'Export to Word',
+      exportHelpSummary: 'How do I get these results into an accessible document?',
+      pasteFirst: 'Paste some JSON in the field above first.',
+      invalidJson: function (m) { return 'Invalid JSON: ' + m + '. Check that you copied the whole object.'; },
+      noViolationsKey: 'Unexpected structure: no "violations" key found.',
+      summary: function (n, e) { return '<strong>' + n + '</strong> rule(s) in violation &middot; <strong>' + e + '</strong> affected element(s)'; },
+      pageScanned: 'Page scanned: ', elementsCount: function (n) { return n + ' element(s)'; }, rulesCount: function (n) { return n + ' rule(s)'; },
+      codeSnippet: 'Code snippet', failureMessage: 'Failure message', cssSelector: 'CSS selector', ruleDoc: 'Rule documentation (new tab)',
+      emptyState: 'No barriers found in this result. Clean pass.',
+      footerBuilt: 'Axe-core Scan Viewer, built by', footerPowered: 'Powered by', footerPoweredMid: '(Deque Systems), criteria based on',
+      footerAllTools: 'All bookmarklets & tools', footerSource: 'Source on GitHub',
+      colSeverity: 'Severity', colRuleId: 'Rule (id)', colTitle: 'Title', colDescription: 'Description', colWcag: 'WCAG criteria',
+      colSelector: 'CSS selector', colSnippet: 'Code snippet', colFailure: 'Failure message', colDoc: 'Documentation',
+      sheetName: 'axe-core violations', reportTitle: 'Vesper Lab, Axe-core Scan Viewer report',
+      reportIntro: 'This report lists the accessibility barriers found by the axe-core engine (Deque Systems) on the scanned page.',
+      reportDate: 'Report date: ', summaryHeading: 'Summary', detailHeading: 'Violation detail',
+      reportGenerated: 'Report generated with the Vesper Lab bookmarklets.', docDescription: 'Accessibility barriers found by axe-core', docLang: 'en-CA'
+    },
+    fr: {
+      title: 'Visualisateur de scans axe-core',
+      subtitle: 'Transforme un scan axe-core brut en rapport lisible. Critères groupés par sévérité, avec le sélecteur en échec, la documentation de la règle, et des exports Word, Excel et impression accessibles. Basé sur axe-core, le moteur open source de Deque Systems.',
+      usage: 'Utilisation', jsonLabel: 'JSON axe-core', renderBtn: 'Afficher les résultats', clearBtn: 'Effacer',
+      usageHint: 'Colle le résultat de <code style="font-family:\'Courier New\',monospace;font-size:.85em;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px">axe.run()</code> ci-dessous. Entrée pour afficher les résultats, Maj+Entrée pour un saut de ligne dans le champ.',
+      printBtn: 'Imprimer / PDF', excelBtn: 'Exporter en Excel', wordBtn: 'Exporter en Word',
+      exportHelpSummary: 'Comment obtenir ces résultats dans un document accessible ?',
+      pasteFirst: 'Colle d’abord du JSON dans le champ ci-dessus.',
+      invalidJson: function (m) { return 'JSON invalide : ' + m + '. Vérifie que tu as bien copié l’objet complet.'; },
+      noViolationsKey: 'Structure inattendue : aucune clé « violations » trouvée.',
+      summary: function (n, e) { return '<strong>' + n + '</strong> règle(s) en infraction &middot; <strong>' + e + '</strong> élément(s) concerné(s)'; },
+      pageScanned: 'Page scannée : ', elementsCount: function (n) { return n + ' élément(s)'; }, rulesCount: function (n) { return n + ' règle(s)'; },
+      codeSnippet: 'Extrait de code', failureMessage: 'Message d’échec', cssSelector: 'Sélecteur CSS', ruleDoc: 'Documentation de la règle (nouvel onglet)',
+      emptyState: 'Aucun obstacle trouvé dans ce résultat. Scan propre.',
+      footerBuilt: 'Visualisateur de scans axe-core, développé par', footerPowered: 'Propulsé par', footerPoweredMid: '(Deque Systems), critères basés sur',
+      footerAllTools: 'Tous les bookmarklets et outils', footerSource: 'Code source sur GitHub',
+      colSeverity: 'Sévérité', colRuleId: 'Règle (id)', colTitle: 'Titre', colDescription: 'Description', colWcag: 'Critères WCAG',
+      colSelector: 'Sélecteur CSS', colSnippet: 'Extrait de code', colFailure: 'Message d’échec', colDoc: 'Documentation',
+      sheetName: 'Violations axe-core', reportTitle: 'Vesper Lab, rapport du Visualisateur axe-core',
+      reportIntro: 'Ce rapport liste les obstacles d’accessibilité détectés par le moteur axe-core (Deque Systems) sur la page scannée.',
+      reportDate: 'Date du rapport : ', summaryHeading: 'Résumé', detailHeading: 'Détail des violations',
+      reportGenerated: 'Rapport généré avec les bookmarklets Vesper Lab.', docDescription: 'Obstacles d’accessibilité détectés par axe-core', docLang: 'fr-CA'
+    }
+  };
+  function t(k) { return T[lang][k]; }
 
   var input = document.getElementById('json-input');
   var btnRender = document.getElementById('btnRender');
@@ -171,7 +237,7 @@
     errorEl.textContent = '';
     statusEl.textContent = '';
     if (!raw) {
-      errorEl.textContent = 'Paste some JSON in the field above first.';
+      errorEl.textContent = t('pasteFirst');
       state.data = null;
       render();
       return;
@@ -180,7 +246,7 @@
     try {
       parsed = JSON.parse(raw);
     } catch (e) {
-      errorEl.textContent = 'Invalid JSON: ' + e.message + '. Check that you copied the whole object.';
+      errorEl.textContent = t('invalidJson')(e.message);
       state.data = null;
       render();
       return;
@@ -191,7 +257,7 @@
     } else if (parsed && parsed.violations) {
       scans = [parsed];
     } else {
-      errorEl.textContent = 'Unexpected structure: no "violations" key found.';
+      errorEl.textContent = t('noViolationsKey');
       state.data = null;
       render();
       return;
@@ -231,8 +297,8 @@
       return;
     }
 
-    var counts = { critical: 0, serious: 0, moderate: 0, minor: 0 };
-    violations.forEach(function (v) { if (counts[v.impact] !== undefined) counts[v.impact]++; });
+    var counts = { critical: 0, serious: 0, moderate: 0, minor: 0, unrated: 0 };
+    violations.forEach(function (v) { var k = v.impact || 'unrated'; if (counts[k] !== undefined) counts[k]++; });
     var nodeCount = violations.reduce(function (s, v) { return s + (v.nodes ? v.nodes.length : 0); }, 0);
 
     summaryPanel.style.display = '';
@@ -240,25 +306,25 @@
       return '<span style="' + badgeStyle(i) + '">' + SYMBOL[i] + ' ' + LABEL[i] + ': ' + counts[i] + '</span>';
     }).join('');
     summaryPanel.innerHTML =
-      '<div><strong>' + violations.length + '</strong> rule(s) in violation &middot; <strong>' + nodeCount + '</strong> affected element(s)</div>' +
+      '<div>' + t('summary')(violations.length, nodeCount) + '</div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">' + tallyHtml + '</div>';
 
     if (data.url) {
       scannedUrlEl.style.display = '';
-      scannedUrlEl.innerHTML = 'Page scanned: <code style="font-family:\'Courier New\',monospace;background:#191714;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px;word-break:break-all">' + esc(data.url) + '</code>';
+      scannedUrlEl.innerHTML = esc(t('pageScanned')) + '<code style="font-family:\'Courier New\',monospace;background:#191714;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px;word-break:break-all">' + esc(data.url) + '</code>';
     } else {
       scannedUrlEl.style.display = 'none';
     }
 
     var groupsHtml = '';
     ORDER.forEach(function (impact) {
-      var rules = violations.filter(function (v) { return v.impact === impact; });
+      var rules = violations.filter(function (v) { return (v.impact || 'unrated') === impact; });
       if (!rules.length) return;
 
       var rulesHtml = rules.map(function (v) {
         var wcag = (v.tags || []).filter(function (t) { return t.indexOf('wcag') === 0; }).join(', ');
         var nodes = v.nodes || [];
-        var open = (impact === 'critical' || impact === 'serious') ? ' open' : '';
+        var open = (impact === 'critical' || impact === 'serious' || impact === 'unrated') ? ' open' : '';
         var cardStyle = 'border:1px solid rgba(237,231,218,0.14);border-left:4px solid ' + INK[impact] +
           ';border-radius:8px;background:#191714;margin-bottom:10px';
 
@@ -267,28 +333,28 @@
           var htmlSnippet = n.html || '';
           var summary = cleanSummary(n.failureSummary);
           var snippetBlock = htmlSnippet
-            ? '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:10px 0 3px">Code snippet</div>' +
+            ? '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:10px 0 3px">' + esc(t('codeSnippet')) + '</div>' +
               '<code style="font-family:\'Courier New\',monospace;font-size:.78rem;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:4px 6px;display:block;white-space:pre-wrap;word-break:break-word">' + esc(htmlSnippet) + '</code>'
             : '';
           var summaryBlock = summary
-            ? '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:10px 0 3px">Failure message</div>' +
+            ? '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:10px 0 3px">' + esc(t('failureMessage')) + '</div>' +
               '<p style="margin:3px 0;color:#C8C0B2">' + esc(summary) + '</p>'
             : '';
           return '<div class="vl-node" style="background:#221F1A;border:1px solid rgba(237,231,218,0.12);border-radius:8px;padding:10px 12px;margin-top:10px">' +
-            '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:4px 0 3px">CSS selector</div>' +
+            '<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#A6CA93;margin:4px 0 3px">' + esc(t('cssSelector')) + '</div>' +
             '<span style="font-family:\'Courier New\',monospace;font-size:.78rem;background:#100F0D;border:1px solid rgba(237,231,218,0.16);border-radius:4px;padding:1px 6px;word-break:break-all;display:inline-block">' + esc(selector) + '</span>' +
             snippetBlock + summaryBlock +
             '</div>';
         }).join('');
 
         var docLink = v.helpUrl
-          ? '<p style="margin:7px 0"><a href="' + esc(v.helpUrl) + '" target="_blank" rel="noopener" style="color:#F0A9A2">Rule documentation (new tab)</a></p>'
+          ? '<p style="margin:7px 0"><a href="' + esc(v.helpUrl) + '" target="_blank" rel="noopener" style="color:#F0A9A2">' + esc(t('ruleDoc')) + '</a></p>'
           : '';
 
         return '<details class="vl-card"' + open + ' style="' + cardStyle + '">' +
           '<summary style="cursor:pointer;padding:13px 16px;font-size:.92rem;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:baseline;border-radius:8px">' +
           '<span>' + esc(v.help || v.id) + '</span>' +
-          '<span style="font-weight:400;color:#A9A091;white-space:nowrap;font-size:.8rem">' + nodes.length + ' element(s)</span>' +
+          '<span style="font-weight:400;color:#A9A091;white-space:nowrap;font-size:.8rem">' + esc(t('elementsCount')(nodes.length)) + '</span>' +
           '</summary>' +
           '<div style="padding:0 16px 16px;font-size:.87rem">' +
           '<p style="margin:7px 0;color:#C8C0B2">' + esc(v.description || '') + '</p>' +
@@ -302,7 +368,7 @@
       groupsHtml += '<section style="margin-bottom:26px">' +
         '<h2 style="font-family:\'Noto Serif\',Georgia,serif;font-size:1.05rem;font-weight:600;margin:0 0 10px;display:flex;align-items:center;gap:10px">' +
         '<span style="' + badgeStyle(impact) + '">' + SYMBOL[impact] + ' ' + LABEL[impact] + '</span>' +
-        '<span style="font-size:.9rem;font-weight:400;color:#A9A091">' + rules.length + ' rule(s)</span>' +
+        '<span style="font-size:.9rem;font-weight:400;color:#A9A091">' + esc(t('rulesCount')(rules.length)) + '</span>' +
         '</h2>' + rulesHtml + '</section>';
     });
 
@@ -312,15 +378,15 @@
   // --- Colonnes / lignes partagées par les deux exports ---
   function columns() {
     return [
-      { name: 'Severity', width: 13 },
-      { name: 'Rule (id)', width: 26, code: true },
-      { name: 'Title', width: 30, wrap: true },
-      { name: 'Description', width: 46, wrap: true },
-      { name: 'WCAG criteria', width: 16 },
-      { name: 'CSS selector', width: 30, wrap: true },
-      { name: 'Code snippet', width: 44, wrap: true, code: true },
-      { name: 'Failure message', width: 40, wrap: true },
-      { name: 'Documentation', width: 22, link: true }
+      { name: t('colSeverity'), width: 13 },
+      { name: t('colRuleId'), width: 26, code: true },
+      { name: t('colTitle'), width: 30, wrap: true },
+      { name: t('colDescription'), width: 46, wrap: true },
+      { name: t('colWcag'), width: 16 },
+      { name: t('colSelector'), width: 30, wrap: true },
+      { name: t('colSnippet'), width: 44, wrap: true, code: true },
+      { name: t('colFailure'), width: 40, wrap: true },
+      { name: t('colDoc'), width: 22, link: true }
     ];
   }
 
@@ -331,9 +397,9 @@
       var nodes = (v.nodes && v.nodes.length) ? v.nodes : [{ target: [], html: '', failureSummary: '' }];
       nodes.forEach(function (n) {
         rows.push({
-          impact: v.impact || 'minor',
+          impact: v.impact || 'unrated',
           values: [
-            SYMBOL[v.impact] + ' ' + (LABEL[v.impact] || v.impact || ''),
+            SYMBOL[v.impact || 'unrated'] + ' ' + LABEL[v.impact || 'unrated'],
             v.id || '', v.help || '', v.description || '', wcag,
             (n.target || []).join(', '), n.html || '',
             cleanSummary(n.failureSummary), v.helpUrl || ''
@@ -382,14 +448,14 @@
     var rows = buildRows();
     var wb = new window.ExcelJS.Workbook();
     wb.creator = 'Vesper Lab';
-    wb.title = 'axe-core report';
-    var ws = wb.addWorksheet('axe-core violations', { views: [{ showGridLines: false, state: 'frozen', ySplit: 4 }] });
+    wb.title = t('reportTitle');
+    var ws = wb.addWorksheet(t('sheetName'), { views: [{ showGridLines: false, state: 'frozen', ySplit: 4 }] });
     ws.columns = COLUMNS.map(function (c) { return { width: c.width }; });
 
-    ws.getCell('B1').value = { text: 'Vesper Lab, Axe-core Scan Viewer report', hyperlink: 'https://vesperlab.framer.website/' };
+    ws.getCell('B1').value = { text: t('reportTitle'), hyperlink: 'https://vesperlab.framer.website/' };
     ws.getCell('B1').style = { font: { name: 'Noto Serif', size: 16, bold: true, color: { argb: 'FF3F5A32' } }, alignment: { vertical: 'middle' } };
     ws.getRow(1).height = 30;
-    ws.getCell('B2').value = 'This report lists the accessibility barriers found by the axe-core engine (Deque Systems) on the scanned page.';
+    ws.getCell('B2').value = t('reportIntro');
     ws.getCell('B2').font = { name: 'Noto Serif', size: 10.5, italic: true, color: { argb: 'FF6B6459' } };
     ws.getCell('B2').alignment = { wrapText: true, vertical: 'middle' };
     ws.getRow(2).height = 34;
@@ -497,33 +563,33 @@
 
     children.push(new d.Paragraph({
       heading: d.HeadingLevel.HEADING_1,
-      children: [new d.ExternalHyperlink({ children: [txt('Vesper Lab, Axe-core Scan Viewer report', { color: '3F5A32' })], link: 'https://vesperlab.framer.website/' })]
+      children: [new d.ExternalHyperlink({ children: [txt(t('reportTitle'), { color: '3F5A32' })], link: 'https://vesperlab.framer.website/' })]
     }));
-    children.push(new d.Paragraph({ children: [txt('This report lists the accessibility barriers found by the axe-core engine (Deque Systems) on the scanned page.')] }));
-    if (url) { children.push(new d.Paragraph({ children: [txt('Page scanned: ' + url)] })); }
-    children.push(new d.Paragraph({ children: [txt('Report date: ' + stamp())] }));
+    children.push(new d.Paragraph({ children: [txt(t('reportIntro'))] }));
+    if (url) { children.push(new d.Paragraph({ children: [txt(t('pageScanned') + url)] })); }
+    children.push(new d.Paragraph({ children: [txt(t('reportDate') + stamp())] }));
 
     var counts = {};
-    violations.forEach(function (v) { counts[v.impact] = (counts[v.impact] || 0) + 1; });
-    children.push(new d.Paragraph({ text: 'Summary', heading: d.HeadingLevel.HEADING_2 }));
-    children.push(new d.Paragraph({ children: [txt(violations.length + ' rule(s) in violation, ' + rows.length + ' affected element(s).')] }));
+    violations.forEach(function (v) { var k = v.impact || 'unrated'; counts[k] = (counts[k] || 0) + 1; });
+    children.push(new d.Paragraph({ text: t('summaryHeading'), heading: d.HeadingLevel.HEADING_2 }));
+    children.push(new d.Paragraph({ children: [txt(t('summary')(violations.length, rows.length).replace(/<\/?strong>/g, '').replace('&middot;', ',').replace(/\s+/g, ' '))] }));
     ORDER.forEach(function (i) {
-      if (counts[i]) { children.push(new d.Paragraph({ text: SYMBOL[i] + ' ' + LABEL[i] + ': ' + counts[i] + ' rule(s)', bullet: { level: 0 } })); }
+      if (counts[i]) { children.push(new d.Paragraph({ text: SYMBOL[i] + ' ' + LABEL[i] + ': ' + t('rulesCount')(counts[i]), bullet: { level: 0 } })); }
     });
 
-    children.push(new d.Paragraph({ text: 'Violation detail', heading: d.HeadingLevel.HEADING_2 }));
+    children.push(new d.Paragraph({ text: t('detailHeading'), heading: d.HeadingLevel.HEADING_2 }));
     children.push(new d.Table({
       width: { size: 100, type: d.WidthType.PERCENTAGE },
       rows: [new d.TableRow({ tableHeader: true, children: headerCells })].concat(bodyRows)
     }));
     children.push(new d.Paragraph({ text: '' }));
-    children.push(new d.Paragraph({ children: [txt('Report generated with the Vesper Lab bookmarklets.')] }));
+    children.push(new d.Paragraph({ children: [txt(t('reportGenerated'))] }));
 
     var doc = new d.Document({
-      title: 'Vesper Lab, Axe-core Scan Viewer report',
+      title: t('reportTitle'),
       creator: 'Vesper Lab',
-      description: 'Accessibility barriers found by axe-core',
-      styles: { default: { document: { run: { font: 'Calibri', size: 21, language: { value: 'en-CA' } } } } },
+      description: t('docDescription'),
+      styles: { default: { document: { run: { font: 'Calibri', size: 21, language: { value: t('docLang') } } } } },
       sections: [{ children: children }]
     });
 
@@ -574,6 +640,73 @@
   btnPrint.addEventListener('click', function () { window.print(); });
   btnExcel.addEventListener('click', function () { runExport('excel'); });
   btnWord.addEventListener('click', function () { runExport('word'); });
+
+  // --- Language toggle: interface chrome only (see the comment on the T dict above) ---
+  var calloutBox = document.getElementById('calloutBox');
+  var exportHelpBody = document.getElementById('exportHelpBody');
+  var CALLOUT_EN = calloutBox.innerHTML;
+  var EXPORT_HELP_EN = exportHelpBody.innerHTML;
+  var CALLOUT_FR = '<strong style="color:#EDE7DA">Il te faut d’abord un scan.</strong> Les bookmarklets <em>🦇 AC Scan</em> et <em>🦇 AC Targeted Scan</em> produisent un JSON et le copient directement dans le presse-papier. Colle-le dans le champ pour voir les résultats. Tu peux installer les bookmarklets depuis <a href="index.html" style="color:#F0A9A2">Vesper Toolkit</a>, qui contient aussi les instructions d’installation et le guide du scan ciblé.';
+  var EXPORT_HELP_FR =
+    '<p style="margin:8px 0"><strong style="color:#EDE7DA">PDF (via Imprimer), un avertissement.</strong> L’impression du navigateur produit un PDF <em>non balisé</em> : aucune structure de titres, aucune sémantique de tableau, aucun ordre de lecture. Un lecteur d’écran n’y voit au mieux qu’un flux de texte brut. Correct pour un aperçu visuel ou une archive, pas pour un document qui doit être accessible en soi.</p>' +
+    '<p style="margin:8px 0">Acrobat Pro peut baliser automatiquement (<em>Accessibilité &rsaquo; Baliser automatiquement le document</em>), mais le résultat reste approximatif : ordre de lecture souvent faux, tableaux mal reconstruits, titres non hiérarchisés. Ça demande toujours une reprise manuelle complète, à éviter comme solution par défaut.</p>' +
+    '<p style="margin:8px 0"><strong style="color:#EDE7DA">Word (.docx), l’option accessible.</strong> L’export génère un document réellement structuré : styles de titre natifs (Titre&nbsp;1, Titre&nbsp;2), un tableau avec une ligne d’en-tête marquée et répétée, une langue de document déclarée, des liens actifs, un texte alternatif sur les images. Pour le garder accessible :</p>' +
+    '<ul style="padding-left:22px;margin:8px 0">' +
+    '<li style="margin-bottom:7px">Ne remplace pas la structure par de la mise en forme : ne troque jamais un style de titre contre du texte en gras agrandi</li>' +
+    '<li style="margin-bottom:7px">Si tu ajoutes des lignes, reste dans le tableau existant plutôt que d’en commencer un nouveau sans en-tête</li>' +
+    '<li style="margin-bottom:7px">Lance le <em>Vérificateur d’accessibilité</em> intégré (<em>Révision &rsaquo; Vérifier l’accessibilité</em>) avant de partager le fichier</li>' +
+    '<li style="margin-bottom:7px">Pour un PDF accessible : exporte depuis Word via <em>Fichier &rsaquo; Enregistrer sous &rsaquo; PDF</em> en cochant <strong style="color:#EDE7DA">&laquo; Balises de structure de document pour l’accessibilité&nbsp;&raquo;</strong>, jamais via l’impression du navigateur</li>' +
+    '</ul>' +
+    '<p style="margin:8px 0"><strong style="color:#EDE7DA">Excel (.xlsx), pour le suivi et le tri.</strong> L’export produit une plage de données propre : une ligne par problème, aucune cellule fusionnée, une ligne d’en-tête figée et filtrable, un nom d’onglet explicite. Pour le garder accessible :</p>' +
+    '<ul style="padding-left:22px;margin:8px 0">' +
+    '<li style="margin-bottom:7px">N’ajoute pas de cellules fusionnées : elles cassent la navigation au lecteur d’écran</li>' +
+    '<li style="margin-bottom:7px">Ne te fie pas qu’à la couleur de sévérité : le symbole (&#9670; &#9650; &#9679; &#9642; &#9675;) est là pour ça, garde-le</li>' +
+    '<li style="margin-bottom:7px">Si tu ajoutes un onglet, donne-lui un nom explicite plutôt que &laquo; Feuille2&nbsp;&raquo;</li>' +
+    '</ul>';
+
+  function applyLang() {
+    document.getElementById('langEn').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    document.getElementById('langFr').setAttribute('aria-pressed', lang === 'fr' ? 'true' : 'false');
+    document.getElementById('langEn').style.background = lang === 'en' ? 'color-mix(in srgb, #C6B2ED 18%, transparent)' : 'transparent';
+    document.getElementById('langEn').style.borderColor = lang === 'en' ? '#C6B2ED' : 'rgba(237,231,218,0.22)';
+    document.getElementById('langEn').style.color = lang === 'en' ? '#C6B2ED' : '#A9A091';
+    document.getElementById('langFr').style.background = lang === 'fr' ? 'color-mix(in srgb, #C6B2ED 18%, transparent)' : 'transparent';
+    document.getElementById('langFr').style.borderColor = lang === 'fr' ? '#C6B2ED' : 'rgba(237,231,218,0.22)';
+    document.getElementById('langFr').style.color = lang === 'fr' ? '#C6B2ED' : '#A9A091';
+    document.documentElement.lang = lang;
+
+    document.getElementById('pageTitle').textContent = t('title');
+    document.title = t('title');
+    document.getElementById('pageSubtitle').textContent = t('subtitle');
+    calloutBox.innerHTML = lang === 'fr' ? CALLOUT_FR : CALLOUT_EN;
+    document.getElementById('usageH2').textContent = t('usage');
+    document.getElementById('usageHint').innerHTML = t('usageHint');
+    document.getElementById('jsonLabel').textContent = t('jsonLabel');
+    document.getElementById('btnRenderLabel').textContent = t('renderBtn');
+    btnClear.textContent = t('clearBtn');
+    btnPrint.textContent = t('printBtn');
+    btnExcel.textContent = t('excelBtn');
+    btnWord.textContent = t('wordBtn');
+    document.getElementById('exportHelpSummary').textContent = t('exportHelpSummary');
+    exportHelpBody.innerHTML = lang === 'fr' ? EXPORT_HELP_FR : EXPORT_HELP_EN;
+    document.getElementById('emptyState').textContent = t('emptyState');
+    document.getElementById('footerBuilt').innerHTML = esc(t('footerBuilt')) + ' <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:#F0A9A2">Vesper Lab</a>';
+    document.getElementById('footerPowered').innerHTML = esc(t('footerPowered')) + ' <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:#F0A9A2">axe-core</a> ' + esc(t('footerPoweredMid')) + ' <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:#F0A9A2">WCAG 2.2</a>';
+    document.getElementById('footerAllTools').textContent = t('footerAllTools');
+    document.getElementById('footerSource').textContent = t('footerSource');
+
+    LABEL.critical = (lang === 'fr' ? LABEL_FR : LABEL_EN).critical;
+    LABEL.serious = (lang === 'fr' ? LABEL_FR : LABEL_EN).serious;
+    LABEL.moderate = (lang === 'fr' ? LABEL_FR : LABEL_EN).moderate;
+    LABEL.minor = (lang === 'fr' ? LABEL_FR : LABEL_EN).minor;
+    LABEL.unrated = (lang === 'fr' ? LABEL_FR : LABEL_EN).unrated;
+
+    // Re-render so the results themselves (summary counts, group headers, node labels) pick up
+    // the new language too — parse() isn't re-run, state.data (already-parsed violations) is untouched.
+    render();
+  }
+  document.getElementById('langEn').addEventListener('click', function () { lang = 'en'; applyLang(); });
+  document.getElementById('langFr').addEventListener('click', function () { lang = 'fr'; applyLang(); });
 })();
 </script>
 </body>
