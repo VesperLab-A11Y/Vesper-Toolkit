@@ -4,41 +4,162 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sonar — WCAG 2.2 reference</title>
+<link rel="icon" href="assets/vesperlab.svg" type="image/svg+xml">
 <style>
+
+  /* ── Jetons du design system Vesper Lab V2 ──────────────────────────────
+     Recopiés à l'identique depuis vesper-library/style.css (ne pas régénérer).
+     Thème SOMBRE uniquement : le :root ci-dessous EST le thème sombre.
+     Les couleurs de niveau WCAG (A/AA/AAA) et de sévérité restent gérées
+     localement plus bas / dans le <script> — hors design system V2. */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap');
+
+/* ---- Typographie (tokens/typography.css) ---- */
+:root{
+  --font-display:'Noto Serif',Georgia,'Times New Roman',serif;
+  --font-body:'Noto Sans',Arial,Helvetica,sans-serif;
+  --font-mono:'Noto Sans Mono','Courier New',monospace;
+
+  --font-size-display:44px;
+  --font-size-h1:32px;
+  --font-size-h2:24px;
+  --font-size-h3:19px;
+  --font-size-lead:19px;
+  --font-size-body:17px;
+  --font-size-body-sm:15px;
+  --font-size-caption:13px;
+
+  --font-size-ui-title:24px;
+  --font-size-ui-h2:19px;
+  --font-size-ui-h3:15px;
+  --font-size-ui-body:15px;
+  --font-size-ui-body-sm:14px;
+  --font-size-ui-caption:13px;
+
+  --font-size-eyebrow:17px;
+
+  --leading-tight:1.18;
+  --leading-heading:1.25;
+  --leading-body:1.65;
+
+  --tracking-display:0.005em;
+  --tracking-eyebrow:0.12em;
+  --tracking-wordmark:0.04em;
+}
+
+/* ---- Espacements (tokens/spacing.css) ---- */
+:root{
+  --space-1:4px;
+  --space-2:6px;
+  --space-3:8px;
+  --space-4:10px;
+  --space-5:12px;
+  --space-6:16px;
+  --space-7:18px;
+  --space-8:24px;
+  --space-9:28px;
+  --space-10:32px;
+
+  --radius-sm:6px;
+  --radius-md:8px;
+  --radius-lg:10px;
+  --radius-pill:20px;
+
+  --shadow-card:0 1px 4px rgba(0,0,0,0.24);
+  --shadow-popover:0 8px 24px rgba(0,0,0,0.4);
+
+  --min-hit:44px;
+}
+
+/* ---- Couleurs (tokens/colors.css) ---- */
+:root{
+  /* Neutres : noir à reflet fonte et bois foncé (oklch, teinte 150) */
+  --ink-975:oklch(0.11 0.006 150);
+  --ink-950:oklch(0.145 0.008 150);
+  --ink-900:oklch(0.195 0.01 150);
+  --ink-800:oklch(0.235 0.012 150);
+  --ink-700:oklch(0.30 0.014 150);
+  --cream-100:oklch(0.93 0.018 85);
+  --cream-300:oklch(0.85 0.018 85);
+  --cream-500:oklch(0.72 0.02 85);
+  --cream-700:oklch(0.66 0.02 85);
+  --hairline:rgba(233,223,200,0.14);
+  --hairline-strong:rgba(233,223,200,0.18);
+
+  /* Accent unique : sauge séchée (teinte 128) */
+  --sage-300:oklch(0.89 0.05 128);
+  --sage-500:oklch(0.83 0.055 128);
+  --sage-700:oklch(0.66 0.055 128);
+  --sage-900:oklch(0.44 0.05 128);
+  --sage-on:oklch(0.145 0.008 150);
+
+  /* Palette de soutien */
+  --paper-100:#F7F1E9;
+  --stone-500:#BDB6AE;
+  --coral-300:#F0A9A2;
+  --coral-700:#A05C57;
+  --void-950:#0E0F0D;
+  --olive-900:#272E24;
+
+  /* Alias sémantiques */
+  --surface-page:var(--ink-975);
+  --surface-app:var(--ink-950);
+  --surface-card:var(--ink-900);
+  --surface-input:var(--ink-800);
+  --surface-raised:var(--ink-700);
+  --surface-accent-deep:var(--sage-900);
+  --text-body:var(--cream-100);
+  --text-secondary:var(--cream-300);
+  --text-muted:var(--cream-500);
+  --text-faint:var(--cream-700);
+  --text-on-accent-deep:var(--cream-100);
+  --border-default:var(--hairline);
+  --border-strong:var(--hairline-strong);
+  --accent:var(--sage-500);
+  --accent-hover:var(--sage-300);
+  --accent-quiet:var(--sage-700);
+  --accent-on:var(--sage-on);
+  --focus-ring:var(--sage-500);
+  --link:var(--sage-500);
+  --link-hover:var(--sage-300);
+  --danger:var(--coral-700);
+  --success:var(--sage-700);
+}
+
   html { scroll-behavior: smooth; }
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; background: #100F0D; color: #EDE7DA; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-  :focus-visible { outline: 2px solid #C6B2ED; outline-offset: 2px; }
+  html, body { margin: 0; height: 100%; background: var(--surface-page); color: var(--text-body); font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
   body { display: flex; flex-direction: column; height: 100vh; }
 
-  #searchWrap { padding: 10px; border-bottom: 1px solid rgba(237,231,218,0.14); background: #191714; flex: none; }
-  #q { width: 100%; box-sizing: border-box; background: #100F0D; border: 1px solid rgba(237,231,218,0.18); border-radius: 8px; padding: 10px 11px; color: #EDE7DA; font-size: 13.5px; min-height: 40px; }
+  #searchWrap { padding: 10px; border-bottom: 1px solid var(--border-default); background: var(--surface-card); flex: none; }
+  #q { width: 100%; box-sizing: border-box; background: var(--surface-page); border: 1px solid var(--border-strong); border-radius: 8px; padding: 10px 11px; color: var(--text-body); font-size: 13.5px; min-height: 40px; }
   #pills { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
-  .pill { appearance: none; cursor: pointer; border-radius: 999px; padding: 5px 11px; font-size: 11.5px; min-height: 30px; background: transparent; border: 1px solid rgba(237,231,218,0.18); color: #A9A091; }
+  .pill { appearance: none; cursor: pointer; border-radius: 999px; padding: 5px 11px; font-size: 11.5px; min-height: 30px; background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted); }
   .pill[aria-pressed="true"] { background-color: color-mix(in srgb, var(--pc) 18%, transparent); border-color: var(--pc); color: var(--pc); }
-  #hint { margin: 7px 0 0; font-size: 11px; color: #A9A091; }
+  #hint { margin: 7px 0 0; font-size: 11px; color: var(--text-muted); }
 
-  #listWrap { flex: 1 1 auto; min-height: 0; overflow: auto; background: #100F0D; }
+  #listWrap { flex: 1 1 auto; min-height: 0; overflow: auto; background: var(--surface-page); }
   #list { list-style: none; margin: 0; padding: 5px; }
   #list li { margin: 0; }
-  .row { appearance: none; cursor: pointer; width: 100%; text-align: left; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 7px; font-size: 13px; min-height: 42px; border: 1px solid transparent; background: transparent; color: #EDE7DA; }
-  .row.active { border-color: #7A659E; background: #221F1A; }
-  .row .id { font-variant-numeric: tabular-nums; color: #A9A091; min-width: 44px; flex: none; }
+  .row { appearance: none; cursor: pointer; width: 100%; text-align: left; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 7px; font-size: 13px; min-height: 42px; border: 1px solid transparent; background: transparent; color: var(--text-body); }
+  .row.active { border-color: #7A659E; background: var(--surface-raised); }
+  .row .id { font-variant-numeric: tabular-nums; color: var(--text-muted); min-width: 44px; flex: none; }
   .row .name { flex: 1; }
   .row .level { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; border: 1px solid; flex: none; }
-  .row .version { font-size: 11px; color: #A9A091; white-space: nowrap; flex: none; }
-  #noResults { margin: 0; padding: 18px 16px; font-size: 12.5px; color: #A9A091; }
+  .row .version { font-size: 11px; color: var(--text-muted); white-space: nowrap; flex: none; }
+  #noResults { margin: 0; padding: 18px 16px; font-size: 12.5px; color: var(--text-muted); }
 
-  #detail { display: none; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; overflow: auto; padding: 14px 16px; background: #191714; }
-  #back { appearance: none; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1px solid rgba(237,231,218,0.18); border-radius: 999px; padding: 6px 12px; font-size: 11.5px; color: #C6B2ED; min-height: 32px; }
-  #meta { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #A6CA93; }
-  #title { margin: 2px 0 0; font-size: 16px; font-weight: 600; color: #EDE7DA; }
+  #detail { display: none; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; overflow: auto; padding: 14px 16px; background: var(--surface-card); }
+  #back { appearance: none; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1px solid var(--border-strong); border-radius: 999px; padding: 6px 12px; font-size: 11.5px; color: var(--link); min-height: 32px; }
+  #meta { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  #title { margin: 2px 0 0; font-size: 16px; font-weight: 600; color: var(--text-body); }
   #linkRow { display: flex; gap: 8px; flex-wrap: wrap; }
-  #linkRow a { display: inline-flex; align-items: center; padding: 7px 12px; border: 1px solid #5A7D46; border-radius: 999px; font-size: 11.5px; color: #A6CA93; text-decoration: none; min-height: 32px; }
+  #linkRow a { display: inline-flex; align-items: center; padding: 7px 12px; border: 1px solid var(--accent-quiet); border-radius: 999px; font-size: 11.5px; color: var(--accent); text-decoration: none; min-height: 32px; }
   #copyRow { display: flex; gap: 7px; flex-wrap: wrap; }
-  #copyRow button { appearance: none; cursor: pointer; background: #100F0D; border: 1px solid rgba(237,231,218,0.18); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; color: #C6B2ED; min-height: 32px; }
-  #toastWrap { min-height: 30px; padding: 6px 16px 10px; background: #191714; flex: none; }
-  #toast { margin: 0; padding: 6px 12px; display: inline-block; border: 1px solid #5A7D46; border-radius: 999px; background: #100F0D; font-size: 11.5px; color: #A6CA93; }
+  #copyRow button { appearance: none; cursor: pointer; background: var(--surface-page); border: 1px solid var(--border-strong); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; color: var(--link); min-height: 32px; }
+  #toastWrap { min-height: 30px; padding: 6px 16px 10px; background: var(--surface-card); flex: none; }
+  #toast { margin: 0; padding: 6px 12px; display: inline-block; border: 1px solid var(--accent-quiet); border-radius: 999px; background: var(--surface-page); font-size: 11.5px; color: var(--accent); }
 </style>
 </head>
 <body>
