@@ -155,7 +155,7 @@
       <button type="button" id="langEn" aria-pressed="true" style="appearance:none;cursor:pointer;background:color-mix(in srgb, var(--link) 18%, transparent);border:1px solid var(--link);color:var(--link);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.04em;min-height:26px">EN</button>
       <button type="button" id="langFr" aria-pressed="false" style="appearance:none;cursor:pointer;background:transparent;border:1px solid var(--border-strong);color:var(--text-muted);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.04em;min-height:26px">FR</button>
     </div>
-    <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)" style="display:inline-flex;border-radius:10px">
+    <a href="https://vesperlab.dev/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)" style="display:inline-flex;border-radius:10px">
       <img src="assets/viewer-logo.svg" alt="" width="96" style="width:96px;height:auto;display:block">
     </a>
     <h1 id="pageTitle" style="font-family:var(--font-display);font-size:2rem;font-weight:600;letter-spacing:.01em;margin:0">Axe-core Scan Viewer</h1>
@@ -218,7 +218,7 @@
   </main>
 
   <footer style="max-width:1000px;margin:44px auto 0;padding:20px 20px 0;text-align:center;font-size:.78rem;color:var(--text-muted);border-top:1px solid var(--border-default);line-height:1.9">
-    <div id="footerBuilt">Axe-core Scan Viewer, built by <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:var(--coral-300)">Vesper Lab</a></div>
+    <div id="footerBuilt">Axe-core Scan Viewer, built by <a href="https://vesperlab.dev/" target="_blank" rel="noopener" style="color:var(--coral-300)">Vesper Lab</a></div>
     <div id="footerPowered">Powered by <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:var(--coral-300)">axe-core</a> (Deque Systems), criteria based on <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:var(--coral-300)">WCAG 2.2</a></div>
     <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px">
       <a href="index.html" id="footerAllTools" style="color:var(--coral-300)">All bookmarklets &amp; tools</a>
@@ -574,7 +574,7 @@
     var ws = wb.addWorksheet(t('sheetName'), { views: [{ showGridLines: false, state: 'frozen', ySplit: 4 }] });
     ws.columns = COLUMNS.map(function (c) { return { width: c.width }; });
 
-    ws.getCell('B1').value = { text: t('reportTitle'), hyperlink: 'https://vesperlab.framer.website/' };
+    ws.getCell('B1').value = { text: t('reportTitle'), hyperlink: 'https://vesperlab.dev/' };
     ws.getCell('B1').style = { font: { name: 'Noto Serif', size: 16, bold: true, color: { argb: 'FF3F5A32' } }, alignment: { vertical: 'middle' } };
     ws.getRow(1).height = 30;
     ws.getCell('B2').value = t('reportIntro');
@@ -685,7 +685,7 @@
 
     children.push(new d.Paragraph({
       heading: d.HeadingLevel.HEADING_1,
-      children: [new d.ExternalHyperlink({ children: [txt(t('reportTitle'), { color: '3F5A32' })], link: 'https://vesperlab.framer.website/' })]
+      children: [new d.ExternalHyperlink({ children: [txt(t('reportTitle'), { color: '3F5A32' })], link: 'https://vesperlab.dev/' })]
     }));
     children.push(new d.Paragraph({ children: [txt(t('reportIntro'))] }));
     if (url) { children.push(new d.Paragraph({ children: [txt(t('pageScanned') + url)] })); }
@@ -812,7 +812,7 @@
     document.getElementById('exportHelpSummary').textContent = t('exportHelpSummary');
     exportHelpBody.innerHTML = lang === 'fr' ? EXPORT_HELP_FR : EXPORT_HELP_EN;
     document.getElementById('emptyState').textContent = t('emptyState');
-    document.getElementById('footerBuilt').innerHTML = esc(t('footerBuilt')) + ' <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" style="color:var(--coral-300)">Vesper Lab</a>';
+    document.getElementById('footerBuilt').innerHTML = esc(t('footerBuilt')) + ' <a href="https://vesperlab.dev/" target="_blank" rel="noopener" style="color:var(--coral-300)">Vesper Lab</a>';
     document.getElementById('footerPowered').innerHTML = esc(t('footerPowered')) + ' <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener" style="color:var(--coral-300)">axe-core</a> ' + esc(t('footerPoweredMid')) + ' <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener" style="color:var(--coral-300)">WCAG 2.2</a>';
     document.getElementById('footerAllTools').textContent = t('footerAllTools');
     document.getElementById('footerSource').textContent = t('footerSource');

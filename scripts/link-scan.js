@@ -183,7 +183,7 @@
       "    var ws = wb.addWorksheet(CFG.sheetName || 'Results', { views: [{ showGridLines: false, state: 'frozen', ySplit: 4 }] });\n\n" +
       "    var cols = [{ name: 'Status', width: 14 }].concat(CFG.columns.map(function (c) { return { name: c.name, width: c.width || 30 }; }));\n" +
       "    ws.columns = cols.map(function (c) { return { width: c.width }; });\n\n" +
-      "    ws.getCell('B1').value = { text: 'Vesper Lab \\u2013 ' + CFG.title, hyperlink: 'https://vesperlab.framer.website/' };\n" +
+      "    ws.getCell('B1').value = { text: 'Vesper Lab \\u2013 ' + CFG.title, hyperlink: 'https://vesperlab.dev/' };\n" +
       "    ws.getCell('B1').style = { font: { name: 'Noto Serif', size: 16, bold: true, color: { argb: 'FF3F5A32' } }, alignment: { vertical: 'middle' } };\n" +
       "    ws.getRow(1).height = 30;\n" +
       "    ws.getCell('B2').value = CFG.intro;\n" +
@@ -296,7 +296,7 @@
       "    var children = [];\n" +
       "    children.push(new d.Paragraph({\n" +
       "      heading: d.HeadingLevel.HEADING_1,\n" +
-      "      children: [new d.ExternalHyperlink({ children: [txt('Vesper Lab \\u2013 ' + CFG.title, { color: '3F5A32' })], link: 'https://vesperlab.framer.website/' })]\n" +
+      "      children: [new d.ExternalHyperlink({ children: [txt('Vesper Lab \\u2013 ' + CFG.title, { color: '3F5A32' })], link: 'https://vesperlab.dev/' })]\n" +
       "    }));\n" +
       "    children.push(new d.Paragraph({ children: [txt(CFG.intro)] }));\n" +
       "    if (CFG.pageUrl) { children.push(new d.Paragraph({ children: [txt('Page scanned: ' + CFG.pageUrl)] })); }\n" +
@@ -484,8 +484,8 @@
       s += '<style>' + VL_CSS + '</style></head><body>';
 
       s += '<header class="rep-header">';
-      s += '<a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)">';
-      s += '<a href="https://vesperlab.framer.website/" target="_blank" rel="noopener" class="brand-link">Vesper Lab</a>';
+      s += '<a href="https://vesperlab.dev/" target="_blank" rel="noopener" aria-label="Vesper Lab, visit the website (new tab)">';
+      s += '<a href="https://vesperlab.dev/" target="_blank" rel="noopener" class="brand-link">Vesper Lab</a>';
       s += '</a>';
       s += '<h1>' + vlEsc(CFG.title) + '</h1>';
       s += '<p class="intro">' + vlEsc(CFG.intro) + '</p>';
@@ -512,7 +512,7 @@
 
       s += '<footer class="rep-footer">';
       s += '<div>' + vlEsc(CFG.title) + '</div>';
-      s += '<div>Built by <a href="https://vesperlab.framer.website/" target="_blank" rel="noopener">Vesper Lab</a></div>';
+      s += '<div>Built by <a href="https://vesperlab.dev/" target="_blank" rel="noopener">Vesper Lab</a></div>';
       s += '<div>' + CFG.sourceLine + '</div>';
       s += '</footer>';
 

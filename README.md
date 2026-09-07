@@ -1,6 +1,6 @@
 # Vesper Toolkit
 
-Small, free accessibility-testing tools that live in your bookmarks bar. No extension, no account, no data leaving your browser. Built by [Vesper Lab](https://vesperlab.framer.website/).
+Small, free accessibility-testing tools that live in your bookmarks bar. No extension, no account, no data leaving your browser. Built by [Vesper Lab](https://vesperlab.dev/).
 
 **[Get the bookmarklets →](https://VesperLab-A11Y.github.io/Vesper-Toolkit/)**
 
