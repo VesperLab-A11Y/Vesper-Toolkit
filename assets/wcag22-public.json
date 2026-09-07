@@ -1,1133 +1,2786 @@
 [
-{
-"id": "1.1.1",
-"name": "Non-text Content",
-"fullTitle": "WCAG 2.2 Success Criterion 1.1.1 Non-text Content",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.1",
-"guidelineName": "Text Alternatives",
-"url": "https://www.w3.org/TR/WCAG22/#non-text-content",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html"
-},
-{
-"id": "1.2.1",
-"name": "Audio-only and Video-only (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#audio-only-and-video-only-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html"
-},
-{
-"id": "1.2.2",
-"name": "Captions (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.2 Captions (Prerecorded)",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#captions-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html"
-},
-{
-"id": "1.2.3",
-"name": "Audio Description or Media Alternative (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.3 Audio Description or Media Alternative (Prerecorded)",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#audio-description-or-media-alternative-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded.html"
-},
-{
-"id": "1.2.4",
-"name": "Captions (Live)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.4 Captions (Live)",
-"level": "AA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#captions-live",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/captions-live.html"
-},
-{
-"id": "1.2.5",
-"name": "Audio Description (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.5 Audio Description (Prerecorded)",
-"level": "AA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#audio-description-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded.html"
-},
-{
-"id": "1.2.6",
-"name": "Sign Language (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.6 Sign Language (Prerecorded)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#sign-language-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded.html"
-},
-{
-"id": "1.2.7",
-"name": "Extended Audio Description (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.7 Extended Audio Description (Prerecorded)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#extended-audio-description-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded.html"
-},
-{
-"id": "1.2.8",
-"name": "Media Alternative (Prerecorded)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.8 Media Alternative (Prerecorded)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#media-alternative-prerecorded",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded.html"
-},
-{
-"id": "1.2.9",
-"name": "Audio-only (Live)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.2.9 Audio-only (Live)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.2",
-"guidelineName": "Time-based Media",
-"url": "https://www.w3.org/TR/WCAG22/#audio-only-live",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live.html"
-},
-{
-"id": "1.3.1",
-"name": "Info and Relationships",
-"fullTitle": "WCAG 2.2 Success Criterion 1.3.1 Info and Relationships",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.3",
-"guidelineName": "Adaptable",
-"url": "https://www.w3.org/TR/WCAG22/#info-and-relationships",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
-},
-{
-"id": "1.3.2",
-"name": "Meaningful Sequence",
-"fullTitle": "WCAG 2.2 Success Criterion 1.3.2 Meaningful Sequence",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.3",
-"guidelineName": "Adaptable",
-"url": "https://www.w3.org/TR/WCAG22/#meaningful-sequence",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html"
-},
-{
-"id": "1.3.3",
-"name": "Sensory Characteristics",
-"fullTitle": "WCAG 2.2 Success Criterion 1.3.3 Sensory Characteristics",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.3",
-"guidelineName": "Adaptable",
-"url": "https://www.w3.org/TR/WCAG22/#sensory-characteristics",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics.html"
-},
-{
-"id": "1.3.4",
-"name": "Orientation",
-"fullTitle": "WCAG 2.2 Success Criterion 1.3.4 Orientation",
-"level": "AA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.3",
-"guidelineName": "Adaptable",
-"url": "https://www.w3.org/TR/WCAG22/#orientation",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/orientation.html"
-},
-{
-"id": "1.3.5",
-"name": "Identify Input Purpose",
-"fullTitle": "WCAG 2.2 Success Criterion 1.3.5 Identify Input Purpose",
-"level": "AA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.3",
-"guidelineName": "Adaptable",
-"url": "https://www.w3.org/TR/WCAG22/#identify-input-purpose",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html"
-},
-{
-"id": "1.3.6",
-"name": "Identify Purpose",
-"fullTitle": "WCAG 2.2 Success Criterion 1.3.6 Identify Purpose",
-"level": "AAA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.3",
-"guidelineName": "Adaptable",
-"url": "https://www.w3.org/TR/WCAG22/#identify-purpose",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose.html"
-},
-{
-"id": "1.4.1",
-"name": "Use of Color",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.1 Use of Color",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#use-of-color",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html"
-},
-{
-"id": "1.4.2",
-"name": "Audio Control",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.2 Audio Control",
-"level": "A",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#audio-control",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-control.html"
-},
-{
-"id": "1.4.3",
-"name": "Contrast (Minimum)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.3 Contrast (Minimum)",
-"level": "AA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#contrast-minimum",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
-},
-{
-"id": "1.4.4",
-"name": "Resize Text",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.4 Resize Text",
-"level": "AA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#resize-text",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"
-},
-{
-"id": "1.4.5",
-"name": "Images of Text",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.5 Images of Text",
-"level": "AA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#images-of-text",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html"
-},
-{
-"id": "1.4.6",
-"name": "Contrast (Enhanced)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.6 Contrast (Enhanced)",
-"level": "AAA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#contrast-enhanced",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html"
-},
-{
-"id": "1.4.7",
-"name": "Low or No Background Audio",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.7 Low or No Background Audio",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#low-or-no-background-audio",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio.html"
-},
-{
-"id": "1.4.8",
-"name": "Visual Presentation",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.8 Visual Presentation",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#visual-presentation",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html"
-},
-{
-"id": "1.4.9",
-"name": "Images of Text (No Exception)",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.9 Images of Text (No Exception)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#images-of-text-no-exception",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception.html"
-},
-{
-"id": "1.4.10",
-"name": "Reflow",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.10 Reflow",
-"level": "AA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#reflow",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
-},
-{
-"id": "1.4.11",
-"name": "Non-text Contrast",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.11 Non-text Contrast",
-"level": "AA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#non-text-contrast",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"
-},
-{
-"id": "1.4.12",
-"name": "Text Spacing",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.12 Text Spacing",
-"level": "AA",
-"version": "2.1",
-"principle": "Perceivable",
-"principleLetter": "P",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#text-spacing",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html"
-},
-{
-"id": "1.4.13",
-"name": "Content on Hover or Focus",
-"fullTitle": "WCAG 2.2 Success Criterion 1.4.13 Content on Hover or Focus",
-"level": "AA",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "1.4",
-"guidelineName": "Distinguishable",
-"url": "https://www.w3.org/TR/WCAG22/#content-on-hover-or-focus",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html"
-},
-{
-"id": "2.1.1",
-"name": "Keyboard",
-"fullTitle": "WCAG 2.2 Success Criterion 2.1.1 Keyboard",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.1",
-"guidelineName": "Keyboard Accessible",
-"url": "https://www.w3.org/TR/WCAG22/#keyboard",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
-},
-{
-"id": "2.1.2",
-"name": "No Keyboard Trap",
-"fullTitle": "WCAG 2.2 Success Criterion 2.1.2 No Keyboard Trap",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.1",
-"guidelineName": "Keyboard Accessible",
-"url": "https://www.w3.org/TR/WCAG22/#no-keyboard-trap",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html"
-},
-{
-"id": "2.1.3",
-"name": "Keyboard (No Exception)",
-"fullTitle": "WCAG 2.2 Success Criterion 2.1.3 Keyboard (No Exception)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.1",
-"guidelineName": "Keyboard Accessible",
-"url": "https://www.w3.org/TR/WCAG22/#keyboard-no-exception",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception.html"
-},
-{
-"id": "2.1.4",
-"name": "Character Key Shortcuts",
-"fullTitle": "WCAG 2.2 Success Criterion 2.1.4 Character Key Shortcuts",
-"level": "A",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.1",
-"guidelineName": "Keyboard Accessible",
-"url": "https://www.w3.org/TR/WCAG22/#character-key-shortcuts",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts.html"
-},
-{
-"id": "2.2.1",
-"name": "Timing Adjustable",
-"fullTitle": "WCAG 2.2 Success Criterion 2.2.1 Timing Adjustable",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.2",
-"guidelineName": "Enough Time",
-"url": "https://www.w3.org/TR/WCAG22/#timing-adjustable",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html"
-},
-{
-"id": "2.2.2",
-"name": "Pause, Stop, Hide",
-"fullTitle": "WCAG 2.2 Success Criterion 2.2.2 Pause, Stop, Hide",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.2",
-"guidelineName": "Enough Time",
-"url": "https://www.w3.org/TR/WCAG22/#pause-stop-hide",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html"
-},
-{
-"id": "2.2.3",
-"name": "No Timing",
-"fullTitle": "WCAG 2.2 Success Criterion 2.2.3 No Timing",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.2",
-"guidelineName": "Enough Time",
-"url": "https://www.w3.org/TR/WCAG22/#no-timing",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/no-timing.html"
-},
-{
-"id": "2.2.4",
-"name": "Interruptions",
-"fullTitle": "WCAG 2.2 Success Criterion 2.2.4 Interruptions",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.2",
-"guidelineName": "Enough Time",
-"url": "https://www.w3.org/TR/WCAG22/#interruptions",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/interruptions.html"
-},
-{
-"id": "2.2.5",
-"name": "Re-authenticating",
-"fullTitle": "WCAG 2.2 Success Criterion 2.2.5 Re-authenticating",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.2",
-"guidelineName": "Enough Time",
-"url": "https://www.w3.org/TR/WCAG22/#re-authenticating",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating.html"
-},
-{
-"id": "2.2.6",
-"name": "Timeouts",
-"fullTitle": "WCAG 2.2 Success Criterion 2.2.6 Timeouts",
-"level": "AAA",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.2",
-"guidelineName": "Enough Time",
-"url": "https://www.w3.org/TR/WCAG22/#timeouts",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/timeouts.html"
-},
-{
-"id": "2.3.1",
-"name": "Three Flashes or Below Threshold",
-"fullTitle": "WCAG 2.2 Success Criterion 2.3.1 Three Flashes or Below Threshold",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.3",
-"guidelineName": "Seizures and Physical Reactions",
-"url": "https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html"
-},
-{
-"id": "2.3.2",
-"name": "Three Flashes",
-"fullTitle": "WCAG 2.2 Success Criterion 2.3.2 Three Flashes",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.3",
-"guidelineName": "Seizures and Physical Reactions",
-"url": "https://www.w3.org/TR/WCAG22/#three-flashes",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes.html"
-},
-{
-"id": "2.3.3",
-"name": "Animation from Interactions",
-"fullTitle": "WCAG 2.2 Success Criterion 2.3.3 Animation from Interactions",
-"level": "AAA",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.3",
-"guidelineName": "Seizures and Physical Reactions",
-"url": "https://www.w3.org/TR/WCAG22/#animation-from-interactions",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html"
-},
-{
-"id": "2.4.1",
-"name": "Bypass Blocks",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.1 Bypass Blocks",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#bypass-blocks",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html"
-},
-{
-"id": "2.4.2",
-"name": "Page Titled",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.2 Page Titled",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#page-titled",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html"
-},
-{
-"id": "2.4.3",
-"name": "Focus Order",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.3 Focus Order",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#focus-order",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
-},
-{
-"id": "2.4.4",
-"name": "Link Purpose (In Context)",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.4 Link Purpose (In Context)",
-"level": "A",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#link-purpose-in-context",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html"
-},
-{
-"id": "2.4.5",
-"name": "Multiple Ways",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.5 Multiple Ways",
-"level": "AA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#multiple-ways",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways.html"
-},
-{
-"id": "2.4.6",
-"name": "Headings and Labels",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.6 Headings and Labels",
-"level": "AA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#headings-and-labels",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html"
-},
-{
-"id": "2.4.7",
-"name": "Focus Visible",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.7 Focus Visible",
-"level": "AA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#focus-visible",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
-},
-{
-"id": "2.4.8",
-"name": "Location",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.8 Location",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#location",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/location.html"
-},
-{
-"id": "2.4.9",
-"name": "Link Purpose (Link Only)",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.9 Link Purpose (Link Only)",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#link-purpose-link-only",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only.html"
-},
-{
-"id": "2.4.10",
-"name": "Section Headings",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.10 Section Headings",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#section-headings",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/section-headings.html"
-},
-{
-"id": "2.4.11",
-"name": "Focus Not Obscured (Minimum)",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.11 Focus Not Obscured (Minimum)",
-"level": "AA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html"
-},
-{
-"id": "2.4.12",
-"name": "Focus Not Obscured (Enhanced)",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.12 Focus Not Obscured (Enhanced)",
-"level": "AA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#focus-not-obscured-enhanced",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-enhanced.html"
-},
-{
-"id": "2.4.13",
-"name": "Focus Appearance",
-"fullTitle": "WCAG 2.2 Success Criterion 2.4.13 Focus Appearance",
-"level": "AAA",
-"version": "2.0",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.4",
-"guidelineName": "Navigable",
-"url": "https://www.w3.org/TR/WCAG22/#focus-appearance",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html"
-},
-{
-"id": "2.5.1",
-"name": "Pointer Gestures",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.1 Pointer Gestures",
-"level": "A",
-"version": "2.2",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#pointer-gestures",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html"
-},
-{
-"id": "2.5.2",
-"name": "Pointer Cancellation",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.2 Pointer Cancellation",
-"level": "A",
-"version": "2.2",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#pointer-cancellation",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html"
-},
-{
-"id": "2.5.3",
-"name": "Label in Name",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.3 Label in Name",
-"level": "A",
-"version": "2.2",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#label-in-name",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html"
-},
-{
-"id": "2.5.4",
-"name": "Motion Actuation",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.4 Motion Actuation",
-"level": "A",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#motion-actuation",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation.html"
-},
-{
-"id": "2.5.5",
-"name": "Target Size",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.5 Target Size",
-"level": "AAA",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#target-size",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size.html"
-},
-{
-"id": "2.5.6",
-"name": "Concurrent Input Mechanisms",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.6 Concurrent Input Mechanisms",
-"level": "AAA",
-"version": "2.1",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#concurrent-input-mechanisms",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/concurrent-input-mechanisms.html"
-},
-{
-"id": "2.5.7",
-"name": "Dragging Movements",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.7 Dragging Movements",
-"level": "AA",
-"version": "2.2",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#dragging-movements",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html"
-},
-{
-"id": "2.5.8",
-"name": "Target Size (Minimum)",
-"fullTitle": "WCAG 2.2 Success Criterion 2.5.8 Target Size (Minimum)",
-"level": "AA",
-"version": "2.2",
-"principle": "Operable",
-"principleLetter": "O",
-"guidelineId": "2.5",
-"guidelineName": "Input Modalities",
-"url": "https://www.w3.org/TR/WCAG22/#target-size-minimum",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
-},
-{
-"id": "3.1.1",
-"name": "Language of Page",
-"fullTitle": "WCAG 2.2 Success Criterion 3.1.1 Language of Page",
-"level": "A",
-"version": "2.1",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.1",
-"guidelineName": "Readable",
-"url": "https://www.w3.org/TR/WCAG22/#language-of-page",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html"
-},
-{
-"id": "3.1.2",
-"name": "Language of Parts",
-"fullTitle": "WCAG 2.2 Success Criterion 3.1.2 Language of Parts",
-"level": "AA",
-"version": "2.1",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.1",
-"guidelineName": "Readable",
-"url": "https://www.w3.org/TR/WCAG22/#language-of-parts",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html"
-},
-{
-"id": "3.1.3",
-"name": "Unusual Words",
-"fullTitle": "WCAG 2.2 Success Criterion 3.1.3 Unusual Words",
-"level": "AAA",
-"version": "2.1",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.1",
-"guidelineName": "Readable",
-"url": "https://www.w3.org/TR/WCAG22/#unusual-words",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/unusual-words.html"
-},
-{
-"id": "3.1.4",
-"name": "Abbreviations",
-"fullTitle": "WCAG 2.2 Success Criterion 3.1.4 Abbreviations",
-"level": "AAA",
-"version": "2.2",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.1",
-"guidelineName": "Readable",
-"url": "https://www.w3.org/TR/WCAG22/#abbreviations",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html"
-},
-{
-"id": "3.1.5",
-"name": "Reading Level",
-"fullTitle": "WCAG 2.2 Success Criterion 3.1.5 Reading Level",
-"level": "AAA",
-"version": "2.2",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.1",
-"guidelineName": "Readable",
-"url": "https://www.w3.org/TR/WCAG22/#reading-level",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/reading-level.html"
-},
-{
-"id": "3.1.6",
-"name": "Pronunciation",
-"fullTitle": "WCAG 2.2 Success Criterion 3.1.6 Pronunciation",
-"level": "AAA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.1",
-"guidelineName": "Readable",
-"url": "https://www.w3.org/TR/WCAG22/#pronunciation",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pronunciation.html"
-},
-{
-"id": "3.2.1",
-"name": "On Focus",
-"fullTitle": "WCAG 2.2 Success Criterion 3.2.1 On Focus",
-"level": "A",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.2",
-"guidelineName": "Predictable",
-"url": "https://www.w3.org/TR/WCAG22/#on-focus",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/on-focus.html"
-},
-{
-"id": "3.2.2",
-"name": "On Input",
-"fullTitle": "WCAG 2.2 Success Criterion 3.2.2 On Input",
-"level": "AA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.2",
-"guidelineName": "Predictable",
-"url": "https://www.w3.org/TR/WCAG22/#on-input",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/on-input.html"
-},
-{
-"id": "3.2.3",
-"name": "Consistent Navigation",
-"fullTitle": "WCAG 2.2 Success Criterion 3.2.3 Consistent Navigation",
-"level": "AA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.2",
-"guidelineName": "Predictable",
-"url": "https://www.w3.org/TR/WCAG22/#consistent-navigation",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation.html"
-},
-{
-"id": "3.2.4",
-"name": "Consistent Identification",
-"fullTitle": "WCAG 2.2 Success Criterion 3.2.4 Consistent Identification",
-"level": "AA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.2",
-"guidelineName": "Predictable",
-"url": "https://www.w3.org/TR/WCAG22/#consistent-identification",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification.html"
-},
-{
-"id": "3.2.5",
-"name": "Change on Request",
-"fullTitle": "WCAG 2.2 Success Criterion 3.2.5 Change on Request",
-"level": "AAA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.2",
-"guidelineName": "Predictable",
-"url": "https://www.w3.org/TR/WCAG22/#change-on-request",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html"
-},
-{
-"id": "3.2.6",
-"name": "Consistent Help",
-"fullTitle": "WCAG 2.2 Success Criterion 3.2.6 Consistent Help",
-"level": "A",
-"version": "2.2",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.2",
-"guidelineName": "Predictable",
-"url": "https://www.w3.org/TR/WCAG22/#consistent-help",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html"
-},
-{
-"id": "3.3.1",
-"name": "Error Identification",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.1 Error Identification",
-"level": "A",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#error-identification",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html"
-},
-{
-"id": "3.3.2",
-"name": "Labels or Instructions",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.2 Labels or Instructions",
-"level": "A",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#labels-or-instructions",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html"
-},
-{
-"id": "3.3.3",
-"name": "Error Suggestion",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.3 Error Suggestion",
-"level": "AA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#error-suggestion",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html"
-},
-{
-"id": "3.3.4",
-"name": "Error Prevention (Legal, Financial, Data)",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.4 Error Prevention (Legal, Financial, Data)",
-"level": "AA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#error-prevention-legal-financial-data",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html"
-},
-{
-"id": "3.3.5",
-"name": "Help",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.5 Help",
-"level": "AAA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#help",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/help.html"
-},
-{
-"id": "3.3.6",
-"name": "Error Prevention (All)",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.6 Error Prevention (All)",
-"level": "AAA",
-"version": "2.2",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#error-prevention-all",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html"
-},
-{
-"id": "3.3.7",
-"name": "Redundant Entry",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.7 Redundant Entry",
-"level": "A",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#redundant-entry",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html"
-},
-{
-"id": "3.3.8",
-"name": "Accessible Authentication",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.8 Accessible Authentication",
-"level": "AA",
-"version": "2.0",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#accessible-authentication",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication.html"
-},
-{
-"id": "3.3.9",
-"name": "Accessible Authentication (Enhanced)",
-"fullTitle": "WCAG 2.2 Success Criterion 3.3.9 Accessible Authentication (Enhanced)",
-"level": "AAA",
-"version": "2.1",
-"principle": "Understandable",
-"principleLetter": "U",
-"guidelineId": "3.3",
-"guidelineName": "Input Assistance",
-"url": "https://www.w3.org/TR/WCAG22/#accessible-authentication-enhanced",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html"
-},
-{
-"id": "4.1.1",
-"name": "Parsing",
-"fullTitle": "WCAG 2.2 Success Criterion 4.1.1 Parsing",
-"level": "A",
-"version": "2.0",
-"principle": "Robust",
-"principleLetter": "R",
-"guidelineId": "4.1",
-"guidelineName": "Compatible",
-"url": "https://www.w3.org/TR/WCAG22/#parsing",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/parsing.html"
-},
-{
-"id": "4.1.2",
-"name": "Name, Role, Value",
-"fullTitle": "WCAG 2.2 Success Criterion 4.1.2 Name, Role, Value",
-"level": "A",
-"version": "2.0",
-"principle": "Robust",
-"principleLetter": "R",
-"guidelineId": "4.1",
-"guidelineName": "Compatible",
-"url": "https://www.w3.org/TR/WCAG22/#name-role-value",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
-},
-{
-"id": "4.1.3",
-"name": "Status Messages",
-"fullTitle": "WCAG 2.2 Success Criterion 4.1.3 Status Messages",
-"level": "AA",
-"version": "2.0",
-"principle": "Robust",
-"principleLetter": "R",
-"guidelineId": "4.1",
-"guidelineName": "Compatible",
-"url": "https://www.w3.org/TR/WCAG22/#status-messages",
-"understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
-}
+  {
+    "id": "1.1.1",
+    "name": "Non-text Content",
+    "name_fr": "Contenu non textuel",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.1.1 Non-text Content",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.1",
+    "guidelineName": "Text Alternatives",
+    "url": "https://www.w3.org/TR/WCAG22/#non-text-content",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Toute image, icône ou élément non textuel qui porte une information doit avoir une alternative textuelle, pour que les personnes utilisatrices de lecteur d'écran comprennent ce que l'image transmet.",
+      "en": "Any image, icon, or non-text element that conveys information must have a text alternative, so people who use screen readers can understand what the image communicates."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.1",
+    "name": "Audio-only and Video-only (Prerecorded)",
+    "name_fr": "Contenu seulement audio ou seulement vidéo (préenregistré)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#audio-only-and-video-only-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un contenu uniquement audio ou uniquement vidéo doit être accompagné d'une alternative textuelle équivalente, pour rester accessible aux personnes qui ne peuvent pas entendre ou voir le contenu original.",
+      "en": "Audio-only or video-only content must be accompanied by an equivalent text alternative, so it stays accessible to people who cannot hear or see the original content."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.2",
+    "name": "Captions (Prerecorded)",
+    "name_fr": "Sous-titres (préenregistrés)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.2 Captions (Prerecorded)",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#captions-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les vidéos préenregistrées avec du son doivent proposer des sous-titres synchronisés, incluant les dialogues et les informations sonores importantes.",
+      "en": "Prerecorded videos with sound must provide synchronized captions, including dialogue and important sound information."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.3",
+    "name": "Audio Description or Media Alternative (Prerecorded)",
+    "name_fr": "Audio-description ou version de remplacement pour média temporel (préenregistré)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.3 Audio Description or Media Alternative (Prerecorded)",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#audio-description-or-media-alternative-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une vidéo préenregistrée doit permettre de comprendre les informations visuelles importantes même sans les voir, via une audiodescription ou une alternative textuelle complète.",
+      "en": "A prerecorded video must let people understand important visual information even without seeing it, through audio description or a full text alternative."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.4",
+    "name": "Captions (Live)",
+    "name_fr": "Sous-titres (en direct)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.4 Captions (Live)",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#captions-live",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/captions-live.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les contenus audio diffusés en direct doivent aussi proposer des sous-titres en temps réel.",
+      "en": "Live audio broadcasts must also provide real-time captions."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.5",
+    "name": "Audio Description (Prerecorded)",
+    "name_fr": "Audio-description (préenregistrée)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.5 Audio Description (Prerecorded)",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#audio-description-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les vidéos préenregistrées doivent proposer une piste d'audiodescription qui décrit à l'oral les éléments visuels importants non couverts par le dialogue.",
+      "en": "Prerecorded videos must provide an audio description track that describes aloud important visual elements not covered by the dialogue."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.6",
+    "name": "Sign Language (Prerecorded)",
+    "name_fr": "Langue des signes (préenregistrée)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.6 Sign Language (Prerecorded)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#sign-language-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une traduction en langue des signes peut être proposée en complément de l'audio pour les vidéos préenregistrées, en plus des sous-titres.",
+      "en": "A sign language interpretation may be provided in addition to the audio for prerecorded videos, alongside captions."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.7",
+    "name": "Extended Audio Description (Prerecorded)",
+    "name_fr": "Audio-description étendue (préenregistrée)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.7 Extended Audio Description (Prerecorded)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#extended-audio-description-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand les pauses naturelles d'une vidéo ne suffisent pas à insérer une audiodescription complète, la vidéo peut être mise en pause automatiquement pour laisser le temps de décrire les éléments visuels essentiels.",
+      "en": "When a video's natural pauses are not long enough to insert a complete audio description, the video can be automatically paused to allow time to describe essential visual elements."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.8",
+    "name": "Media Alternative (Prerecorded)",
+    "name_fr": "Version de remplacement pour média temporel (préenregistrée)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.8 Media Alternative (Prerecorded)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#media-alternative-prerecorded",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Pour les contenus vidéo synchronisés, une alternative textuelle complète décrivant tout le contenu doit être disponible, en plus des sous-titres et de l'audiodescription.",
+      "en": "For synchronized media content, a full text alternative describing all the content must be available, in addition to captions and audio description."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.2.9",
+    "name": "Audio-only (Live)",
+    "name_fr": "Seulement audio (en direct)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.2.9 Audio-only (Live)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.2",
+    "guidelineName": "Time-based Media",
+    "url": "https://www.w3.org/TR/WCAG22/#audio-only-live",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un contenu diffusé uniquement en audio et en direct doit être accompagné d'une alternative textuelle équivalente.",
+      "en": "Content broadcast only in audio and live must be accompanied by an equivalent text alternative."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.3.1",
+    "name": "Info and Relationships",
+    "name_fr": "Information et relations",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.3.1 Info and Relationships",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.3",
+    "guidelineName": "Adaptable",
+    "url": "https://www.w3.org/TR/WCAG22/#info-and-relationships",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La structure et les relations entre les éléments d'une page (titres, listes, tableaux, champs de formulaire) doivent être transmises par le code, pas seulement par l'apparence visuelle, pour que cette structure reste compréhensible avec une technologie d'assistance.",
+      "en": "The structure and relationships between elements on a page (headings, lists, tables, form fields) must be conveyed through code, not just visual appearance, so that structure remains understandable with assistive technology."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.3.2",
+    "name": "Meaningful Sequence",
+    "name_fr": "Ordre séquentiel logique",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.3.2 Meaningful Sequence",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.3",
+    "guidelineName": "Adaptable",
+    "url": "https://www.w3.org/TR/WCAG22/#meaningful-sequence",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand l'ordre de lecture d'un contenu a une importance, cet ordre doit être conservé même lorsqu'on retire la mise en forme visuelle, notamment pour les technologies d'assistance qui lisent le contenu de façon linéaire.",
+      "en": "When the reading order of content matters, that order must be preserved even when visual formatting is removed, particularly for assistive technologies that read content linearly."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.3.3",
+    "name": "Sensory Characteristics",
+    "name_fr": "Caractéristiques sensorielles",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.3.3 Sensory Characteristics",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.3",
+    "guidelineName": "Adaptable",
+    "url": "https://www.w3.org/TR/WCAG22/#sensory-characteristics",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les instructions ne doivent pas reposer uniquement sur des caractéristiques sensorielles comme la forme, la position ou la couleur, pour rester compréhensibles par tout le monde.",
+      "en": "Instructions must not rely solely on sensory characteristics like shape, position, or colour, so they remain understandable to everyone."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.3.4",
+    "name": "Orientation",
+    "name_fr": "Orientation",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.3.4 Orientation",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.3",
+    "guidelineName": "Adaptable",
+    "url": "https://www.w3.org/TR/WCAG22/#orientation",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/orientation.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le contenu ne doit pas être restreint à une seule orientation d'écran, portrait ou paysage, sauf si cette orientation est essentielle à l'usage.",
+      "en": "Content must not be restricted to a single screen orientation, portrait or landscape, unless that orientation is essential to its use."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.3.5",
+    "name": "Identify Input Purpose",
+    "name_fr": "Identifier la finalité de la saisie",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.3.5 Identify Input Purpose",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.3",
+    "guidelineName": "Adaptable",
+    "url": "https://www.w3.org/TR/WCAG22/#identify-input-purpose",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les champs de formulaire qui demandent des informations courantes sur la personne (nom, adresse courriel, numéro de téléphone) doivent être identifiés par programmation, pour permettre le remplissage automatique.",
+      "en": "Form fields that request common information about the person (name, email address, phone number) must be identified programmatically, to enable autofill."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.3.6",
+    "name": "Identify Purpose",
+    "name_fr": "Identifier la finalité",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.3.6 Identify Purpose",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.3",
+    "guidelineName": "Adaptable",
+    "url": "https://www.w3.org/TR/WCAG22/#identify-purpose",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Au-delà des champs de formulaire, la fonction des composants, icônes et régions d'une page peut être identifiée par programmation, pour permettre une adaptation ou une personnalisation par des outils tiers.",
+      "en": "Beyond form fields, the purpose of components, icons, and regions on a page can be identified programmatically, to enable adaptation or personalization by third-party tools."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.1",
+    "name": "Use of Color",
+    "name_fr": "Utilisation de la couleur",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.1 Use of Color",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#use-of-color",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "L'information ne doit jamais être transmise uniquement par la couleur, un repère supplémentaire (texte, forme, icône) doit toujours l'accompagner.",
+      "en": "Information must never be conveyed by colour alone; an additional cue (text, shape, icon) must always accompany it."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.2",
+    "name": "Audio Control",
+    "name_fr": "Contrôle du son",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.2 Audio Control",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#audio-control",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/audio-control.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un son qui démarre automatiquement pendant plus de trois secondes doit pouvoir être mis en pause, arrêté, ou son volume contrôlé indépendamment du volume du système.",
+      "en": "A sound that starts automatically for more than three seconds must be pausable, stoppable, or have its volume controllable independently of the system volume."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.3",
+    "name": "Contrast (Minimum)",
+    "name_fr": "Contraste (minimum)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.3 Contrast (Minimum)",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le texte doit se détacher suffisamment de son fond pour rester lisible, y compris pour les personnes malvoyantes ou dans de mauvaises conditions d'éclairage.",
+      "en": "Text must stand out sufficiently from its background to remain readable, including for low-vision people or in poor lighting conditions."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.4",
+    "name": "Resize Text",
+    "name_fr": "Redimensionnement du texte",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.4 Resize Text",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#resize-text",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le texte doit pouvoir être agrandi jusqu'à 200% sans perte de contenu ni de fonctionnalité, uniquement avec les outils du navigateur.",
+      "en": "Text must be resizable up to 200% without loss of content or functionality, using only the browser's own tools."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.5",
+    "name": "Images of Text",
+    "name_fr": "Texte sous forme d'image",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.5 Images of Text",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#images-of-text",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le texte doit être présenté sous forme de texte réel plutôt que sous forme d'image, sauf exception, pour rester adaptable et lisible par les technologies d'assistance.",
+      "en": "Text must be presented as real text rather than as an image, except in specific cases, so it remains adaptable and readable by assistive technologies."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.6",
+    "name": "Contrast (Enhanced)",
+    "name_fr": "Contraste (amélioré)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.6 Contrast (Enhanced)",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#contrast-enhanced",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un niveau de contraste renforcé, soit 7:1 pour le texte courant, peut être appliqué pour une lisibilité optimale, au-delà du minimum requis en AA.",
+      "en": "An enhanced contrast level, 7:1 for body text, can be applied for optimal readability, beyond the minimum required at AA."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.7",
+    "name": "Low or No Background Audio",
+    "name_fr": "Arrière-plan sonore faible ou absent",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.7 Low or No Background Audio",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#low-or-no-background-audio",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Dans un contenu audio principalement vocal, tout son de fond doit être suffisamment discret, absent, ou contrôlable, pour ne pas nuire à la compréhension de la parole.",
+      "en": "In content that is primarily speech, any background sound must be sufficiently quiet, absent, or controllable, so it does not interfere with understanding the speech."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.8",
+    "name": "Visual Presentation",
+    "name_fr": "Présentation visuelle",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.8 Visual Presentation",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#visual-presentation",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un contenu textuel long doit permettre d'ajuster certains réglages de présentation, comme les couleurs, la largeur ou l'interligne, pour l'adapter aux besoins de lecture de chacun.",
+      "en": "Long-form text content must allow certain presentation settings, such as colours, width, or line spacing, to be adjusted to suit each person's reading needs."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.9",
+    "name": "Images of Text (No Exception)",
+    "name_fr": "Texte sous forme d'image (sans exception)",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.9 Images of Text (No Exception)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#images-of-text-no-exception",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le texte sous forme d'image n'est autorisé dans aucun cas, pas même comme exception esthétique, sauf pour les logos.",
+      "en": "Text presented as an image is not allowed in any case, not even as an aesthetic exception, except for logos."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.10",
+    "name": "Reflow",
+    "name_fr": "Redistribution",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.10 Reflow",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#reflow",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le contenu doit rester utilisable sans défilement horizontal ni perte d'information lorsqu'il est affiché sur un petit écran ou fortement zoomé, jusqu'à l'équivalent de 320 pixels de large.",
+      "en": "Content must remain usable without horizontal scrolling or loss of information when displayed on a small screen or zoomed in heavily, down to the equivalent of 320 pixels wide."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.11",
+    "name": "Non-text Contrast",
+    "name_fr": "Contraste des éléments non textuels",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.11 Non-text Contrast",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#non-text-contrast",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les éléments d'interface, comme les bordures de champs, les icônes et les indicateurs d'état, doivent aussi respecter un contraste minimum avec leur environnement.",
+      "en": "Interface elements, such as field borders, icons, and status indicators, must also meet a minimum contrast with their surroundings."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.12",
+    "name": "Text Spacing",
+    "name_fr": "Espacement du texte",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.12 Text Spacing",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#text-spacing",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le contenu doit rester lisible et fonctionnel même lorsque la personne applique ses propres réglages d'espacement de texte, comme l'interligne ou l'espace entre les mots.",
+      "en": "Content must remain readable and functional even when a person applies their own text spacing settings, such as line height or word spacing."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "1.4.13",
+    "name": "Content on Hover or Focus",
+    "name_fr": "Contenu au survol ou au focus",
+    "fullTitle": "WCAG 2.2 Success Criterion 1.4.13 Content on Hover or Focus",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Perceivable",
+    "principleLetter": "P",
+    "guidelineId": "1.4",
+    "guidelineName": "Distinguishable",
+    "url": "https://www.w3.org/TR/WCAG22/#content-on-hover-or-focus",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un contenu supplémentaire qui apparaît au survol ou au focus doit pouvoir être fermé sans déplacer le pointeur, rester visible assez longtemps, et ne pas disparaître si on l'approche avec la souris.",
+      "en": "Additional content that appears on hover or focus must be dismissible without moving the pointer, remain visible long enough, and not disappear when approached with the mouse."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.1.1",
+    "name": "Keyboard",
+    "name_fr": "Clavier",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.1.1 Keyboard",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.1",
+    "guidelineName": "Keyboard Accessible",
+    "url": "https://www.w3.org/TR/WCAG22/#keyboard",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Toutes les fonctionnalités doivent être utilisables entièrement au clavier, sans dépendre d'un mouvement de souris précis.",
+      "en": "All functionality must be operable entirely through a keyboard, without depending on a precise mouse movement."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.1.2",
+    "name": "No Keyboard Trap",
+    "name_fr": "Pas de piège au clavier",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.1.2 No Keyboard Trap",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.1",
+    "guidelineName": "Keyboard Accessible",
+    "url": "https://www.w3.org/TR/WCAG22/#no-keyboard-trap",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Si un élément peut être atteint au clavier, il doit aussi être possible d'en sortir au clavier, sans que le focus reste bloqué à l'intérieur.",
+      "en": "If an element can be reached by keyboard, it must also be possible to leave it by keyboard, without the focus becoming trapped inside."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.1.3",
+    "name": "Keyboard (No Exception)",
+    "name_fr": "Clavier (sans exception)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.1.3 Keyboard (No Exception)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.1",
+    "guidelineName": "Keyboard Accessible",
+    "url": "https://www.w3.org/TR/WCAG22/#keyboard-no-exception",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Toutes les fonctionnalités doivent être utilisables au clavier, sans aucune exception, y compris celles qui dépendent normalement de la vitesse ou de la trajectoire d'un geste.",
+      "en": "All functionality must be operable by keyboard, with no exceptions, including functionality that normally depends on the speed or path of a gesture."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.1.4",
+    "name": "Character Key Shortcuts",
+    "name_fr": "Raccourcis clavier utilisant un caractère",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.1.4 Character Key Shortcuts",
+    "level": "A",
+    "version": "2.1",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.1",
+    "guidelineName": "Keyboard Accessible",
+    "url": "https://www.w3.org/TR/WCAG22/#character-key-shortcuts",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un raccourci clavier composé d'une seule touche de caractère doit pouvoir être désactivé, réassigné, ou limité au focus d'un composant précis, pour ne pas interférer avec la saisie de texte.",
+      "en": "A single-character keyboard shortcut must be able to be turned off, reassigned, or limited to the focus of a specific component, so it does not interfere with text input."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.2.1",
+    "name": "Timing Adjustable",
+    "name_fr": "Réglage du délai",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.2.1 Timing Adjustable",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.2",
+    "guidelineName": "Enough Time",
+    "url": "https://www.w3.org/TR/WCAG22/#timing-adjustable",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand une limite de temps est imposée, la personne doit pouvoir la désactiver, l'ajuster ou la prolonger avant qu'elle n'expire, sauf exception justifiée.",
+      "en": "When a time limit is imposed, the person must be able to turn it off, adjust it, or extend it before it expires, except in justified cases."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.2.2",
+    "name": "Pause, Stop, Hide",
+    "name_fr": "Mettre en pause, arrêter, masquer",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.2.2 Pause, Stop, Hide",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.2",
+    "guidelineName": "Enough Time",
+    "url": "https://www.w3.org/TR/WCAG22/#pause-stop-hide",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Tout contenu qui bouge, clignote ou défile automatiquement pendant plus de cinq secondes doit pouvoir être mis en pause, arrêté ou masqué par la personne.",
+      "en": "Any content that moves, blinks, or scrolls automatically for more than five seconds must be pausable, stoppable, or hideable by the person."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.2.3",
+    "name": "No Timing",
+    "name_fr": "Pas de délai d'exécution",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.2.3 No Timing",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.2",
+    "guidelineName": "Enough Time",
+    "url": "https://www.w3.org/TR/WCAG22/#no-timing",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/no-timing.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une limite de temps ne devrait jamais être imposée pour interagir avec un contenu, sauf pour un événement en temps réel où c'est essentiel.",
+      "en": "A time limit should never be imposed to interact with content, except for a real-time event where it is essential."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.2.4",
+    "name": "Interruptions",
+    "name_fr": "Interruptions",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.2.4 Interruptions",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.2",
+    "guidelineName": "Enough Time",
+    "url": "https://www.w3.org/TR/WCAG22/#interruptions",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/interruptions.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les interruptions non essentielles, comme les notifications, devraient pouvoir être reportées ou supprimées par la personne, sauf en cas d'urgence réelle.",
+      "en": "Non-essential interruptions, such as notifications, should be postponable or dismissible by the person, except in a genuine emergency."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.2.5",
+    "name": "Re-authenticating",
+    "name_fr": "Ré-authentification",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.2.5 Re-authenticating",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.2",
+    "guidelineName": "Enough Time",
+    "url": "https://www.w3.org/TR/WCAG22/#re-authenticating",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand une session expire, la personne doit pouvoir se réauthentifier et reprendre son activité sans perdre les données déjà saisies.",
+      "en": "When a session expires, the person must be able to re-authenticate and resume their activity without losing data already entered."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.2.6",
+    "name": "Timeouts",
+    "name_fr": "Délais d'expiration",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.2.6 Timeouts",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.2",
+    "guidelineName": "Enough Time",
+    "url": "https://www.w3.org/TR/WCAG22/#timeouts",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/timeouts.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La personne doit être avertie à l'avance de toute limite d'inactivité susceptible d'entraîner une perte de données, avec suffisamment de temps pour réagir.",
+      "en": "The person must be warned in advance of any inactivity limit likely to cause data loss, with enough time to react."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.3.1",
+    "name": "Three Flashes or Below Threshold",
+    "name_fr": "Pas plus de trois flashs ou sous le seuil critique",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.3.1 Three Flashes or Below Threshold",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.3",
+    "guidelineName": "Seizures and Physical Reactions",
+    "url": "https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Aucun contenu ne doit clignoter plus de trois fois par seconde, au risque de déclencher des crises chez les personnes photosensibles.",
+      "en": "No content should flash more than three times per second, as it risks triggering seizures in photosensitive people."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.3.2",
+    "name": "Three Flashes",
+    "name_fr": "Pas plus de trois flashs",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.3.2 Three Flashes",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.3",
+    "guidelineName": "Seizures and Physical Reactions",
+    "url": "https://www.w3.org/TR/WCAG22/#three-flashes",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Aucun contenu ne doit clignoter plus de trois fois par seconde, sans aucune exception ni seuil de tolérance.",
+      "en": "No content should flash more than three times per second, with no exception or tolerance threshold whatsoever."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.3.3",
+    "name": "Animation from Interactions",
+    "name_fr": "Animation à partir d'interactions",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.3.3 Animation from Interactions",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.3",
+    "guidelineName": "Seizures and Physical Reactions",
+    "url": "https://www.w3.org/TR/WCAG22/#animation-from-interactions",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les animations déclenchées par une interaction, comme le défilement ou un clic, doivent pouvoir être désactivées, sauf si elles sont essentielles à la fonctionnalité.",
+      "en": "Animations triggered by an interaction, such as scrolling or a click, must be able to be turned off, unless they are essential to the functionality."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.1",
+    "name": "Bypass Blocks",
+    "name_fr": "Contourner des blocs",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.1 Bypass Blocks",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#bypass-blocks",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un mécanisme doit permettre de contourner les blocs de contenu répétés sur plusieurs pages, comme le menu ou l'en-tête, pour accéder directement au contenu principal.",
+      "en": "A mechanism must allow users to bypass blocks of content that repeat across pages, such as the menu or header, to reach the main content directly."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.2",
+    "name": "Page Titled",
+    "name_fr": "Titre de page",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.2 Page Titled",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#page-titled",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Chaque page doit avoir un titre décrivant son contenu ou son objectif, affiché notamment dans l'onglet du navigateur.",
+      "en": "Every page must have a title describing its content or purpose, displayed notably in the browser tab."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.3",
+    "name": "Focus Order",
+    "name_fr": "Parcours du focus",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.3 Focus Order",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#focus-order",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "L'ordre dans lequel le focus se déplace au clavier doit suivre une séquence logique et cohérente avec l'ordre visuel et la compréhension du contenu.",
+      "en": "The order in which focus moves via keyboard must follow a sequence that is logical and consistent with the visual order and the meaning of the content."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.4",
+    "name": "Link Purpose (In Context)",
+    "name_fr": "Fonction du lien (selon le contexte)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.4 Link Purpose (In Context)",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#link-purpose-in-context",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La destination ou la fonction d'un lien doit être compréhensible à partir de son texte seul ou de son contexte immédiat, sans ambiguïté.",
+      "en": "The destination or purpose of a link must be understandable from its text alone or its immediate context, without ambiguity."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.5",
+    "name": "Multiple Ways",
+    "name_fr": "Accès multiples",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.5 Multiple Ways",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#multiple-ways",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Il doit exister plus d'une façon d'atteindre une page donnée au sein d'un site, comme un menu, une recherche ou un plan du site, sauf si la page fait partie d'un processus séquentiel.",
+      "en": "There must be more than one way to reach a given page within a site, such as a menu, a search feature, or a sitemap, unless the page is part of a sequential process."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.6",
+    "name": "Headings and Labels",
+    "name_fr": "En-têtes et étiquettes",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.6 Headings and Labels",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#headings-and-labels",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les titres et les étiquettes de champ doivent décrire clairement leur sujet ou leur objectif, pour faciliter la compréhension et la navigation.",
+      "en": "Headings and field labels must clearly describe their topic or purpose, to make understanding and navigation easier."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.7",
+    "name": "Focus Visible",
+    "name_fr": "Visibilité du focus",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.7 Focus Visible",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#focus-visible",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand on navigue au clavier, il doit toujours être visible où se trouve le focus à l'écran, sous peine de perdre complètement ses repères.",
+      "en": "When navigating by keyboard, it must always be visible where the focus is on screen, or people completely lose their bearings."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.8",
+    "name": "Location",
+    "name_fr": "Emplacement",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.8 Location",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#location",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/location.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La personne doit pouvoir savoir où elle se trouve dans la structure globale du site, par exemple via un fil d'ariane ou une indication de section active dans le menu.",
+      "en": "The person must be able to know where they are within the site's overall structure, for example through a breadcrumb trail or an indication of the active section in the menu."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.9",
+    "name": "Link Purpose (Link Only)",
+    "name_fr": "Fonction du lien (lien uniquement)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.9 Link Purpose (Link Only)",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#link-purpose-link-only",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La destination d'un lien doit être compréhensible à partir de son seul texte, sans avoir besoin de lire le contexte environnant.",
+      "en": "A link's destination must be understandable from its text alone, without needing to read the surrounding context."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.10",
+    "name": "Section Headings",
+    "name_fr": "En-têtes de section",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.10 Section Headings",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#section-headings",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/section-headings.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le contenu doit être organisé avec des titres de section, pour faciliter la navigation et la compréhension de la structure globale.",
+      "en": "Content must be organized with section headings, to make navigation and understanding of the overall structure easier."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.11",
+    "name": "Focus Not Obscured (Minimum)",
+    "name_fr": "Focus non masqué (minimum)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.11 Focus Not Obscured (Minimum)",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand un élément reçoit le focus clavier, il ne doit pas être totalement masqué par un autre contenu, comme un bandeau ou une fenêtre superposée.",
+      "en": "When an element receives keyboard focus, it must not be entirely hidden by other content, such as a banner or an overlapping window."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.12",
+    "name": "Focus Not Obscured (Enhanced)",
+    "name_fr": "Focus non masqué (amélioré)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.12 Focus Not Obscured (Enhanced)",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#focus-not-obscured-enhanced",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-enhanced.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand un élément reçoit le focus clavier, il ne doit être masqué par aucun autre contenu, même partiellement.",
+      "en": "When an element receives keyboard focus, it must not be hidden by any other content, even partially."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.4.13",
+    "name": "Focus Appearance",
+    "name_fr": "Apparence du focus",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.4.13 Focus Appearance",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.4",
+    "guidelineName": "Navigable",
+    "url": "https://www.w3.org/TR/WCAG22/#focus-appearance",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "L'indicateur visuel de focus doit respecter une taille et un contraste minimums, pour rester clairement identifiable.",
+      "en": "The visual focus indicator must meet a minimum size and contrast, to remain clearly identifiable."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.1",
+    "name": "Pointer Gestures",
+    "name_fr": "Gestes pour le contrôle du pointeur",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.1 Pointer Gestures",
+    "level": "A",
+    "version": "2.2",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#pointer-gestures",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une fonctionnalité qui repose sur un geste complexe, comme un glissement à deux doigts ou un tracé, doit aussi être utilisable avec un geste simple ou un clic unique.",
+      "en": "A feature that relies on a complex gesture, such as a two-finger swipe or a drawn path, must also be usable with a simple gesture or a single click."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.2",
+    "name": "Pointer Cancellation",
+    "name_fr": "Annulation de l'action du pointeur",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.2 Pointer Cancellation",
+    "level": "A",
+    "version": "2.2",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#pointer-cancellation",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une action déclenchée par un pointeur doit pouvoir être annulée en déplaçant le pointeur avant de relâcher, plutôt que de se déclencher dès l'appui initial.",
+      "en": "An action triggered by a pointer must be cancellable by moving the pointer away before releasing, rather than triggering as soon as it is pressed."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.3",
+    "name": "Label in Name",
+    "name_fr": "Étiquette dans le nom",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.3 Label in Name",
+    "level": "A",
+    "version": "2.2",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#label-in-name",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le nom accessible d'un élément interactif, utilisé par les technologies d'assistance, doit contenir le texte visible affiché à l'écran.",
+      "en": "The accessible name of an interactive element, used by assistive technologies, must contain the visible text displayed on screen."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.4",
+    "name": "Motion Actuation",
+    "name_fr": "Activation par le mouvement",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.4 Motion Actuation",
+    "level": "A",
+    "version": "2.1",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#motion-actuation",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une fonctionnalité déclenchée par un mouvement de l'appareil, comme secouer ou incliner, doit aussi être utilisable via une commande d'interface classique, et pouvoir être désactivée.",
+      "en": "A feature triggered by moving the device, such as shaking or tilting, must also be usable through a standard interface control, and must be able to be turned off."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.5",
+    "name": "Target Size",
+    "name_fr": "Taille de la cible (amélioré)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.5 Target Size",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#target-size",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les cibles tactiles ou cliquables doivent avoir une taille minimale confortable, soit 44 par 44 pixels, sauf exceptions justifiées.",
+      "en": "Touch or clickable targets must have a comfortable minimum size, 44 by 44 pixels, except in justified cases."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.6",
+    "name": "Concurrent Input Mechanisms",
+    "name_fr": "Mécanismes d'entrée concurrents",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.6 Concurrent Input Mechanisms",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#concurrent-input-mechanisms",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/concurrent-input-mechanisms.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une interface ne devrait pas restreindre l'usage à une seule méthode de saisie, comme le clavier, la souris, le tactile ou la voix, mais permettre de les utiliser simultanément selon les besoins.",
+      "en": "An interface should not restrict use to a single input method, such as keyboard, mouse, touch, or voice, but should allow them to be used simultaneously as needed."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.7",
+    "name": "Dragging Movements",
+    "name_fr": "Mouvements de glissement",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.7 Dragging Movements",
+    "level": "AA",
+    "version": "2.2",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#dragging-movements",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une fonctionnalité qui repose sur un glissement doit aussi être réalisable par une action simple, comme une série de clics.",
+      "en": "A feature that relies on dragging must also be achievable through a simple action, such as a series of clicks."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "2.5.8",
+    "name": "Target Size (Minimum)",
+    "name_fr": "Taille de la cible (minimum)",
+    "fullTitle": "WCAG 2.2 Success Criterion 2.5.8 Target Size (Minimum)",
+    "level": "AA",
+    "version": "2.2",
+    "principle": "Operable",
+    "principleLetter": "O",
+    "guidelineId": "2.5",
+    "guidelineName": "Input Modalities",
+    "url": "https://www.w3.org/TR/WCAG22/#target-size-minimum",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les cibles cliquables ou tactiles doivent avoir une taille minimale de 24 par 24 pixels, sauf exceptions justifiées.",
+      "en": "Clickable or touch targets must have a minimum size of 24 by 24 pixels, except in justified cases."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.1.1",
+    "name": "Language of Page",
+    "name_fr": "Langue de la page",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.1.1 Language of Page",
+    "level": "A",
+    "version": "2.1",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.1",
+    "guidelineName": "Readable",
+    "url": "https://www.w3.org/TR/WCAG22/#language-of-page",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La langue principale de chaque page doit être indiquée dans le code, pour que les technologies d'assistance appliquent la bonne prononciation.",
+      "en": "The main language of each page must be indicated in the code, so assistive technologies apply the correct pronunciation."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.1.2",
+    "name": "Language of Parts",
+    "name_fr": "Langue d'un passage",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.1.2 Language of Parts",
+    "level": "AA",
+    "version": "2.1",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.1",
+    "guidelineName": "Readable",
+    "url": "https://www.w3.org/TR/WCAG22/#language-of-parts",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand un passage de texte est dans une langue différente de la langue principale de la page, cette langue doit aussi être indiquée dans le code.",
+      "en": "When a passage of text is in a different language from the page's main language, that language must also be indicated in the code."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.1.3",
+    "name": "Unusual Words",
+    "name_fr": "Mots inhabituels",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.1.3 Unusual Words",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.1",
+    "guidelineName": "Readable",
+    "url": "https://www.w3.org/TR/WCAG22/#unusual-words",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/unusual-words.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les termes rares, techniques ou utilisés de façon particulière doivent avoir une définition disponible, via un glossaire ou une explication en ligne.",
+      "en": "Rare, technical, or unusually used terms must have a definition available, via a glossary or an inline explanation."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.1.4",
+    "name": "Abbreviations",
+    "name_fr": "Abréviations",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.1.4 Abbreviations",
+    "level": "AAA",
+    "version": "2.2",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.1",
+    "guidelineName": "Readable",
+    "url": "https://www.w3.org/TR/WCAG22/#abbreviations",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "La signification d'une abréviation doit pouvoir être obtenue facilement, la première fois qu'elle apparaît dans le contenu.",
+      "en": "The meaning of an abbreviation must be easy to obtain, the first time it appears in the content."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.1.5",
+    "name": "Reading Level",
+    "name_fr": "Niveau de lecture",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.1.5 Reading Level",
+    "level": "AAA",
+    "version": "2.2",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.1",
+    "guidelineName": "Readable",
+    "url": "https://www.w3.org/TR/WCAG22/#reading-level",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/reading-level.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Si un texte nécessite un niveau de lecture avancé, une version simplifiée doit être proposée en complément.",
+      "en": "If a text requires an advanced reading level, a simplified version must be offered in addition."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.1.6",
+    "name": "Pronunciation",
+    "name_fr": "Prononciation",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.1.6 Pronunciation",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.1",
+    "guidelineName": "Readable",
+    "url": "https://www.w3.org/TR/WCAG22/#pronunciation",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pronunciation.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand la prononciation d'un mot est essentielle à la compréhension et ambiguë à la lecture, un moyen de connaître cette prononciation doit être fourni.",
+      "en": "When a word's pronunciation is essential to understanding and ambiguous from reading, a way to know that pronunciation must be provided."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.2.1",
+    "name": "On Focus",
+    "name_fr": "Au focus",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.2.1 On Focus",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.2",
+    "guidelineName": "Predictable",
+    "url": "https://www.w3.org/TR/WCAG22/#on-focus",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/on-focus.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le fait de donner le focus à un élément ne doit déclencher aucun changement de contexte inattendu, comme l'ouverture automatique d'une nouvelle fenêtre.",
+      "en": "Giving focus to an element must not trigger any unexpected change of context, such as automatically opening a new window."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.2.2",
+    "name": "On Input",
+    "name_fr": "À la saisie",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.2.2 On Input",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.2",
+    "guidelineName": "Predictable",
+    "url": "https://www.w3.org/TR/WCAG22/#on-input",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/on-input.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Le fait de modifier la valeur d'un champ ne doit déclencher aucun changement de contexte inattendu, sauf si la personne en a été prévenue à l'avance.",
+      "en": "Changing the value of a field must not trigger any unexpected change of context, unless the person has been warned about it in advance."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.2.3",
+    "name": "Consistent Navigation",
+    "name_fr": "Navigation cohérente",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.2.3 Consistent Navigation",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.2",
+    "guidelineName": "Predictable",
+    "url": "https://www.w3.org/TR/WCAG22/#consistent-navigation",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les éléments de navigation qui se répètent sur plusieurs pages doivent apparaître dans le même ordre relatif, pour rester prévisibles d'une page à l'autre.",
+      "en": "Navigation elements that repeat across multiple pages must appear in the same relative order, to remain predictable from one page to the next."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.2.4",
+    "name": "Consistent Identification",
+    "name_fr": "Identification cohérente",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.2.4 Consistent Identification",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.2",
+    "guidelineName": "Predictable",
+    "url": "https://www.w3.org/TR/WCAG22/#consistent-identification",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un même élément qui remplit la même fonction doit être identifié de façon cohérente d'une page à l'autre du site, avec le même intitulé, la même icône et le même format.",
+      "en": "The same element serving the same function must be identified consistently from one page to another on the site, with the same label, the same icon, and the same format."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.2.5",
+    "name": "Change on Request",
+    "name_fr": "Changement à la demande",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.2.5 Change on Request",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.2",
+    "guidelineName": "Predictable",
+    "url": "https://www.w3.org/TR/WCAG22/#change-on-request",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Tout changement de contexte significatif devrait être déclenché uniquement à la demande explicite de la personne, jamais automatiquement.",
+      "en": "Any significant change of context should be triggered only at the person's explicit request, never automatically."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.2.6",
+    "name": "Consistent Help",
+    "name_fr": "Aide cohérente",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.2.6 Consistent Help",
+    "level": "A",
+    "version": "2.2",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.2",
+    "guidelineName": "Predictable",
+    "url": "https://www.w3.org/TR/WCAG22/#consistent-help",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand un mécanisme d'aide existe, comme un contact, une foire aux questions ou un clavardage, il doit être présent au même endroit relatif sur toutes les pages où il apparaît.",
+      "en": "When a help mechanism exists, such as a contact option, an FAQ, or a chat, it must appear in the same relative location on every page where it is present."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.1",
+    "name": "Error Identification",
+    "name_fr": "Identification des erreurs",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.1 Error Identification",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#error-identification",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand une erreur de saisie est détectée dans un formulaire, elle doit être clairement identifiée et décrite en texte, pas seulement par une couleur.",
+      "en": "When an input error is detected in a form, it must be clearly identified and described in text, not only through colour."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.2",
+    "name": "Labels or Instructions",
+    "name_fr": "Étiquettes ou instructions",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.2 Labels or Instructions",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#labels-or-instructions",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Des étiquettes ou des instructions doivent accompagner les champs de formulaire qui demandent une saisie de la personne.",
+      "en": "Labels or instructions must accompany form fields that request input from the person."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.3",
+    "name": "Error Suggestion",
+    "name_fr": "Suggestion après une erreur",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.3 Error Suggestion",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#error-suggestion",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Quand une erreur de saisie est détectée et que la correction peut être suggérée sans compromettre la sécurité, une suggestion doit être proposée à la personne.",
+      "en": "When an input error is detected and a correction can be suggested without compromising security, a suggestion must be offered to the person."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.4",
+    "name": "Error Prevention (Legal, Financial, Data)",
+    "name_fr": "Prévention des erreurs (juridiques, financières, de données)",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.4 Error Prevention (Legal, Financial, Data)",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#error-prevention-legal-financial-data",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Pour les actions ayant des conséquences légales, financières ou de suppression de données, la personne doit pouvoir vérifier, corriger ou annuler avant la validation finale.",
+      "en": "For actions with legal, financial, or data-deletion consequences, the person must be able to review, correct, or cancel before final submission."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.5",
+    "name": "Help",
+    "name_fr": "Aide",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.5 Help",
+    "level": "AAA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#help",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/help.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une aide contextuelle devrait être disponible pour accompagner la personne dans la complétion d'un formulaire complexe.",
+      "en": "Contextual help should be available to assist the person in completing a complex form."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.6",
+    "name": "Error Prevention (All)",
+    "name_fr": "Prévention des erreurs (toutes)",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.6 Error Prevention (All)",
+    "level": "AAA",
+    "version": "2.2",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#error-prevention-all",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Pour toute soumission de formulaire, pas seulement les cas légaux ou financiers, la personne doit pouvoir vérifier, corriger ou annuler avant la validation finale.",
+      "en": "For any form submission, not only legal or financial cases, the person must be able to review, correct, or cancel before final submission."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.7",
+    "name": "Redundant Entry",
+    "name_fr": "Saisie redondante",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.7 Redundant Entry",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#redundant-entry",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Une information déjà saisie par la personne au cours d'un même processus ne devrait pas lui être redemandée, sauf exception justifiée.",
+      "en": "Information already entered by the person during the same process should not be requested again, except in justified cases."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.8",
+    "name": "Accessible Authentication",
+    "name_fr": "Authentification accessible (minimum)",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.8 Accessible Authentication",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#accessible-authentication",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un processus d'authentification ne doit pas reposer uniquement sur un test cognitif, comme mémoriser un mot de passe complexe ou résoudre une énigme, une alternative doit exister.",
+      "en": "An authentication process must not rely solely on a cognitive test, such as memorizing a complex password or solving a puzzle; an alternative must exist."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "3.3.9",
+    "name": "Accessible Authentication (Enhanced)",
+    "name_fr": "Authentification accessible (amélioré)",
+    "fullTitle": "WCAG 2.2 Success Criterion 3.3.9 Accessible Authentication (Enhanced)",
+    "level": "AAA",
+    "version": "2.1",
+    "principle": "Understandable",
+    "principleLetter": "U",
+    "guidelineId": "3.3",
+    "guidelineName": "Input Assistance",
+    "url": "https://www.w3.org/TR/WCAG22/#accessible-authentication-enhanced",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Un processus d'authentification ne doit reposer sur aucun test cognitif, même avec une alternative, sauf pour la reconnaissance d'objets ou de contenu personnel de la personne.",
+      "en": "An authentication process must not rely on any cognitive test, even with an alternative, except for recognizing objects or personal content belonging to the person."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "4.1.1",
+    "name": "Parsing",
+    "name_fr": "Analyse syntaxique",
+    "fullTitle": "WCAG 2.2 Success Criterion 4.1.1 Parsing",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Robust",
+    "principleLetter": "R",
+    "guidelineId": "4.1",
+    "guidelineName": "Compatible",
+    "url": "https://www.w3.org/TR/WCAG22/#parsing",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/parsing.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Ce critère, retiré de la liste active en WCAG 2.2, portait sur la validité structurelle du code (balises bien formées, sans identifiant dupliqué). Il reste répertorié ici pour référence historique.",
+      "en": "This criterion, removed from the active list in WCAG 2.2, covered the structural validity of code (well-formed tags, no duplicate IDs). It remains listed here for historical reference."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "4.1.2",
+    "name": "Name, Role, Value",
+    "name_fr": "Nom, rôle et valeur",
+    "fullTitle": "WCAG 2.2 Success Criterion 4.1.2 Name, Role, Value",
+    "level": "A",
+    "version": "2.0",
+    "principle": "Robust",
+    "principleLetter": "R",
+    "guidelineId": "4.1",
+    "guidelineName": "Compatible",
+    "url": "https://www.w3.org/TR/WCAG22/#name-role-value",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les composants d'interface personnalisés doivent communiquer leur nom, leur rôle et leur état aux technologies d'assistance, via le code ou les attributs ARIA appropriés.",
+      "en": "Custom interface components must communicate their name, role, and state to assistive technologies, through code or appropriate ARIA attributes."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  },
+  {
+    "id": "4.1.3",
+    "name": "Status Messages",
+    "name_fr": "Messages d'état",
+    "fullTitle": "WCAG 2.2 Success Criterion 4.1.3 Status Messages",
+    "level": "AA",
+    "version": "2.0",
+    "principle": "Robust",
+    "principleLetter": "R",
+    "guidelineId": "4.1",
+    "guidelineName": "Compatible",
+    "url": "https://www.w3.org/TR/WCAG22/#status-messages",
+    "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+    "disability_tags": [],
+    "description": {
+      "fr": "Les messages de statut, comme une confirmation, une erreur ou un chargement, qui apparaissent sans déplacer le focus doivent être annoncés automatiquement aux technologies d'assistance.",
+      "en": "Status messages, such as a confirmation, an error, or a loading indicator, that appear without moving focus must be announced automatically to assistive technologies."
+    },
+    "plain": {
+      "fr": "",
+      "en": ""
+    },
+    "remediation": {
+      "fr": "",
+      "en": ""
+    },
+    "xref": {
+      "en301549": [],
+      "rgaa": [],
+      "qc": []
+    }
+  }
 ]
