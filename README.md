@@ -73,5 +73,5 @@ This repo is fully static — GitHub Pages serves it as-is, no build step.
 Built on [axe-core](https://github.com/dequelabs/axe-core) (Deque Systems). Criteria based on [WCAG 2.2](https://www.w3.org/TR/WCAG22/).
 
 ## Contact
-If you encounter an issue, accessibility barrier, or translation error, please contact contact@vesperlab.dev
+If you encounter an issue, accessibility barrier, or translation error, please contact : contact@vesperlab.dev
 If you enjoy my work, you can [Buy me a coffee](https://buymeacoffee.com/vesperlab).

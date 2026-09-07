@@ -1,4 +1,4 @@
-// Finder — Vesper Toolkit
+// Finder 
 // Retrouve et met en évidence un ou plusieurs éléments à partir d'un sélecteur CSS ou d'un extrait de code HTML.
 // Utile quand le CSS Selector ne peut pas cibler un élément déjà disparu, masqué ou hors écran.
 (function () {
@@ -10,7 +10,7 @@
       return;
     }
 
-    // Éléments qu'on a dû révéler temporairement (display/visibility/opacity/hidden modifiés) pour les montrer.
+    // Éléments révélés temporairement (display/visibility/opacity/hidden modifiés).
     var revealed = [];
     // Éléments actuellement entourés d'un contour de surlignage.
     var marked = [];
@@ -28,8 +28,7 @@
     }
 
     // Remonte la chaîne des parents d'un élément et force l'affichage de tous ceux qui le cachaient
-    // (display:none, visibility:hidden, opacity:0, ou l'attribut hidden). On garde en mémoire l'état
-    // d'origine de chacun pour pouvoir tout restaurer exactement au clic sur "Reset" ou "Close".
+    // (display:none, visibility:hidden, opacity:0, ou l'attribut hidden). 
     function reveal(el) {
       var chain = [];
       var node = el;
@@ -96,8 +95,8 @@
       }
     }
 
-    // Recherche par extrait de code : on parse le HTML collé pour en extraire un élément "sonde",
-    // puis on note ses attributs distinctifs (id, src, href...) et son texte, et on compare
+    // Recherche par extrait de code : parse le HTML collé pour en extraire un élément "sonde",
+    // puis note ses attributs distinctifs (id, src, href...) et son texte, et compare
     // chaque élément du même tag présent sur la page pour trouver le meilleur candidat.
     // Si le texte collé n'est pas du HTML valide, on cherche simplement ce texte tel quel dans la page.
     function searchBySnippet(q) {
@@ -143,8 +142,6 @@
     }
 
     // --- Construction du panneau flottant ---
-    // Pas de police Noto ici volontairement : ce panneau s'injecte dans une page tierce quelconque,
-    // qui n'a aucune raison d'avoir chargé les polices Vesper Lab. On reste sur la pile système.
     var panel = document.createElement('div');
     panel.id = 'vl-finder-panel';
     panel.setAttribute('role', 'dialog');

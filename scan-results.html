@@ -10,11 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 
-  /* ── Jetons du design system Vesper Lab V2 ──────────────────────────────
-     Recopiés à l'identique depuis vesper-library/style.css (ne pas régénérer).
-     Thème SOMBRE uniquement. Les couleurs de sévérité (var INK / var TINT dans
-     le <script>) et les couleurs d'export Word/Excel restent gérées à part —
-     hors design system V2. */
+  /* ── design system Vesper Lab ── */
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap');
 
 /* ---- Typographie (tokens/typography.css) ---- */
@@ -322,8 +318,7 @@
   // state.data ressemble à { violations: [...], url: '...' } une fois qu'un scan a été rendu, sinon null.
   var state = { data: null, busy: false };
 
-  // Échappe une valeur pour l'injecter sans risque dans du HTML — les violations viennent
-  // de la page auditée, donc leur contenu (attributs, extraits de code) n'est pas fiable.
+  // Échappe une valeur pour l'injecter sans risque dans du HTML
   function esc(s) {
     if (s == null) return '';
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -352,8 +347,8 @@
 
   // --- Analyse du JSON collé ---
   // Accepte soit un seul résultat axe-core ({violations:[...]}), soit un tableau de plusieurs
-  // scans fusionnés (utile pour comparer plusieurs pages) — chaque violation garde la trace
-  // de son url d'origine.
+  // scans fusionnés (utile pour comparer plusieurs pages)
+  // Chaque violation garde la trace de son url d'origine.
   function parse() {
     var raw = (input.value || '').trim();
     errorEl.textContent = '';

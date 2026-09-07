@@ -1,4 +1,4 @@
-// Link Scan — Vesper Toolkit
+// Link Scan
 // Scans every link on the page and opens a standalone report in a new tab: accessible name,
 // destination, new-window behaviour, generic or duplicate labels.
 // The report is a fully self-contained HTML string (own CSS, own logo, own export logic) —
@@ -7,7 +7,7 @@
   'use strict';
   try {
 
-    // --- Styles for the report page itself (opened in its own tab) ---
+    // --- Styles for the report page itself (own tab) ---
     var VL_CSS = ":root{--bg:#100F0D;--surface:#191714;--surface-raised:#221F1A;--line:rgba(237,231,218,0.16);--line-soft:rgba(237,231,218,0.12);--ink:#EDE7DA;--muted:#A9A091;--accent:#A6CA93;--accent-dark:#5A7D46;--accent-ink:#100F0D;--accent-light:#F0A9A2;--focus:#C6B2ED;--ok-ink:#A6CA93;--ok-bg:#182317;--warn-ink:#E5BE7D;--warn-bg:#2A2113;--err-ink:#F0A9A2;--err-bg:#2B1614;--serif:'Noto Serif',Georgia,\"Iowan Old Style\",\"Palatino Linotype\",serif;--sans:'Noto Sans',-apple-system,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;--mono:\"SFMono-Regular\",Consolas,\"Liberation Mono\",Menlo,monospace}\n" +
       "*{box-sizing:border-box}\n" +
       "body{margin:0;padding:0 20px 50px;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55}\n" +
@@ -70,7 +70,7 @@
       "}\n";
 
     // --- Script injected into the report page: filter checkbox, locate/highlight, snippet
-    // toggles, print, and the Excel/Word exports. Runs inside the report's own tab, not here. ---
+    // toggles, print, and the Excel/Word exports. ---
     var VL_PAGE_JS = "(function () {\n" +
       "  'use strict';\n\n" +
       "  var CFG = JSON.parse(document.getElementById('vl-data').textContent);\n" +

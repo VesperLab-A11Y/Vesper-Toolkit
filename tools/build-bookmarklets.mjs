@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// build-bookmarklets.mjs — Vesper Bookmarklets
+// build-bookmarklets.mjs, Vesper Bookmarklets
 //
 // À lancer à la main avant chaque publication (aucune CI, aucune dépendance npm) :
 //   node tools/build-bookmarklets.mjs
@@ -12,8 +12,7 @@
 //
 // Important : la minification ici est volontairement simple (pas de vrai parseur JS). Elle ne
 // fonctionne que parce que dans scripts/*.js, un commentaire est TOUJOURS seul sur sa ligne
-// (jamais en fin de ligne de code). Si tu ajoutes un commentaire en bout de ligne, ce script
-// va le laisser tel quel dans le bookmarklet publié — donc garde cette convention.
+// (jamais en fin de ligne de code). 
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -35,9 +34,6 @@ const SLUGS = [
   'sonar'
 ];
 
-// Retire les lignes de commentaire (// ...) et les lignes vides, puis aplatit le reste en une
-// seule ligne séparée par des espaces simples. Suppose que les commentaires sont toujours seuls
-// sur leur ligne (voir l'avertissement en haut du fichier).
 function minify(source) {
   const lines = source.split('\n');
   const kept = [];
@@ -50,8 +46,7 @@ function minify(source) {
 }
 
 // Échappe les caractères qui casseraient un attribut HTML href="...".
-// Pas d'encodeURIComponent ici : on veut garder le bookmarklet lisible si quelqu'un
-// inspecte le code source de la page, pas le transformer en charabia pourcent-encodé.
+// Pas d'encodeURIComponent 
 function escapeForHtmlAttr(s) {
   return s
     .replace(/&/g, '&amp;')
@@ -79,9 +74,6 @@ function main() {
     const href = buildHref(slug);
     if (href === null) continue;
 
-    // On ne remplace que le href de l'ancre qui porte data-bookmarklet="slug" — jamais
-    // n'importe quel href de la page. Le gabarit d'index.html place toujours href juste
-    // après data-bookmarklet sur la même balise <a>, donc cette regex reste fiable.
     const pattern = new RegExp(
       `(<a[^>]*data-bookmarklet="${slug}"[^>]*?)href="[^"]*"`
     );

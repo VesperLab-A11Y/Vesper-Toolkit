@@ -1,11 +1,9 @@
-// AC Scan — Vesper Toolkit
+// AC Scan
 // Lance axe-core sur toute la page et copie le résultat JSON dans le presse-papier.
 (function () {
   'use strict';
   try {
     // Copie une chaîne dans le presse-papier via un <textarea> temporaire.
-    // On n'utilise pas navigator.clipboard ici : certains sites bloquent l'API moderne
-    // via leur Content Security Policy, alors que cette méthode (execCommand) passe presque toujours.
     function vlCopy(json, count) {
       var copied = false;
       try {
@@ -38,7 +36,7 @@
       });
     }
 
-    // axe-core n'est pas forcément déjà chargé sur la page auditée : on le charge depuis le CDN si besoin.
+    // axe-core n'est pas forcément déjà chargé : charge depuis le CDN si besoin.
     if (typeof axe === 'undefined') {
       var s = document.createElement('script');
       s.src = 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.0/axe.min.js';

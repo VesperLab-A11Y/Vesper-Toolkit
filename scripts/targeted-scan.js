@@ -1,4 +1,4 @@
-// AC Targeted Scan — Vesper Toolkit
+// AC Targeted Scan 
 // Comme AC Scan, mais restreint à un sélecteur CSS précis (voir 🦇 CSS Selector pour l'obtenir).
 (function () {
   'use strict';

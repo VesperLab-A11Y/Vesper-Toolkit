@@ -1,4 +1,4 @@
-// CSS Selector — Vesper Toolkit
+// CSS Selector
 // Survole la page pour voir le sélecteur CSS de l'élément sous la souris, clique pour le copier.
 // À utiliser avec 🦇 AC Targeted Scan.
 (function () {

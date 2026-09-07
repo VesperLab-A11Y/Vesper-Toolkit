@@ -1,4 +1,4 @@
-// Image Scan — Vesper Toolkit
+// Image Scan
 // Scans every image on the page and opens a standalone report in a new tab: alternative text,
 // decorative/hidden status, a captured thumbnail, and a contrast heuristic to check by eye.
 // The report is a fully self-contained HTML string (own CSS, own logo, own export logic) —
@@ -7,7 +7,7 @@
   'use strict';
   try {
 
-    // --- Styles for the report page itself (opened in its own tab) ---
+    // --- Styles for the report page itself (own tab) ---
     var VL_CSS = ":root{--bg:#100F0D;--surface:#191714;--surface-raised:#221F1A;--line:rgba(237,231,218,0.16);--line-soft:rgba(237,231,218,0.12);--ink:#EDE7DA;--muted:#A9A091;--accent:#A6CA93;--accent-dark:#5A7D46;--accent-ink:#100F0D;--accent-light:#F0A9A2;--focus:#C6B2ED;--ok-ink:#A6CA93;--ok-bg:#182317;--warn-ink:#E5BE7D;--warn-bg:#2A2113;--err-ink:#F0A9A2;--err-bg:#2B1614;--serif:'Noto Serif',Georgia,\"Iowan Old Style\",\"Palatino Linotype\",serif;--sans:'Noto Sans',-apple-system,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;--mono:\"SFMono-Regular\",Consolas,\"Liberation Mono\",Menlo,monospace}\n" +
       "*{box-sizing:border-box}\n" +
       "body{margin:0;padding:0 20px 50px;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55}\n" +
@@ -568,8 +568,7 @@
       }
 
       // Heuristic only, not a WCAG measurement: compares the luminance of the darkest and
-      // lightest 5% of sampled pixels. A low ratio suggests the image is flat/low-contrast —
-      // worth a manual look if it carries text.
+      // lightest 5% of sampled pixels.
       function contrastOf(ctx, w, h) {
         var px = ctx.getImageData(0, 0, w, h).data;
         var lums = [];
@@ -636,7 +635,7 @@
         lowContrast: { id: 'vesper-image-low-contrast', impact: 'minor', description: 'Image has low internal contrast (heuristic, verify by eye if it carries text)', help: 'Check manually whether embedded text in the image meets contrast requirements', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html', wcag: '1.4.3' }
       };
       // Pushes a note for the on-page report AND, when the note maps to a rule, a matching
-      // tag for the JSON export — single source of truth for the message text.
+      // tag for the JSON export.
       function note(notes, tags, key, msg) {
         notes.push(msg);
         if (RULES[key]) { tags.push({ id: RULES[key].id, impact: RULES[key].impact, description: RULES[key].description, help: RULES[key].help, helpUrl: RULES[key].helpUrl, wcag: RULES[key].wcag, msg: msg }); }
