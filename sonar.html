@@ -124,6 +124,7 @@
 
   html { scroll-behavior: smooth; }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html, body { margin: 0; height: 100%; background: var(--surface-page); color: var(--text-body); font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
   body { display: flex; flex-direction: column; height: 100vh; }
@@ -156,14 +157,28 @@
   #copyRow button { appearance: none; cursor: pointer; background: var(--surface-page); border: 1px solid var(--border-strong); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; color: var(--link); min-height: 32px; }
   #toastWrap { min-height: 30px; padding: 6px 16px 10px; background: var(--surface-card); flex: none; }
   #toast { margin: 0; padding: 6px 12px; display: inline-block; border: 1px solid var(--accent-quiet); border-radius: 999px; background: var(--surface-page); font-size: 11.5px; color: var(--accent); }
+
+  #swTop { display: flex; justify-content: flex-end; margin-bottom: 6px; }
+  #lang { appearance: none; cursor: pointer; background: transparent; border: 1px solid var(--border-strong); border-radius: 999px; padding: 4px 12px; font-size: 11.5px; font-weight: 700; color: var(--text-body); min-height: 30px; }
+  #lang:hover { border-color: var(--accent); color: var(--accent); }
+
+  #prose { display: flex; flex-direction: column; gap: 12px; }
+  .prose-sec h3 { margin: 0 0 3px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .prose-sec p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--text-body); }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; background: var(--surface-raised); color: var(--text-secondary); border: 1px solid var(--border-default); }
+  .xref-list { display: flex; gap: 6px; flex-wrap: wrap; }
+  .xref-chip { font-size: 11px; padding: 2px 9px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--text-secondary); border: 1px solid var(--border-default); }
+  .xref-note { margin: 6px 0 0; font-size: 11px; font-style: italic; color: var(--text-muted); border-left: 2px solid var(--accent-quiet); padding-left: 10px; }
 </style>
 </head>
 <body>
 
 <div id="searchWrap">
+  <div id="swTop"><button type="button" id="lang">Français</button></div>
   <input type="search" id="q" aria-label="Search a criterion" aria-describedby="hint" placeholder="Search: name, id, guideline…">
   <div id="pills"></div>
-  <p id="hint">↑ ↓ to browse · Enter to open · Esc to close · <span id="resultCount"></span></p>
+  <p id="hint"><span id="hintKeys">↑ ↓ to browse · Enter to open · Esc to close</span> · <span id="resultCount"></span></p>
 </div>
 
 <div id="listWrap">
@@ -177,6 +192,7 @@
     <div id="meta"></div>
     <h2 id="title"></h2>
   </div>
+  <div id="prose"></div>
   <div id="linkRow"></div>
   <div id="copyRow"></div>
 </div>
@@ -191,8 +207,81 @@
   'use strict';
 
   var LEVEL_COLOR = { A: '#A6CA93', AA: '#C6B2ED', AAA: '#F0A9A2' };
+  var LANG_KEY = 'vesperlab-toolkit:lang'; // partagée avec l'annuaire du Toolkit
 
-  var state = { data: [], q: '', levels: [], versions: [], active: 0, selectedId: null };
+  // Chaînes d'interface (la prose des critères vient bilingue du JSON, voir L()).
+  var I18N = {
+    fr: {
+      langToggle: 'English',
+      searchLabel: 'Rechercher un critère',
+      searchPlaceholder: 'Recherche : nom, identifiant, règle…',
+      hintKeys: '↑ ↓ pour parcourir · Entrée pour ouvrir · Échap pour fermer',
+      results: '{n} résultat(s)',
+      noResults: 'Aucun critère ne correspond.',
+      back: '← Retour à la liste',
+      levelPrefix: 'Niveau',
+      whatWcag: 'Ce que disent les WCAG',
+      plain: 'En clair',
+      remediation: 'Piste de correction',
+      affects: 'Concerne',
+      otherStandards: 'Autres référentiels',
+      qcShort: 'Exigé au Québec',
+      goToPage: 'Ouvrir la page W3C ↗',
+      understanding: 'Comprendre ce critère ↗',
+      copyMd: 'Lien Markdown', copyHtml: 'Lien HTML', copyName: 'Nom seul', copyUrl: 'URL seule',
+      copiedMd: 'Lien Markdown copié.', copiedHtml: 'Lien HTML copié.',
+      copiedName: 'Nom copié.', copiedUrl: 'URL copiée.',
+      copyFail: 'Copie impossible.',
+      dataError: 'Impossible de charger la liste des critères WCAG.'
+    },
+    en: {
+      langToggle: 'Français',
+      searchLabel: 'Search a criterion',
+      searchPlaceholder: 'Search: name, id, guideline…',
+      hintKeys: '↑ ↓ to browse · Enter to open · Esc to close',
+      results: '{n} result(s)',
+      noResults: 'No criterion matches.',
+      back: '← Back to the list',
+      levelPrefix: 'Level',
+      whatWcag: 'What WCAG says',
+      plain: 'In plain language',
+      remediation: 'A fix to aim for',
+      affects: 'Affects',
+      otherStandards: 'Other standards',
+      qcShort: 'Required in Québec',
+      goToPage: 'Open the W3C page ↗',
+      understanding: 'Understanding this criterion ↗',
+      copyMd: 'Markdown link', copyHtml: 'HTML link', copyName: 'Name only', copyUrl: 'URL only',
+      copiedMd: 'Markdown link copied.', copiedHtml: 'HTML link copied.',
+      copiedName: 'Name copied.', copiedUrl: 'URL copied.',
+      copyFail: 'Copy failed.',
+      dataError: 'Could not load the WCAG criteria list.'
+    }
+  };
+  // Libellés des 9 publics (énumération fermée de la base).
+  var DIS = {
+    'blind': { fr: 'Aveugle', en: 'Blind' },
+    'low-vision': { fr: 'Malvoyant', en: 'Low vision' },
+    'deaf-hoh': { fr: 'Sourd ou malentendant', en: 'Deaf or hard of hearing' },
+    'motor': { fr: 'Handicap moteur', en: 'Motor' },
+    'cognitive': { fr: 'Handicap cognitif', en: 'Cognitive' },
+    'vestibular': { fr: 'Troubles vestibulaires', en: 'Vestibular' },
+    'photosensitive': { fr: 'Épilepsie photosensible', en: 'Photosensitive' },
+    'color-blind': { fr: 'Daltonisme', en: 'Colour blindness' },
+    'speech': { fr: 'Trouble de la parole', en: 'Speech' }
+  };
+  var TAG_ORDER = ['blind', 'low-vision', 'color-blind', 'deaf-hoh', 'motor', 'speech', 'cognitive', 'vestibular', 'photosensitive'];
+
+  var state = { data: [], q: '', levels: [], versions: [], active: 0, selectedId: null, lang: 'fr' };
+
+  function T(key) { return I18N[state.lang][key]; }
+  function L(field) {
+    if (!field) return '';
+    if (typeof field === 'string') return field;
+    return field[state.lang] || field.fr || field.en || '';
+  }
+  function dis(tag) { return DIS[tag] ? DIS[tag][state.lang] : tag; }
+  function critName(c) { return (state.lang === 'fr' && c.name_fr) ? c.name_fr : c.name; }
 
   var qInput = document.getElementById('q');
   var pillsEl = document.getElementById('pills');
@@ -203,9 +292,12 @@
   var backBtn = document.getElementById('back');
   var metaEl = document.getElementById('meta');
   var titleEl = document.getElementById('title');
+  var proseEl = document.getElementById('prose');
   var linkRowEl = document.getElementById('linkRow');
   var copyRowEl = document.getElementById('copyRow');
   var resultCountEl = document.getElementById('resultCount');
+  var hintKeysEl = document.getElementById('hintKeys');
+  var langEl = document.getElementById('lang');
   var toastEl = document.getElementById('toast');
   var toastTimer = null;
 
@@ -256,10 +348,31 @@
     }
   }
 
+  // Applique les chaînes d'interface statiques dans la langue courante.
+  function applyStatic() {
+    document.documentElement.lang = state.lang;
+    document.title = state.lang === 'fr' ? 'Sonar — référentiel WCAG 2.2' : 'Sonar — WCAG 2.2 reference';
+    langEl.textContent = T('langToggle');
+    qInput.setAttribute('aria-label', T('searchLabel'));
+    qInput.setAttribute('placeholder', T('searchPlaceholder'));
+    hintKeysEl.textContent = T('hintKeys');
+    backBtn.textContent = T('back');
+    noResultsEl.textContent = T('noResults');
+  }
+
+  function setLang(lang) {
+    state.lang = (lang === 'en') ? 'en' : 'fr';
+    try { localStorage.setItem(LANG_KEY, state.lang); } catch (e) {}
+    applyStatic();
+    renderPills();
+    renderList();
+    if (state.selectedId) openDetail(state.selectedId, false);
+  }
+
   function filtered() {
     var q = state.q.trim().toLowerCase();
     return state.data.filter(function (c) {
-      if (q && (c.id + ' ' + c.name + ' ' + c.guidelineName).toLowerCase().indexOf(q) < 0) return false;
+      if (q && (c.id + ' ' + c.name + ' ' + (c.name_fr || '') + ' ' + c.guidelineName).toLowerCase().indexOf(q) < 0) return false;
       if (state.levels.length && state.levels.indexOf(c.level) < 0) return false;
       if (state.versions.length && state.versions.indexOf(c.version) < 0) return false;
       return true;
@@ -273,7 +386,7 @@
 
     pillsEl.innerHTML = '';
     ['A', 'AA', 'AAA'].forEach(function (lvl) {
-      pillsEl.appendChild(makePill('Level ' + lvl, state.levels.indexOf(lvl) > -1, LEVEL_COLOR[lvl], function () { toggleIn('levels', lvl); }));
+      pillsEl.appendChild(makePill(T('levelPrefix') + ' ' + lvl, state.levels.indexOf(lvl) > -1, LEVEL_COLOR[lvl], function () { toggleIn('levels', lvl); }));
     });
     versions.forEach(function (v) {
       pillsEl.appendChild(makePill('WCAG ' + v, state.versions.indexOf(v) > -1, '#C6B2ED', function () { toggleIn('versions', v); }));
@@ -310,7 +423,7 @@
       btn.className = 'row' + (i === state.active ? ' active' : '');
       btn.innerHTML =
         '<span class="id">' + esc(c.id) + '</span>' +
-        '<span class="name">' + esc(c.name) + '</span>' +
+        '<span class="name">' + esc(critName(c)) + '</span>' +
         '<span class="level" style="color:' + LEVEL_COLOR[c.level] + ';border-color:' + LEVEL_COLOR[c.level] + '55;background:' + LEVEL_COLOR[c.level] + '1f">' + esc(c.level) + '</span>' +
         '<span class="version">WCAG ' + esc(c.version) + '</span>';
       btn.addEventListener('click', function () { openDetail(c.id); });
@@ -318,7 +431,7 @@
       listEl.appendChild(li);
     });
     noResultsEl.hidden = !(state.data.length > 0 && list.length === 0);
-    resultCountEl.textContent = list.length + ' result(s)';
+    resultCountEl.textContent = T('results').replace('{n}', list.length);
   }
 
   // Fait défiler la liste pour garder la ligne active visible (navigation clavier).
@@ -341,7 +454,11 @@
     scrollActiveIntoView();
   }
 
-  function openDetail(id) {
+  function proseSec(headKey, bodyHtml) {
+    return '<div class="prose-sec"><h3>' + esc(T(headKey)) + '</h3>' + bodyHtml + '</div>';
+  }
+
+  function openDetail(id, refocus) {
     var c = state.data.filter(function (x) { return x.id === id; })[0];
     if (!c) return;
     state.selectedId = id;
@@ -350,22 +467,52 @@
     document.getElementById('searchWrap').hidden = true;
     detailEl.style.display = 'flex';
 
-    metaEl.textContent = 'Level ' + c.level + ' · WCAG ' + c.version + ' · ' + c.guidelineId + ' ' + c.guidelineName;
-    titleEl.textContent = c.id + ' ' + c.name;
+    metaEl.textContent = T('levelPrefix') + ' ' + c.level + ' · WCAG ' + c.version + ' · ' + c.guidelineId + ' ' + c.guidelineName;
+    titleEl.textContent = c.id + ' ' + critName(c);
+
+    // Prose : les 3 couches publiques + publics concernés + croisements référentiels.
+    var out = '';
+    var descr = L(c.description);
+    if (descr) out += proseSec('whatWcag', '<p>' + esc(descr) + '</p>');
+    var plain = L(c.plain);
+    if (plain) out += proseSec('plain', '<p>' + esc(plain) + '</p>');
+    var rem = L(c.remediation);
+    if (rem) out += proseSec('remediation', '<p>' + esc(rem) + '</p>');
+
+    var tags = (c.disability_tags || []).slice().sort(function (a, b) {
+      return TAG_ORDER.indexOf(a) - TAG_ORDER.indexOf(b);
+    });
+    if (tags.length) {
+      out += proseSec('affects', '<div class="tags">' +
+        tags.map(function (tg) { return '<span class="tag">' + esc(dis(tg)) + '</span>'; }).join('') + '</div>');
+    }
+
+    var xr = c.xref || {};
+    var chips = [];
+    if ((xr.en301549 || []).length) chips.push('<span class="xref-chip">EN 301 549 : ' + esc(xr.en301549.join(', ')) + '</span>');
+    if ((xr.rgaa || []).length) chips.push('<span class="xref-chip">RGAA 4.1 : ' + esc(xr.rgaa.join(', ')) + '</span>');
+    if ((xr.qc || []).length) chips.push('<span class="xref-chip">SGQRI 008 3.0 · ' + esc(T('qcShort')) + '</span>');
+    var note = L(c.xref_note);
+    if (chips.length || note) {
+      out += proseSec('otherStandards',
+        (chips.length ? '<div class="xref-list">' + chips.join('') + '</div>' : '') +
+        (note ? '<p class="xref-note">' + esc(note) + '</p>' : ''));
+    }
+    proseEl.innerHTML = out;
 
     var md = '[' + c.id + ' ' + c.name + '](' + c.url + ')';
     var html = '<a href="' + c.url + '">' + c.id + ' ' + c.name + '</a>';
 
     linkRowEl.innerHTML =
-      '<a href="' + esc(c.url) + '" target="_blank" rel="noreferrer">Go to the page ↗</a>' +
-      '<a href="' + esc(c.understandingUrl) + '" target="_blank" rel="noreferrer">Understanding doc ↗</a>';
+      '<a href="' + esc(c.url) + '" target="_blank" rel="noreferrer">' + esc(T('goToPage')) + '</a>' +
+      '<a href="' + esc(c.understandingUrl) + '" target="_blank" rel="noreferrer">' + esc(T('understanding')) + '</a>';
 
     copyRowEl.innerHTML = '';
     [
-      ['Markdown link', md, 'Markdown link copied!'],
-      ['HTML link', html, 'HTML link copied!'],
-      ['Name only', c.id + ' ' + c.name, 'Name copied!'],
-      ['URL only', c.url, 'URL copied!']
+      [T('copyMd'), md, T('copiedMd')],
+      [T('copyHtml'), html, T('copiedHtml')],
+      [T('copyName'), c.id + ' ' + c.name, T('copiedName')],
+      [T('copyUrl'), c.url, T('copiedUrl')]
     ].forEach(function (a) {
       var b = document.createElement('button');
       b.type = 'button';
@@ -374,7 +521,7 @@
       copyRowEl.appendChild(b);
     });
 
-    backBtn.focus();
+    if (refocus !== false) backBtn.focus();
   }
 
   function closeDetail() {
@@ -407,6 +554,19 @@
     if (e.key === 'Escape' && state.selectedId) { closeDetail(); }
   });
 
+  langEl.addEventListener('click', function () {
+    setLang(state.lang === 'fr' ? 'en' : 'fr');
+  });
+
+  // Langue de départ : choix mémorisé (clé partagée avec l'annuaire), sinon la langue du
+  // navigateur, sinon français.
+  var stored = null;
+  try { stored = localStorage.getItem(LANG_KEY); } catch (e) {}
+  state.lang = (stored === 'en' || stored === 'fr')
+    ? stored
+    : ((navigator.language || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'fr');
+  applyStatic();
+
   fetch('assets/wcag22-public.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
@@ -414,7 +574,7 @@
       renderPills();
       renderList();
     })
-    .catch(function () { notify('Could not load the WCAG criteria list.'); });
+    .catch(function () { notify(T('dataError')); });
 
   setTimeout(function () { qInput.focus(); }, 100);
 })();
