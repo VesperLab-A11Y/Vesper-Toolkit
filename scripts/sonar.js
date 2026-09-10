@@ -1,12 +1,13 @@
 // Sonar
-// Ouvre un panneau flottant qui charge sonar.html (hébergé sur GitHub Pages) dans une iframe.
+// Ouvre un panneau flottant qui charge sonar.html (servi sur toolkit.vesperlab.dev) dans une iframe.
 // Contrairement aux 7 autres bookmarklets, celui-ci ne s'exécute pas seul : il a besoin que
 // sonar.html soit servi en HTTPS, donc il ne fonctionnera pas sur une page file:// ou en HTTP simple.
 (function () {
   'use strict';
 
-  // URL fixe du repo publié sur GitHub Pages.
-  var URL_SONAR = 'https://VesperLab-A11Y.github.io/Vesper-Toolkit/sonar.html';
+  // URL fixe de la page publiée. Le sous-domaine est l'adresse canonique ; l'ancienne
+  // URL GitHub Pages (vesperlab-a11y.github.io/Vesper-Toolkit/) répond encore en parallèle.
+  var URL_SONAR = 'https://toolkit.vesperlab.dev/sonar.html';
 
   // Si le panneau existe déjà, un second clic sur le favori le referme plutôt que d'en ouvrir un autre.
   var existing = document.getElementById('vl-sonar-panel');
