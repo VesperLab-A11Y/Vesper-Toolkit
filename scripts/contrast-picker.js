@@ -17,12 +17,24 @@
 
     var overlay, badge, prevCursor;
 
-    // Parse un "rgb(r, g, b)" / "rgba(r, g, b, a)" tel que renvoyé par getComputedStyle.
+    // getComputedStyle peut renvoyer n'importe quel espace de couleur CSS moderne (oklch(),
+    // lab(), hsl()...), pas seulement rgb()/rgba() — les palettes Vesper Lab elles-mêmes sont
+    // en oklch(). Relire la chaîne fillStyle après coup ne suffit pas : certains moteurs la
+    // renvoient telle quelle sans la convertir (ex. "oklch(...)" reste "oklch(...)"). Il faut
+    // vraiment dessiner un pixel avec cette couleur et relire sa valeur RVB effective.
+    var vlColorCanvasCtx = null;
     function parseColor(str) {
-      var m = str && str.match(/rgba?\(([^)]+)\)/);
-      if (!m) return null;
-      var parts = m[1].split(',').map(function (p) { return parseFloat(p); });
-      return { r: parts[0], g: parts[1], b: parts[2], a: parts.length > 3 ? parts[3] : 1 };
+      if (!str) return null;
+      if (!vlColorCanvasCtx) {
+        var c = document.createElement('canvas');
+        c.width = c.height = 1;
+        vlColorCanvasCtx = c.getContext('2d', { willReadFrequently: true });
+      }
+      vlColorCanvasCtx.clearRect(0, 0, 1, 1);
+      try { vlColorCanvasCtx.fillStyle = str; } catch (e) { return null; }
+      vlColorCanvasCtx.fillRect(0, 0, 1, 1);
+      var d = vlColorCanvasCtx.getImageData(0, 0, 1, 1).data;
+      return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
     }
 
     // Le fond réel d'un élément n'est pas forcément le sien : s'il est transparent, il faut
