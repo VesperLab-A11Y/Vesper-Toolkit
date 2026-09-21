@@ -31,7 +31,12 @@ const SLUGS = [
   'link-scan',
   'image-scan',
   'label-scan',
-  'sonar'
+  'sonar',
+  'contrast-picker',
+  'headings-landmarks',
+  'tab-order',
+  'reflow-toggle',
+  'accessible-name'
 ];
 
 function minify(source) {

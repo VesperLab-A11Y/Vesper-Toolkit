@@ -22,6 +22,17 @@ extension, no account, no data leaving your browser. Built by
 - **Sonar**: search the 87 WCAG 2.2 success criteria in a movable panel over the
   page you're working on. Shows the official name, level, guideline and a link to
   the W3C page.
+- **Contrast**: click a text element, then its background, and get the
+  WCAG contrast ratio with an AA/AAA verdict for the detected text size.
+- **Headings**: lists the h1-h6 hierarchy (level skips flagged) and
+  the ARIA/HTML5 landmarks in a panel; click an entry to jump to it.
+- **Tab Order**: numbers every focusable element in real tab order and draws the
+  path between them; flags positive `tabindex` and invisible focusable elements.
+  Export the list as a `.txt` file.
+- **Reflow**: opens the page in a window resized to a CSS width you
+  choose (320px, 884px foldable open, 1280px, or custom) and flags horizontal scroll automatically.
+- **ARIA Reader**: click an element to see its computed accessible name,
+  role and ARIA states, plus an approximate screen reader announcement.
 - **Vesper Axe-Core Viewer** (`scan-results.html`): turns the JSON from AC Scan
   into a readable report, exportable to Word, Excel and print.
 
@@ -129,6 +140,18 @@ Réalisés par [Vesper Lab](https://vesperlab.dev/).
 - **Sonar** : recherche parmi les 87 critères de succès WCAG 2.2 dans un panneau
   déplaçable par-dessus la page en cours. Affiche le nom officiel, le niveau, la
   règle et un lien vers la page du W3C.
+- **Contrast** : clique un élément de texte, puis son fond, et obtiens le
+  ratio de contraste WCAG avec un verdict AA/AAA selon la taille de texte détectée.
+- **Headings** : liste la hiérarchie h1-h6 (sauts de niveau signalés)
+  et les landmarks ARIA/HTML5 dans un panneau ; clique une entrée pour y aller.
+- **Tab Order** : numérote chaque élément focusable dans l'ordre réel de
+  tabulation et trace le chemin entre eux ; signale les `tabindex` positifs et
+  les éléments focusables invisibles. Exporte la liste en fichier `.txt`.
+- **Reflow** : ouvre la page dans une fenêtre redimensionnée à la largeur
+  CSS de ton choix (320px, 884px pliable déplié, 1280px, ou personnalisée) et repère le défilement horizontal
+  automatiquement.
+- **ARIA Reader** : clique un élément pour voir son nom accessible calculé,
+  son rôle et ses états ARIA, plus une annonce approximative de lecteur d'écran.
 - **Vesper Axe-Core Viewer** (`scan-results.html`) : transforme le JSON d'AC Scan
   en rapport lisible, exportable en Word, Excel et impression.
 
