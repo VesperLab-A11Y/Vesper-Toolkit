@@ -78,6 +78,30 @@
         (pass ? '✓ PASS' : '✗ FAIL') + '</span> ' + label;
     }
 
+    // Un clic peut tomber dans le padding d'un conteneur (ex. un <blockquote> autour d'un
+    // <p>) : e.target renvoie alors le conteneur, dont le color hérité n'a souvent rien à voir
+    // avec le texte visible qu'on voulait mesurer. hasDirectText() détecte ce cas pour le
+    // rejeter à l'étape TEXTE plutôt que de lire une couleur qui n'est pas celle des lettres.
+    function hasDirectText(el) {
+      for (var i = 0; i < el.childNodes.length; i++) {
+        var n = el.childNodes[i];
+        if (n.nodeType === 3 && n.textContent.trim().length > 0) return true;
+      }
+      return false;
+    }
+
+    function describeEl(el) {
+      var cls = (typeof el.className === 'string' && el.className.trim())
+        ? '.' + el.className.trim().split(/\s+/).join('.') : '';
+      return el.tagName.toLowerCase() + cls;
+    }
+
+    function swatch(rgb) {
+      return '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;' +
+        'border:1px solid rgba(237,231,218,.3);background:rgb(' + Math.round(rgb.r) + ',' +
+        Math.round(rgb.g) + ',' + Math.round(rgb.b) + ');vertical-align:-1px;margin-right:5px"></span>';
+    }
+
     // Panneau de résultat, sur le modèle visuel d'ARIA Reader / Headings.
     function buildPanel(textEl, bgEl) {
       var textColor = parseColor(getComputedStyle(textEl).color);
@@ -131,6 +155,10 @@
       ratioBox.innerHTML = '<div style="font-size:1.6rem;font-weight:700;color:#A6CA93">' +
         ratio.toFixed(2) + ':1</div><div style="font-size:.78rem;opacity:.7">contrast ratio</div>';
       body.appendChild(ratioBox);
+
+      body.appendChild(row('Picked elements',
+        swatch(textColor) + 'Text: ' + describeEl(textEl) + '<br>' +
+        swatch(bgColor) + 'Background: ' + describeEl(bgEl)));
 
       body.appendChild(row('Detected text size', fontSizePx.toFixed(1) + 'px' + (isBold ? ' bold' : '') +
         ' — treated as ' + (isLarge ? 'LARGE' : 'normal') + ' text'));
@@ -214,6 +242,19 @@
       }
       renderBanner();
 
+      // Étape TEXTE : si le clic tombe sur un conteneur sans texte direct (son padding, par
+      // exemple), on reste sur l'étape au lieu de lire silencieusement une couleur héritée qui
+      // n'appartient pas au texte visible — ça évite un faux verdict "correct".
+      function flashNoText() {
+        banner.innerHTML = '<strong style="color:#F0A9A2">No direct text here</strong><br>' +
+          '<span style="opacity:.85">Click the letters themselves, not the space around them.</span>';
+        overlay.style.borderColor = '#F0A9A2';
+        setTimeout(function () {
+          renderBanner();
+          overlay.style.borderColor = '#A6CA93';
+        }, 1100);
+      }
+
       function cleanup() {
         document.removeEventListener('mousemove', onMove, true);
         document.removeEventListener('click', onClick, true);
@@ -245,6 +286,10 @@
         e.preventDefault();
         e.stopPropagation();
         if (step === 1) {
+          if (!hasDirectText(e.target)) {
+            flashNoText();
+            return;
+          }
           textEl = e.target;
           step = 2;
           renderBanner();
