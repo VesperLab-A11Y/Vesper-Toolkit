@@ -1,7 +1,7 @@
 // Headings
 // Ouvre un panneau listant la hiérarchie des titres (h1-h6) avec les sauts de niveau signalés,
 // et les landmarks ARIA/HTML5 de la page. Cliquer une entrée fait défiler jusqu'à l'élément et
-// le met brièvement en surbrillance.
+// le met brièvement en surbrillance. Le bouton « Export .txt » ouvre la liste brute dans un nouvel onglet.
 (function () {
   'use strict';
   try {
@@ -102,7 +102,19 @@
       panel.remove();
       document.removeEventListener('keydown', onKey);
     };
-    bar.appendChild(closeBtn);
+
+    // Export .txt : les données brutes (titres + landmarks) dans un nouvel onglet, à garder en annexe.
+    var exportBtn = document.createElement('button');
+    exportBtn.type = 'button';
+    exportBtn.textContent = 'Export .txt';
+    exportBtn.style.cssText = 'background:transparent;border:1px solid #A6CA93;color:#A6CA93;' +
+      'border-radius:6px;padding:0 10px;height:28px;font:700 12px/1 system-ui,Arial,sans-serif;cursor:pointer';
+
+    var barActions = document.createElement('div');
+    barActions.style.cssText = 'display:flex;align-items:center;gap:8px';
+    barActions.appendChild(exportBtn);
+    barActions.appendChild(closeBtn);
+    bar.appendChild(barActions);
 
     var body = document.createElement('div');
     body.style.cssText = 'flex:1;overflow:auto;padding:12px';
@@ -174,6 +186,40 @@
         (lm.label ? '— “' + lm.label + '”' : (lm.ambiguous ? '⚠ no label (ambiguous with others of the same role)' : ''));
       body.appendChild(makeRow(html, lm.ambiguous, lm.el));
     });
+
+    function buildExportText() {
+      var lines = [];
+      lines.push('Headings & landmarks — ' + location.href);
+      lines.push(new Date().toISOString());
+      lines.push(headingData.items.length + ' heading(s), ' + landmarks.length + ' landmark(s).');
+      if (!headingData.sawH1) lines.push('WARNING: no <h1> found on the page.');
+      lines.push('');
+      lines.push('HEADINGS');
+      if (headingData.items.length === 0) lines.push('(none)');
+      headingData.items.forEach(function (h) {
+        var pad = new Array(h.level).join('  ');
+        lines.push(pad + 'H' + h.level + ' ' + h.label + (h.skip ? '  [level skipped]' : ''));
+      });
+      lines.push('');
+      lines.push('LANDMARKS');
+      if (landmarks.length === 0) lines.push('(none)');
+      landmarks.forEach(function (lm) {
+        lines.push(lm.role + (lm.label ? ' — "' + lm.label + '"' : '') +
+          (lm.ambiguous ? '  [no label, ambiguous with others of the same role]' : ''));
+      });
+      return lines.join('\n');
+    }
+
+    exportBtn.onclick = function () {
+      var blob = new Blob([buildExportText()], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var win = window.open(url, '_blank');
+      if (!win) {
+        alert('The window was blocked by the browser. Allow pop-ups for this site and try again.');
+      }
+      // Laisse le temps à l'onglet de charger le contenu avant de libérer l'URL mémoire.
+      setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+    };
 
     panel.appendChild(bar);
     panel.appendChild(body);
