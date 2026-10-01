@@ -211,7 +211,7 @@
     }
 
     exportBtn.onclick = function () {
-      var blob = new Blob([buildExportText()], { type: 'text/plain' });
+      var blob = new Blob(['\uFEFF' + buildExportText()], { type: 'text/plain;charset=utf-8' });
       var url = URL.createObjectURL(blob);
       var win = window.open(url, '_blank');
       if (!win) {

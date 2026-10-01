@@ -33,6 +33,11 @@ extension, no account, no data leaving your browser. Built by
   choose (320px, 884px foldable open, 1280px, or custom) and flags horizontal scroll automatically.
 - **ARIA Reader**: click an element to see its computed accessible name,
   role and ARIA states, plus an approximate screen reader announcement.
+- **Text Spacing**: applies the WCAG 1.4.12 text spacing values to the page
+  (toggle on and off) so you can spot clipped or overlapping text.
+- **Target Size**: outlines every interactive element by size (under 24px,
+  24 to 43px, 44px or more), applies the 2.5.8 spacing exception and lists the
+  smallest targets.
 - **Vesper Axe-Core Viewer** (`scan-results.html`): turns the JSON from AC Scan
   into a readable report, exportable to Word, Excel and print.
 
@@ -152,6 +157,11 @@ Réalisés par [Vesper Lab](https://vesperlab.dev/).
   automatiquement.
 - **ARIA Reader** : clique un élément pour voir son nom accessible calculé,
   son rôle et ses états ARIA, plus une annonce approximative de lecteur d'écran.
+- **Text Spacing** : applique à la page les espacements de texte du WCAG 1.4.12
+  (on/off) pour repérer le texte coupé ou superposé.
+- **Target Size** : entoure chaque élément interactif selon sa taille (moins de
+  24 px, 24 à 43 px, 44 px ou plus), applique l'exception d'espacement du 2.5.8 et
+  liste les plus petites cibles.
 - **Vesper Axe-Core Viewer** (`scan-results.html`) : transforme le JSON d'AC Scan
   en rapport lisible, exportable en Word, Excel et impression.
 

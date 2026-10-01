@@ -36,7 +36,9 @@ const SLUGS = [
   'headings-landmarks',
   'tab-order',
   'reflow-toggle',
-  'accessible-name'
+  'accessible-name',
+  'text-spacing',
+  'target-size'
 ];
 
 function minify(source) {
