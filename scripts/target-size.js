@@ -45,6 +45,7 @@
       var items = [];
       for (var i = 0; i < nodes.length; i++) {
         var el = nodes[i];
+        if (root.contains(el)) continue;
         var r = el.getBoundingClientRect();
         if (!visible(el, r)) continue;
         items.push({
@@ -153,6 +154,24 @@
     body.style.cssText = 'flex:1;overflow:auto;padding:12px';
     panel.appendChild(body);
 
+    var foot = document.createElement('div');
+    foot.style.cssText = 'padding:8px 12px;border-top:1px solid rgba(237,231,218,.16);background:#191714';
+    var footBtns = document.createElement('div');
+    footBtns.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap';
+    var jsonBtn = smallBtn('Copy as JSON');
+    var annexBtn = smallBtn('Create as appendix');
+    footBtns.appendChild(jsonBtn);
+    footBtns.appendChild(annexBtn);
+    var exportStatus = document.createElement('div');
+    exportStatus.setAttribute('role', 'status');
+    exportStatus.style.cssText = 'font-size:.8rem;color:#C6B2ED;margin-top:6px;min-height:1.2em';
+    foot.appendChild(footBtns);
+    foot.appendChild(exportStatus);
+    panel.appendChild(foot);
+
+    var lastItems = [];
+    var lastCounts = {};
+
     function flash(el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -163,6 +182,8 @@
       var items = measure();
       var counts = { fail: 0, spacing: 0, aa: 0, ok: 0, inline: 0 };
       items.forEach(function (it) { counts[it.status]++; });
+      lastItems = items;
+      lastCounts = counts;
 
       // Les cadres sont posés en coordonnées de document pour suivre le défilement.
       var sx = window.pageXOffset;
@@ -220,6 +241,142 @@
         body.appendChild(none);
       }
     }
+
+
+    function esc(v) {
+      return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    // Sélecteur CSS lisible pour retrouver l'élément (id unique, sinon chemin avec nth-of-type).
+    function selectorOf(el) {
+      var parts = [];
+      var node = el;
+      while (node && node.nodeType === 1 && node !== document.documentElement) {
+        if (node.id && document.querySelectorAll('#' + CSS.escape(node.id)).length === 1) {
+          parts.unshift('#' + CSS.escape(node.id));
+          break;
+        }
+        var part = node.tagName.toLowerCase();
+        var sibs = Array.prototype.filter.call(node.parentElement.children, function (c) { return c.tagName === node.tagName; });
+        if (sibs.length > 1) part += ':nth-of-type(' + (Array.prototype.indexOf.call(sibs, node) + 1) + ')';
+        parts.unshift(part);
+        node = node.parentElement;
+      }
+      return parts.join(' > ');
+    }
+
+    function snippetOf(el) {
+      var html = el.outerHTML || '';
+      return html.length > 300 ? html.slice(0, 300) + '…' : html;
+    }
+
+    // Seuls les échecs sont exportés : sous 24 px sans exception d'espacement (2.5.8, AA), et
+    // de 24 à 43 px (2.5.5, AAA, signalé « minor » pour que l'Auditor le distingue).
+    function buildJson() {
+      var rules = {
+        fail: { id: 'target-size-under-24', impact: 'serious', wcag: 'wcag258', help: 'Target is smaller than 24 by 24 CSS pixels and has no spacing exception (WCAG 2.5.8, AA)', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html', msg: 'Make the target at least 24 by 24 CSS pixels, or space it so a 24 px circle centred on it touches no other target.' },
+        aa: { id: 'target-size-under-44', impact: 'minor', wcag: 'wcag255', help: 'Target is smaller than 44 by 44 CSS pixels (WCAG 2.5.5, AAA)', helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html', msg: 'Make the target at least 44 by 44 CSS pixels.' }
+      };
+      var violations = [];
+      ['fail', 'aa'].forEach(function (k) {
+        var nodes = lastItems.filter(function (it) { return it.status === k; }).map(function (it) {
+          return { html: snippetOf(it.el), target: [selectorOf(it.el)], failureSummary: 'Fix the following:\n  ' + it.w + ' x ' + it.h + ' px. ' + rules[k].msg };
+        });
+        if (nodes.length) {
+          violations.push({ id: rules[k].id, impact: rules[k].impact, description: rules[k].help, help: rules[k].help, helpUrl: rules[k].helpUrl, tags: [rules[k].wcag], nodes: nodes });
+        }
+      });
+      return JSON.stringify({ violations: violations, passes: [], url: location.href, timestamp: new Date().toISOString() });
+    }
+
+    function say(msg) { exportStatus.textContent = msg; }
+
+    function fallbackCopy(text, done, fail) {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) { done(); } else { fail(); }
+      } catch (e) { fail(); }
+    }
+
+    jsonBtn.onclick = function () {
+      var text = buildJson();
+      var done = function () { say('JSON copied. Paste it into Auditor the same way as an AC Scan result.'); };
+      var fail = function () { say('Copy failed. Use Create as appendix instead.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done, fail); });
+      } else {
+        fallbackCopy(text, done, fail);
+      }
+    };
+
+    // Annexe HTML autonome : même gabarit et même bandeau de provenance que Link / Image / Label Scan,
+    // pour que Vesper Auditor la reconnaisse (titre proposé, lien vers la page scannée).
+    function buildAppendixHtml() {
+      var when = new Date().toISOString().slice(0, 10);
+      var symbols = { fail: '◆', spacing: '▲', aa: '▲' };
+      var shown = lastItems.filter(function (it) { return it.status === 'fail' || it.status === 'spacing' || it.status === 'aa'; })
+        .sort(function (a, b) {
+          var order = { fail: 0, spacing: 1, aa: 2 };
+          return order[a.status] - order[b.status] || Math.min(a.w, a.h) - Math.min(b.w, b.h);
+        });
+      var rows = shown.map(function (it) {
+        return '<tr><td><span class="sev ' + it.status + '">' + symbols[it.status] + ' ' + esc(LABELS[it.status]) + '</span></td>' +
+          '<td>' + it.w + ' × ' + it.h + ' px</td><td>' + esc(describe(it.el)) + '</td>' +
+          '<td><code>' + esc(selectorOf(it.el)) + '</code>' +
+          '<details class="vl-snip"><summary>Code snippet</summary><pre><code>' + esc(snippetOf(it.el)) + '</code></pre></details></td></tr>';
+      }).join('');
+      var legend = ['fail', 'spacing', 'aa', 'ok', 'inline'].map(function (k) {
+        return '<li><strong>' + lastCounts[k] + '</strong> ' + esc(LABELS[k]) + '</li>';
+      }).join('');
+      var css = ':root{--bg:#FFFDF8;--surf:#F7F1E9;--ink:#1B1712;--muted:#4A4238;--line:#B9AF9F;--accent:#3E5230;--link:#3E5230}' +
+        '@media (prefers-color-scheme:dark){:root{--bg:#100F0D;--surf:#191714;--ink:#EDE7DA;--muted:#A9A091;--line:rgba(237,231,218,.25);--accent:#A6CA93;--link:#A6CA93}}' +
+        '*{box-sizing:border-box}body{margin:0;padding:0 20px 50px;font-family:"Noto Sans",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}' +
+        'a{color:var(--link)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}' +
+        'header,main,footer{max-width:1100px;margin:0 auto}header{padding:32px 0 10px;text-align:center}' +
+        'h1{font-family:"Noto Serif",Georgia,serif;font-size:1.6rem;margin:0 0 6px}.intro,.vl-prov{color:var(--muted);font-size:.9rem;max-width:760px;margin:6px auto}' +
+        'ul.legend{list-style:none;padding:0;margin:16px 0}ul.legend li{margin:4px 0}' +
+        'table{border-collapse:collapse;width:100%;margin-top:14px}caption{font-weight:700;text-align:left;margin-bottom:8px}' +
+        'th,td{padding:9px;border:1px solid var(--line);vertical-align:top;text-align:left;font-size:.85rem}th{background:#4E6C3B;color:#F4EFE2}' +
+        '.sev{font-weight:700;white-space:nowrap}code{font-family:Menlo,Consolas,monospace;font-size:.78rem;word-break:break-all}' +
+        '.vl-snip{margin-top:8px}.vl-snip>summary{cursor:pointer;font-size:.78rem;font-weight:700}.vl-snip pre{margin:6px 0 0;white-space:pre-wrap;word-break:break-word}' +
+        'footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:.78rem;color:var(--muted)}';
+      var page = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+        '<title>Target Size, ' + esc(location.hostname) + '</title>' +
+        '<meta name="generator" content="Vesper Toolkit, Target Size"><meta name="vesper-tool" content="target-size">' +
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap">' +
+        '<style>' + css + '</style></head><body>' +
+        '<header><a href="https://vesperlab.dev/" target="_blank" rel="noopener">Vesper Lab <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">(opens in a new tab)</span></a>' +
+        '<h1>Target Size</h1><p class="intro">Size of the interactive elements on the page, against WCAG 2.5.8 (24 by 24 CSS pixels, AA) and 2.5.5 (44 by 44, AAA).</p>' +
+        '<p class="vl-prov">Generated by <a href="https://toolkit.vesperlab.dev/#tool-target-size" target="_blank" rel="noopener">Target Size</a>, a bookmarklet from the ' +
+        '<a href="https://toolkit.vesperlab.dev/" target="_blank" rel="noopener">Vesper Toolkit</a> (free accessibility testing tools by Vesper Lab). Page scanned: ' +
+        '<a href="' + esc(location.href) + '" target="_blank" rel="noopener">' + esc(location.href) + '</a>, ' + when + '.</p></header>' +
+        '<main><h2>Summary</h2><ul class="legend">' + legend + '</ul>' +
+        (rows ? '<table><caption>Targets to review (' + shown.length + ')</caption><thead><tr><th scope="col">Status</th><th scope="col">Size</th><th scope="col">Element</th><th scope="col">Selector and code</th></tr></thead><tbody>' + rows + '</tbody></table>'
+          : '<p>Every target measured is 44 px or more.</p>') +
+        '<p class="intro">Native controls left at their default browser size are also exempt from 2.5.8 and are not flagged here. Measures are taken at the window size used during the scan.</p></main>' +
+        '<footer><div>Appendix from Target Size, <a href="https://toolkit.vesperlab.dev/" target="_blank" rel="noopener">Vesper Toolkit</a></div></footer></body></html>';
+      return page;
+    }
+
+    annexBtn.onclick = function () {
+      var url = URL.createObjectURL(new Blob([buildAppendixHtml()], { type: 'text/html;charset=utf-8' }));
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'annexe-target-size-' + location.hostname.replace(/[^a-z0-9.-]/gi, '-') + '-' + new Date().toISOString().slice(0, 10) + '.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
+      say('Appendix file downloaded. Add it to your audit in Vesper Auditor (Annexes tab).');
+    };
 
     function teardown() {
       root.remove();
